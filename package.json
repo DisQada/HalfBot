@@ -1,0 +1,49 @@
+{
+	"name": "easybot",
+	"version": "0.1.0",
+	"description": " أداة تسهيل وتسريع برمجة بوتات دسكورد بلغة JavaScript أو TypeScript",
+	"scripts": {
+		"build": "tsc",
+		"watch": "tsc -w"
+	},
+	"main": "./dist/main.js",
+	"module": "./dist/main.mjs",
+	"types": "./dist/main.d.ts",
+	"exports": {
+		"import": "./dist/main.mjs",
+		"require": "./dist/main.js",
+		"types": "./dist/main.d.ts"
+	},
+	"files": [
+		"dist/",
+		"README.md",
+		"LICENSE"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Discord-admins/easybot.git"
+	},
+	"bugs": {
+		"url": "https://github.com/Discord-admins/easybot/issues"
+	},
+	"keywords": [
+		"discord.js",
+		"discord",
+		"easy",
+		"bot"
+	],
+	"author": {
+		"name": "The Alpha",
+		"email": "contact@nabilalsaiad.com",
+		"url": "https://links.nabilalsaiad.com"
+	},
+	"license": "Apache 2.0",
+	"dependencies": {
+		"discord.js": "^14.7.1",
+		"paths-manager": "^0.4.3"
+	},
+	"devDependencies": {
+		"@types/node": "^16.18.13",
+		"typescript": "^4.9.5"
+	}
+}
