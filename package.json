@@ -1,5 +1,5 @@
 {
-	"name": "easybot",
+	"name": "halfbot",
 	"version": "0.1.0",
 	"description": " أداة تسهيل وتسريع برمجة بوتات دسكورد بلغة JavaScript أو TypeScript",
 	"scripts": {
@@ -29,7 +29,7 @@
 	"keywords": [
 		"discord.js",
 		"discord",
-		"easy",
+		"half",
 		"bot"
 	],
 	"author": {
