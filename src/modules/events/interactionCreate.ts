@@ -17,7 +17,7 @@ function textToEmbed(text: string, style?: BotStyle): APIEmbed {
 export default async function interactionCreate(
 	interaction: BotCommandInteraction
 ) {
-	function quickReply(reply: string, style: BotStyle) {
+	function quickReply(reply: string, style?: BotStyle) {
 		interaction.followUp({
 			embeds: [textToEmbed(reply, style)],
 			ephemeral: true
@@ -25,7 +25,7 @@ export default async function interactionCreate(
 	}
 
 	if (interaction.isCommand()) {
-		const style: BotStyle = new BotStyle(interaction.bot.config.style);
+		const style = interaction.bot?.style;
 		const command = interaction.bot.commands.get(interaction.commandName);
 
 		if (!command) {
@@ -46,9 +46,11 @@ export default async function interactionCreate(
 			};
 		} else {
 			if (reply.embeds) {
-				reply.embeds = style.applyToEmbeds(
-					reply.embeds.map((embed) => embed as APIEmbed)
-				);
+				if (style) {
+					reply.embeds = style.applyToEmbeds(
+						reply.embeds.map((embed) => embed as APIEmbed)
+					);
+				}
 			} else if (reply.content) {
 				reply.embeds = [textToEmbed(reply.content, style)];
 				delete reply.content;

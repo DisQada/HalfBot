@@ -7,5 +7,7 @@ export * from "./helpers/data/safeDomains";
 export * from "./modules/events/interactionCreate";
 export * from "./modules/events/ready";
 export * from "./config/style";
+export * from "./config/info";
+export * from "./config/vars";
 export * from "./core/extra";
 export * from "./core/discordBot";

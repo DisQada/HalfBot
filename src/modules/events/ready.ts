@@ -4,9 +4,10 @@ import {
 	BotCommandData,
 	BotCommandDeployment
 } from "../../entities/command";
-import type { DiscordBot, DiscordBotConfig } from "../../core/discordBot";
+import type { DiscordBot } from "../../core/discordBot";
+import { BotInfo } from "../../main";
 
-function getGuildId(data: BotCommandData, config: DiscordBotConfig): string {
+function getGuildId(data: BotCommandData, info: BotInfo): string {
 	let globalGuildId: string = "0";
 
 	switch (data.deployment) {
@@ -14,10 +15,10 @@ function getGuildId(data: BotCommandData, config: DiscordBotConfig): string {
 			return globalGuildId;
 
 		case BotCommandDeployment.DevGuild:
-			return config.devGuildId ?? globalGuildId;
+			return info.devGuildId ?? globalGuildId;
 
 		case BotCommandDeployment.SupportGuild:
-			return config.supportGuildId ?? globalGuildId;
+			return info.supportGuildId ?? globalGuildId;
 
 		default:
 			throw new Error("Not implemented switch case: " + data.deployment);
@@ -45,7 +46,7 @@ function registerCommands(bot: DiscordBot): void {
 	const commands: Collection<string, BotCommandData[]> = new Collection();
 
 	bot.commands.forEach((command: BotCommand) => {
-		const guildId: string = getGuildId(command.data, bot.config);
+		const guildId: string = getGuildId(command.data, bot.info);
 
 		const commandArray: BotCommandData[] = commands.get(guildId) ?? [];
 		commandArray.push(command.data);
