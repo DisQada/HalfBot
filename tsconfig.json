@@ -24,7 +24,6 @@
 		// Emit
 		"declaration": true,
 		"importHelpers": true,
-		"importsNotUsedAsValues": "error",
 		"newLine": "lf",
 		"noEmitHelpers": true,
 		"outDir": "dist",
