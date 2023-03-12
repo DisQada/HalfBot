@@ -1,5 +1,5 @@
 {
-	"name": "halfbot",
+	"name": "@disqada/halfbot",
 	"version": "0.1.0",
 	"description": " أداة تسهيل وتسريع برمجة بوتات دسكورد بلغة JavaScript أو TypeScript",
 	"scripts": {
@@ -40,6 +40,7 @@
 	"license": "Apache 2.0",
 	"dependencies": {
 		"discord.js": "^14.7.1",
+		"dotenv": "^16.0.3",
 		"paths-manager": "^0.4.3"
 	},
 	"devDependencies": {
