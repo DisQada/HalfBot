@@ -17,16 +17,16 @@ function textToEmbed(text: string, style?: BotStyle): APIEmbed {
 export default async function interactionCreate(
 	interaction: BotCommandInteraction
 ) {
-	function quickReply(reply: string, style?: BotStyle) {
-		interaction.followUp({
+	async function quickReply(reply: string, style?: BotStyle) {
+		await interaction.followUp({
 			embeds: [textToEmbed(reply, style)],
 			ephemeral: true
 		});
 	}
 
 	if (interaction.isCommand()) {
-		const style = interaction.bot?.style;
 		const command = interaction.bot.commands.get(interaction.commandName);
+		const style = interaction.bot?.style;
 
 		if (!command) {
 			quickReply("Error: Unknown command", style);
@@ -57,6 +57,6 @@ export default async function interactionCreate(
 			}
 		}
 
-		interaction.followUp(reply);
+		await interaction.followUp(reply);
 	}
 }

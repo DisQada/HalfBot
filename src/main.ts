@@ -9,5 +9,4 @@ export * from "./modules/events/ready";
 export * from "./config/style";
 export * from "./config/info";
 export * from "./config/vars";
-export * from "./core/extra";
 export * from "./core/discordBot";

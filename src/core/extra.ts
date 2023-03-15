@@ -5,7 +5,7 @@ export enum Modules {
 	Events = "events",
 	Modals = "modals"
 }
-export type Data = { name: string; type?: ApplicationCommandType };
+export type Data = { name: string; type?: ApplicationCommandType } & any;
 export type Info = {
 	data: Data;
 	execute: Function;
