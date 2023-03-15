@@ -1,10 +1,10 @@
-import type { APIEmbed, ColorResolvable } from "discord.js";
+import type { APIEmbed, HexColorString } from "discord.js";
 import Colour from "../helpers/classes/colour";
 import Link from "../helpers/classes/link";
 
 export interface BotStyleData {
 	name?: string;
-	colour?: ColorResolvable;
+	colour?: number | HexColorString;
 	logoUrl?: string;
 }
 
