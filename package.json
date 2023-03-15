@@ -1,10 +1,11 @@
 {
 	"name": "@disqada/halfbot",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"description": " أداة تسهيل وتسريع برمجة بوتات دسكورد بلغة JavaScript أو TypeScript",
 	"scripts": {
 		"build": "tsc",
-		"watch": "tsc -w"
+		"watch": "tsc -w",
+		"test": "vitest --coverage"
 	},
 	"main": "./dist/main.js",
 	"module": "./dist/main.mjs",
@@ -45,6 +46,8 @@
 	},
 	"devDependencies": {
 		"@types/node": "^16.18.13",
-		"typescript": "^4.9.5"
+		"@vitest/coverage-c8": "^0.29.2",
+		"typescript": "^4.9.5",
+		"vitest": "^0.29.2"
 	}
 }
