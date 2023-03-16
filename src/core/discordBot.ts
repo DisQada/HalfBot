@@ -27,8 +27,8 @@ export interface DiscordBotData {
 
 export class DiscordBot {
 	public client: Client;
-	public info: BotInfo;
-	public vars: BotVars;
+	public info?: BotInfo;
+	public vars?: BotVars;
 	public style?: BotStyle;
 
 	public commands: Collection<string, BotCommand> = new Collection();
@@ -45,34 +45,24 @@ export class DiscordBot {
 			partials: [Partials.GuildMember, Partials.Message]
 		});
 
-		this.info = new BotInfo({
-			clientId: ""
-		});
-
-		this.vars = new BotVars({});
-
 		saveMainFolders([data.rootDirectory]);
-
-		this.retrieveData<BotInfoData>("info", (data) => {
-			this.info = new BotInfo(data);
-		});
-
-		if (this.info.clientId === "") {
-			throw new Error("Invalid client id in bot info");
-		}
-
-		this.retrieveData<Object>("vars", (data) => {
-			this.vars = new BotVars(data);
-		});
-
-		this.retrieveData<BotStyleData>("style", (data) => {
-			this.style = new BotStyle(data);
-		});
 
 		this.runBot();
 	}
 
 	private async runBot() {
+		await this.retrieveData<BotInfoData>("info", (data) => {
+			this.info = new BotInfo(data);
+		});
+
+		await this.retrieveData<Object>("vars", (data) => {
+			this.vars = new BotVars(data);
+		});
+
+		await this.retrieveData<BotStyleData>("style", (data) => {
+			this.style = new BotStyle(data);
+		});
+
 		await this.registerAllModules();
 		this.runCoreEvents();
 
@@ -89,13 +79,14 @@ export class DiscordBot {
 		});
 	}
 
-	private retrieveData<DataType>(
+	private async retrieveData<DataType>(
 		fileName: string,
 		useData: (data: DataType) => void
 	) {
 		const filePath = getFilePath(`${fileName}.json`);
 		if (filePath) {
-			this.importFile(filePath).then((data: DataType) => useData(data));
+			const data = await this.importFile(filePath);
+			useData(data);
 		} else {
 			throw new Error(`Could not find ${fileName}`);
 		}

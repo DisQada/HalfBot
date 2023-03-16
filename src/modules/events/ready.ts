@@ -7,8 +7,11 @@ import {
 import type { DiscordBot } from "../../core/discordBot";
 import { BotInfo } from "../../main";
 
-function getGuildId(data: BotCommandData, info: BotInfo): string {
+function getGuildId(data: BotCommandData, info?: BotInfo): string {
 	let globalGuildId: string = "0";
+	if (!info) {
+		return globalGuildId;
+	}
 
 	switch (data.deployment) {
 		case BotCommandDeployment.Global:
