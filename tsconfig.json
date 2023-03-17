@@ -26,6 +26,7 @@
 		"importHelpers": true,
 		"newLine": "lf",
 		"noEmitHelpers": true,
+		"noEmitOnError": true,
 		"outDir": "dist",
 		"preserveConstEnums": true,
 		"removeComments": true,

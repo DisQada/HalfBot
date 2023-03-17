@@ -1,2 +1,3 @@
-# easybot
- أداة تسهيل وتسريع برمجة بوتات دسكورد بلغة JavaScript أو TypeScript
+# halfbot
+
+أداة تسهيل وتسريع برمجة بوتات دسكورد بلغة JavaScript أو TypeScript

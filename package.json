@@ -1,31 +1,29 @@
 {
 	"name": "@disqada/halfbot",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"description": " أداة تسهيل وتسريع برمجة بوتات دسكورد بلغة JavaScript أو TypeScript",
 	"scripts": {
 		"build": "tsc",
 		"watch": "tsc -w",
-		"test": "vitest --coverage"
+		"test": "vitest run",
+		"commit": "git-cz",
+		"semantic-release": "semantic-release --branches main"
 	},
 	"main": "./dist/main.js",
-	"module": "./dist/main.mjs",
 	"types": "./dist/main.d.ts",
 	"exports": {
-		"import": "./dist/main.mjs",
 		"require": "./dist/main.js",
 		"types": "./dist/main.d.ts"
 	},
 	"files": [
-		"dist/",
-		"README.md",
-		"LICENSE"
+		"dist"
 	],
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Discord-admins/easybot.git"
+		"url": "https://github.com/DisQada/halfbot.git"
 	},
 	"bugs": {
-		"url": "https://github.com/Discord-admins/easybot/issues"
+		"url": "https://github.com/DisQada/halfbot/issues"
 	},
 	"keywords": [
 		"discord.js",
@@ -38,16 +36,23 @@
 		"email": "contact@nabilalsaiad.com",
 		"url": "https://links.nabilalsaiad.com"
 	},
-	"license": "Apache 2.0",
+	"license": "Apache-2.0",
 	"dependencies": {
-		"discord.js": "^14.7.1",
+		"discord.js": "^14.8.0",
 		"dotenv": "^16.0.3",
 		"paths-manager": "^0.4.3"
 	},
 	"devDependencies": {
-		"@types/node": "^16.18.13",
-		"@vitest/coverage-c8": "^0.29.2",
+		"@types/node": "^16.18.16",
+		"@vitest/coverage-c8": "^0.29.3",
+		"cz-conventional-changelog": "^3.3.0",
+		"semantic-release": "^20.1.1",
 		"typescript": "^4.9.5",
-		"vitest": "^0.29.2"
+		"vitest": "^0.29.3"
+	},
+	"config": {
+		"commitizen": {
+			"path": "./node_modules/cz-conventional-changelog"
+		}
 	}
 }
