@@ -1,7 +1,11 @@
 import type {
 	ChatInputApplicationCommandData,
-	CommandInteraction,
-	InteractionReplyOptions
+	ChatInputCommandInteraction,
+	InteractionReplyOptions,
+	MessageApplicationCommandData,
+	MessageContextMenuCommandInteraction,
+	UserApplicationCommandData,
+	UserContextMenuCommandInteraction
 } from "discord.js";
 import type { DiscordBot } from "../core/discordBot";
 
@@ -17,17 +21,26 @@ export enum BotCommandContextMenuType {
 }
 
 export type BotCommandData = {
+	description: string;
 	deployment: BotCommandDeployment;
 	category: string;
 	types: {
 		chatInput: boolean;
 		contextMenu?: BotCommandContextMenuType;
 	};
-} & ChatInputApplicationCommandData;
+} & (
+	| ChatInputApplicationCommandData
+	| UserApplicationCommandData
+	| MessageApplicationCommandData
+);
 
-export interface BotCommandInteraction extends CommandInteraction {
+export type BotCommandInteraction = {
 	bot: DiscordBot;
-}
+} & (
+	| ChatInputCommandInteraction
+	| UserContextMenuCommandInteraction
+	| MessageContextMenuCommandInteraction
+);
 
 export type BotCommandFunction = (
 	interaction: BotCommandInteraction
