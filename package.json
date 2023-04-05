@@ -9,11 +9,11 @@
 		"commit": "git-cz",
 		"semantic-release": "semantic-release --branches main"
 	},
-	"main": "./dist/main.js",
-	"types": "./dist/main.d.ts",
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
 	"exports": {
-		"require": "./dist/main.js",
-		"types": "./dist/main.d.ts"
+		"require": "./dist/index.js",
+		"types": "./dist/index.d.ts"
 	},
 	"files": [
 		"dist"
@@ -29,14 +29,17 @@
 		"discord.js",
 		"discord",
 		"half",
-		"bot"
+		"bot",
+		"client"
 	],
 	"author": {
 		"name": "The Alpha",
 		"email": "contact@nabilalsaiad.com",
 		"url": "https://links.nabilalsaiad.com"
 	},
+	"contributors": [],
 	"license": "Apache-2.0",
+	"homepage": "https://github.com/DisQada/halfbot#readme",
 	"dependencies": {
 		"discord.js": "^14.8.0",
 		"dotenv": "^16.0.3",
