@@ -1,11 +1,7 @@
 import { Client, Collection, ActivityType } from "discord.js";
-import {
-	BotCommand,
-	BotCommandData,
-	BotCommandDeployment
-} from "../../entities/command";
-import type { DiscordBot } from "../../core/discordBot";
-import { BotInfo } from "../../main";
+import { BotCommandData, BotCommandDeployment } from "../../entities/command";
+import type { DiscordBot } from "../discordBot";
+import { BotInfo } from "../..";
 
 function getGuildId(data: BotCommandData, info?: BotInfo): string {
 	let globalGuildId: string = "0";
@@ -24,37 +20,51 @@ function getGuildId(data: BotCommandData, info?: BotInfo): string {
 			return info.supportGuildId ?? globalGuildId;
 
 		default:
-			throw new Error("Not implemented switch case: " + data.deployment);
+			throw new Error(
+				"Unknown BotCommandDeployment value: " + data.deployment
+			);
 	}
 }
 
-function finalRegistration(
+async function finalRegistration(
 	client: Client,
 	commandCollection: Collection<string, BotCommandData[]>
 ) {
-	commandCollection.forEach((commands: BotCommandData[], guildId: string) => {
-		const commandsData = commands.map((command: BotCommandData) => command);
+	for (const iterator of commandCollection) {
+		const guildId: string = iterator[0];
+		const commandsData: BotCommandData[] = iterator[1];
 
 		if (guildId === "0") {
-			client.application?.commands.set(commandsData);
-			console.log("Registering global commands", commandsData);
+			await client.application?.commands.set(commandsData);
+			console.log(
+				"Registered global commands: ",
+				commandsData.map((data: BotCommandData) => {
+					data.name;
+				})
+			);
 		} else {
-			client.guilds.cache.get(guildId)?.commands.set(commandsData);
-			console.log(`Registering commands to ${guildId}`, commandsData);
+			await client.guilds.cache.get(guildId)?.commands.set(commandsData);
+			console.log(
+				`Registered commands to ${guildId}: `,
+				commandsData.map((data: BotCommandData) => {
+					data.name;
+				})
+			);
 		}
-	});
+	}
 }
 
 function registerCommands(bot: DiscordBot): void {
 	const commands: Collection<string, BotCommandData[]> = new Collection();
 
-	bot.commands.forEach((command: BotCommand) => {
+	for (const iterator of bot.commands) {
+		const command = iterator[1];
 		const guildId: string = getGuildId(command.data, bot.info);
 
 		const commandArray: BotCommandData[] = commands.get(guildId) ?? [];
 		commandArray.push(command.data);
 		commands.set(guildId, commandArray);
-	});
+	}
 
 	finalRegistration(bot.client, commands);
 }
@@ -68,7 +78,7 @@ export default function ready(bot: DiscordBot) {
 			{
 				name: "Operating ⚙ ...",
 				type: ActivityType.Listening,
-				url: "https://github.com/Discord-admins/easybot"
+				url: "https://github.com/DisQada/halfbot"
 			}
 		]
 	});
