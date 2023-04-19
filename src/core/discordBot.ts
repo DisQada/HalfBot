@@ -12,10 +12,10 @@ import {
 	GatewayIntentBits
 } from "discord.js";
 import {
-	getFilePath,
-	getFilePathsInFolder,
-	saveMainFolders
-} from "paths-manager";
+	aFilePath,
+	allFilePaths,
+	storeFilePathsInFolders
+} from "@disqada/pathfinder";
 import { BotCommand, BotCommandContextMenuType } from "../entities/command";
 import { BotEvent } from "../entities/event";
 import { checkData, Modules } from "./extra";
@@ -57,7 +57,7 @@ export class DiscordBot {
 
 		this.client = new Client(options);
 
-		saveMainFolders([data.rootDirectory]);
+		storeFilePathsInFolders([data.rootDirectory], true);
 
 		this.runBot();
 	}
@@ -95,9 +95,9 @@ export class DiscordBot {
 		fileName: string,
 		useData: (data: DataType) => void
 	) {
-		const filePath = getFilePath(`${fileName}.json`);
-		if (filePath) {
-			const data = await Importer.importFile<DataType>(filePath);
+		const filePath = aFilePath(fileName);
+		if (filePath && filePath instanceof FilePath) {
+			const data = await Importer.importFile<DataType>(filePath.fullPath);
 			if (data) {
 				useData(data);
 			}
@@ -107,16 +107,23 @@ export class DiscordBot {
 	}
 
 	private async registerModules(module: Modules, callback: Function) {
-		let files = getFilePathsInFolder(module);
+		let files = allFilePaths()?.filter(
+			(filePath: FilePath) => filePath.folder === module
+		);
 		if (!files) return;
 
 		for (let i = 0; i < files.length; i++) {
 			const filePath = files[i];
 
 			if (filePath) {
-				const info = await Importer.importFile(filePath);
+				const info = await Importer.importFile(filePath.fullPath);
 				if (info) {
-					checkData(info as Info, module, filePath, callback);
+					checkData(
+						info as Info,
+						module,
+						filePath.fullPath,
+						callback
+					);
 				}
 			}
 		}
