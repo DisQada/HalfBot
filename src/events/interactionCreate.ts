@@ -1,6 +1,6 @@
 import type { APIEmbed } from "discord.js";
-import type { BotCommandInteraction } from "../../entities/command";
-import { BotStyle } from "../../config/style";
+import type { BotCommandInteraction } from "../entities/command";
+import { BotStyle } from "../config/style";
 
 function textToEmbed(text: string, style?: BotStyle): APIEmbed {
 	const embed = { description: text };

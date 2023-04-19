@@ -1,7 +1,7 @@
 import { Client, Collection, ActivityType } from "discord.js";
-import { BotCommandData, BotCommandDeployment } from "../../entities/command";
-import type { DiscordBot } from "../discordBot";
-import { BotInfo } from "../..";
+import { BotCommandData, BotCommandDeployment } from "../entities/command";
+import type { DiscordBot } from "../core/discordBot";
+import { BotInfo } from "..";
 
 function getGuildId(data: BotCommandData, info?: BotInfo): string {
 	let globalGuildId: string = "0";

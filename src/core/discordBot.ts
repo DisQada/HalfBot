@@ -23,9 +23,10 @@ import { BotStyle } from "../config/style";
 import { BotInfo } from "../config/info";
 import { BotVars } from "../config/vars";
 import { config } from "dotenv";
-import interactionCreate from "./events/interactionCreate";
-import ready from "./events/ready";
+import interactionCreate from "../events/interactionCreate";
+import ready from "../events/ready";
 import Importer from "../helpers/classes/importer";
+import FilePath from "@disqada/pathfinder/dist/types/filePath";
 config();
 
 export interface DiscordBotData {
