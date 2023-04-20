@@ -1,23 +1,44 @@
+import Link from "../helpers/classes/link";
+
 export interface BotInfoData {
-	clientId: string;
-	devGuildId?: string;
-	supportGuildId?: string;
+    id: {
+        client: string;
+        guild: {
+            support: string;
+            development: string;
+        };
+        channel: {
+            welcome?: string;
+            errorLog?: string;
+        };
+        role: {};
+    };
+    links: {
+        website?: Link;
+    };
+    vars: Object;
 }
 
 export class BotInfo {
-	clientId: string;
-	devGuildId?: string;
-	supportGuildId?: string;
+    id: {
+        client: string;
+        guild: {
+            support: string;
+            development: string;
+        };
+        channel: {
+            welcome?: string;
+            errorLog?: string;
+        };
+    };
+    links: {
+        website?: Link;
+    };
+    vars: Object;
 
-	constructor(data: BotInfoData) {
-		this.clientId = data.clientId;
-
-		if (data.devGuildId) {
-			this.devGuildId = data.devGuildId;
-		}
-
-		if (data.supportGuildId) {
-			this.supportGuildId = data.supportGuildId;
-		}
-	}
+    constructor(data: BotInfoData) {
+        this.id = data.id;
+        this.links = data.links;
+        this.vars = data.vars;
+    }
 }

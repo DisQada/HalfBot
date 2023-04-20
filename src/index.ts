@@ -1,6 +1,5 @@
 export * from "./config/info";
 export * from "./config/style";
-export * from "./config/vars";
 export * from "./core/discordBot";
 export * from "./entities/command";
 export * from "./entities/event";

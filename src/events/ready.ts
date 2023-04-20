@@ -14,10 +14,10 @@ function getGuildId(data: BotCommandData, info?: BotInfo): string {
 			return globalGuildId;
 
 		case BotCommandDeployment.DevGuild:
-			return info.devGuildId ?? globalGuildId;
+            return info.id.guild.development ?? globalGuildId;
 
 		case BotCommandDeployment.SupportGuild:
-			return info.supportGuildId ?? globalGuildId;
+            return info.id.guild.support ?? globalGuildId;
 
 		default:
 			throw new Error(
