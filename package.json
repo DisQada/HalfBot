@@ -1,64 +1,68 @@
 {
-	"name": "@disqada/halfbot",
-	"version": "0.2.1",
-	"description": " أداة تسهيل وتسريع برمجة بوتات دسكورد بلغة JavaScript أو TypeScript",
-	"scripts": {
-		"build": "tsc",
-		"watch": "tsc -w",
-		"test": "vitest run",
-		"commit": "git-cz",
-		"semantic-release": "semantic-release"
-	},
-	"main": "./dist/index.js",
-	"types": "./dist/index.d.ts",
-	"exports": {
-		"require": "./dist/index.js",
-		"types": "./dist/index.d.ts"
-	},
-	"files": [
-		"dist"
-	],
-	"homepage": "https://github.com/DisQada/halfbot",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/DisQada/halfbot.git"
-	},
-	"bugs": {
-		"url": "https://github.com/DisQada/halfbot/issues"
-	},
-	"keywords": [
-		"discord.js",
-		"discord",
-		"half",
-		"bot",
-		"client"
-	],
-	"author": {
-		"name": "The Alpha",
-		"email": "contact@nabilalsaiad.com",
-		"url": "https://links.nabilalsaiad.com"
-	},
-	"contributors": [],
-	"license": "Apache-2.0",
-	"dependencies": {
-		"@disqada/pathfinder": "^1.0.0",
-		"discord.js": "^14.8.0",
-		"dotenv": "^16.0.3"
-	},
-	"devDependencies": {
-		"@types/node": "^16.18.16",
-		"@vitest/coverage-c8": "^0.29.3",
-		"cz-conventional-changelog": "^3.3.0",
-		"semantic-release": "^20.1.1",
-		"typescript": "^4.9.5",
-		"vitest": "^0.29.3"
-	},
-	"publishConfig": {
-		"access": "public"
-	},
-	"config": {
-		"commitizen": {
-			"path": "./node_modules/cz-conventional-changelog"
-		}
-	}
+    "name": "@disqada/halfbot",
+    "version": "0.2.1",
+    "description": " أداة تسهيل وتسريع برمجة بوتات دسكورد بلغة JavaScript أو TypeScript",
+    "scripts": {
+        "build": "tsc",
+        "watch": "tsc -w",
+        "test": "vitest run",
+        "commit": "git-cz",
+        "semantic-release": "semantic-release"
+    },
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        "require": "./dist/index.js",
+        "types": "./dist/index.d.ts"
+    },
+    "files": [
+        "dist"
+    ],
+    "homepage": "https://github.com/DisQada/halfbot",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DisQada/halfbot.git"
+    },
+    "bugs": {
+        "url": "https://github.com/DisQada/halfbot/issues"
+    },
+    "keywords": [
+        "discord.js",
+        "discord",
+        "half",
+        "bot",
+        "client"
+    ],
+    "author": {
+        "name": "The Alpha",
+        "email": "contact@nabilalsaiad.com",
+        "url": "https://links.nabilalsaiad.com"
+    },
+    "contributors": [],
+    "license": "Apache-2.0",
+    "dependencies": {
+        "@disqada/pathfinder": "^1.0.0",
+        "discord.js": "^14.8.0",
+        "dotenv": "^16.0.3"
+    },
+    "devDependencies": {
+        "@semantic-release/changelog": "^6.0.3",
+        "@semantic-release/git": "^10.0.1",
+        "@types/node": "^16.18.16",
+        "@vitest/coverage-c8": "^0.29.3",
+        "commitizen": "^4.3.0",
+        "cz-conventional-changelog": "^3.3.0",
+        "semantic-release": "^20.1.1",
+        "tslib": "^2.5.0",
+        "typescript": "^4.9.5",
+        "vitest": "^0.29.3"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-conventional-changelog"
+        }
+    }
 }
