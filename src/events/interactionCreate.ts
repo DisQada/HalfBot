@@ -22,7 +22,7 @@ export default async function interactionCreate(
 	}
 
 	const command = interaction.bot.commands.get(interaction.commandName);
-	const style = interaction.bot?.style;
+    const style = interaction.bot.style;
 
 	if (!command) {
 		quickReply("Error: Unknown command", style);

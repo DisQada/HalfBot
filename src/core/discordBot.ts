@@ -36,8 +36,7 @@ export interface DiscordBotData {
 export class DiscordBot {
 	public client: Client;
 	public vars: BotVars = {};
-	public info: BotInfo = { clientId: "" };
-	public style?: BotStyle;
+    public style: BotStyle;
 
 	public commands: Collection<string, BotCommand> = new Collection();
 
@@ -59,6 +58,7 @@ export class DiscordBot {
 
 		storeFilePathsInFolders([data.rootDirectory], true);
 
+        this.style = {} as BotStyle;
 		this.runBot();
 	}
 

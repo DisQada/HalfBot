@@ -3,9 +3,9 @@ import Colour from "../helpers/classes/colour";
 import Link from "../helpers/classes/link";
 
 export interface BotStyleData {
-	name?: string;
-	colour?: number | HexColorString;
-	logoUrl?: string;
+    name: string;
+    colour: number | HexColorString;
+    logoUrl: string;
 }
 
 export class BotStyle {
@@ -13,10 +13,10 @@ export class BotStyle {
 	public colour: Colour;
 	public logoLink: Link;
 
-	constructor(data?: BotStyleData) {
-		this.name = data?.name ?? "Easy bot";
-		this.colour = new Colour(data?.colour ?? 0xffffff);
-		this.logoLink = new Link(data?.logoUrl ?? Link.defaultAvatarUrl);
+    constructor(data: BotStyleData) {
+        this.name = data.name;
+        this.colour = new Colour(data.colour);
+        this.logoLink = new Link(data.logoUrl);
 	}
 
 	public applyToEmbed(embed: APIEmbed, skipFooter: boolean = false) {
