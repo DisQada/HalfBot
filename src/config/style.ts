@@ -9,48 +9,48 @@ export interface BotStyleData {
 }
 
 export class BotStyle {
-	public name: string;
-	public colour: Colour;
-	public logoLink: Link;
+    public name: string;
+    public colour: Colour;
+    public logoLink: Link;
 
     constructor(data: BotStyleData) {
         this.name = data.name;
         this.colour = new Colour(data.colour);
         this.logoLink = new Link(data.logoUrl);
-	}
+    }
 
-	public applyToEmbed(embed: APIEmbed, skipFooter: boolean = false) {
-		embed.color = this.colour.hexNumber;
+    public applyToEmbed(embed: APIEmbed, skipFooter: boolean = false) {
+        embed.color = this.colour.hexNumber;
 
-		if (!skipFooter) {
-			embed.footer = {
-				text: this.name,
-				icon_url: this.logoLink.url
-			};
-		}
+        if (!skipFooter) {
+            embed.footer = {
+                text: this.name,
+                icon_url: this.logoLink.url
+            };
+        }
 
-		return embed;
-	}
+        return embed;
+    }
 
-	public applyToEmbeds(embeds: APIEmbed[]): typeof embeds {
-		const lastEmbed = embeds.length - 1;
-		for (let i = 0; i < embeds.length; i++) {
-			const embed = embeds[i];
+    public applyToEmbeds(embeds: APIEmbed[]): typeof embeds {
+        const lastEmbed = embeds.length - 1;
+        for (let i = 0; i < embeds.length; i++) {
+            const embed = embeds[i];
 
-			if (embed) {
-				const skipFooter = i < lastEmbed;
-				embeds[i] = this.applyToEmbed(embed, skipFooter);
-			}
-		}
+            if (embed) {
+                const skipFooter = i < lastEmbed;
+                embeds[i] = this.applyToEmbed(embed, skipFooter);
+            }
+        }
 
-		return embeds;
-	}
+        return embeds;
+    }
 
-	public applyTo(toApplyOn: APIEmbed | APIEmbed[]): typeof toApplyOn {
-		if (Array.isArray(toApplyOn)) {
-			return this.applyToEmbeds(toApplyOn);
-		} else {
-			return this.applyToEmbed(toApplyOn);
-		}
-	}
+    public applyTo(toApplyOn: APIEmbed | APIEmbed[]): typeof toApplyOn {
+        if (Array.isArray(toApplyOn)) {
+            return this.applyToEmbeds(toApplyOn);
+        } else {
+            return this.applyToEmbed(toApplyOn);
+        }
+    }
 }
