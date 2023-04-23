@@ -51,4 +51,23 @@ export class BotCommand {
         public data: BotCommandData,
         public execute: BotCommandFunction
     ) {}
+
+    public static isValid(command: BotCommand): boolean {
+        if (!command.data || !command.execute) {
+            return false;
+        }
+
+        const required = [
+            "name",
+            "description",
+            "deployment",
+            "category",
+            "types"
+        ];
+        const hasRequiredData = required.every(
+            (property: string) => property in command.data
+        );
+
+        return hasRequiredData;
+    }
 }

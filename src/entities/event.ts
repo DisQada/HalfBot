@@ -15,4 +15,17 @@ export class BotEvent<Key extends keyof ClientEvents> {
         public data: BotEventData<Key>,
         public execute: BotEventFunction<Key>
     ) {}
+
+    public static isValid(command: BotEvent<any>): boolean {
+        if (!command.data || !command.execute) {
+            return false;
+        }
+
+        const required = ["name"];
+        const hasRequiredData = required.every(
+            (property: string) => property in command.data
+        );
+
+        return hasRequiredData;
+    }
 }
