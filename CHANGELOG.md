@@ -1,3 +1,11 @@
+# [1.1.0](https://github.com/DisQada/halfbot/compare/v1.0.0...v1.1.0) (2023-04-23)
+
+
+### Features
+
+* **logger:** add Logger class and enums file ([455b52f](https://github.com/DisQada/halfbot/commit/455b52f341463ae0a840a764859d0efbc3d90dc9))
+* **validation:** add new validation check system to botcommand and botevent classes ([d7c302d](https://github.com/DisQada/halfbot/commit/d7c302d538be176da0ba6053c598e9676c0f94d2))
+
 # [1.0.0](https://github.com/DisQada/halfbot/compare/v0.2.1...v1.0.0) (2023-04-20)
 
 

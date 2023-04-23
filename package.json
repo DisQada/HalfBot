@@ -1,6 +1,6 @@
 {
     "name": "@disqada/halfbot",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": " أداة تسهيل وتسريع برمجة بوتات دسكورد بلغة JavaScript أو TypeScript",
     "scripts": {
         "build": "tsc",
@@ -44,7 +44,8 @@
     "dependencies": {
         "@disqada/pathfinder": "^1.0.0",
         "discord.js": "^14.8.0",
-        "dotenv": "^16.0.3"
+        "dotenv": "^16.0.3",
+        "tty-table": "^4.2.1"
     },
     "devDependencies": {
         "@semantic-release/changelog": "^6.0.3",
