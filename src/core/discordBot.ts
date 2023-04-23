@@ -2,7 +2,6 @@ import type { ClientOptions, Interaction } from "discord.js";
 import type { BotInfoData } from "../config/info";
 import type { BotStyleData } from "../config/style";
 import type { BotCommandInteraction } from "../entities/command";
-import type { Info } from "./extra";
 
 import {
     aFilePath,
@@ -21,12 +20,13 @@ import { config } from "dotenv";
 import { BotInfo } from "../config/info";
 import { BotStyle } from "../config/style";
 import { BotVars } from "../config/vars";
-import { BotCommand, BotCommandContextMenuType } from "../entities/command";
+import { BotCommand } from "../entities/command";
 import { BotEvent } from "../entities/event";
 import interactionCreate from "../events/interactionCreate";
 import ready from "../events/ready";
 import Importer from "../helpers/classes/importer";
-import { Modules, checkData } from "./extra";
+import { Modules, RecordStates } from "../helpers/data/enums";
+import { Logger } from "./logger";
 config();
 
 export interface DiscordBotData {
@@ -106,55 +106,76 @@ export class DiscordBot {
         }
     }
 
-    private async registerModules(module: Modules, callback: Function) {
-        let files = allFilePaths()?.filter(
-            (filePath: FilePath) => filePath.folder === module
-        );
-        if (!files) return;
+    private async registerCommands(command: BotCommand) {
+        if (command.data.types.chatInput) {
+            command.data.type = ApplicationCommandType.ChatInput;
+            this.commands.set(command.data.name, command);
+        }
 
-        for (let i = 0; i < files.length; i++) {
-            const filePath = files[i];
-
-            if (filePath) {
-                const info = await Importer.importFile(filePath.fullPath);
-                if (info) {
-                    checkData(
-                        info as Info,
-                        module,
-                        filePath.fullPath,
-                        callback
-                    );
-                }
-            }
+        if (command.data.types.contextMenu) {
+            // Note: The 2 is ApplicationCommandType.User
+            command.data.type = command.data.types.contextMenu + 2;
+            this.commands.set(command.data.name, command);
         }
     }
 
+    private async registerEvents(event: BotEvent<any>) {
+        this.client.on(event.data.name, (...args: any) =>
+            event.execute(this, ...args)
+        );
+    }
+
     private async registerAllModules() {
-        await this.registerModules(Modules.Commands, (command: BotCommand) => {
-            if (command.data.types.chatInput) {
-                command.data.type = ApplicationCommandType.ChatInput;
-                this.commands.set(command.data.name, command);
-            }
+        const filePaths = allFilePaths()?.filter(
+            (filePath) =>
+                filePath.folder === Modules.Commands ||
+                filePath.folder === Modules.Events
+        );
+        if (!filePaths) {
+            return;
+        }
 
-            if (command.data.types.contextMenu) {
-                switch (command.data.types?.contextMenu as number) {
-                    case BotCommandContextMenuType.User:
-                        command.data.type = ApplicationCommandType.User;
-                        break;
+        const logger = new Logger();
 
-                    case BotCommandContextMenuType.Message:
-                        command.data.type = ApplicationCommandType.Message;
-                        break;
+        for (const filePath of filePaths) {
+            const botModule: BotCommand | BotEvent<any> | any | void =
+                await Importer.importFile(filePath.fullPath);
+
+            if (botModule instanceof BotCommand) {
+                if (BotCommand.isValid(botModule)) {
+                    this.registerCommands(botModule);
+                } else {
+                    logger.add({
+                        name: botModule.data.name,
+                        deployment: botModule.data.deployment,
+                        state: RecordStates.Fail,
+                        message: "The module is invalid"
+                    });
+                }
+            } else if (botModule instanceof BotEvent) {
+                if (BotEvent.isValid(botModule)) {
+                    this.registerEvents(botModule);
+                } else {
+                    logger.add({
+                        name: botModule.data.name,
+                        state: RecordStates.Fail,
+                        message: "The module is invalid"
+                    });
+                }
+            } else {
+                let name = filePath.fullPath;
+                if (typeof botModule === "object" && botModule?.data?.name) {
+                    name = botModule?.data?.name;
                 }
 
-                this.commands.set(command.data.name, command);
+                logger.add({
+                    name: name,
+                    state: RecordStates.Error,
+                    message: "Module file was empty or not exported correctly"
+                });
             }
-        });
+        }
 
-        await this.registerModules(Modules.Events, (event: BotEvent<any>) =>
-            this.client.on(event.data.name, (...args: any) =>
-                event.execute(this, ...args)
-            )
-        );
+        Logger.debug(logger);
     }
 }

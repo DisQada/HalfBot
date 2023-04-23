@@ -1,7 +1,10 @@
-import { ActivityType, Client, Collection } from "discord.js";
-import { BotInfo } from "..";
+import type { Client } from "discord.js";
+import type { BotInfo } from "..";
 import type { DiscordBot } from "../core/discordBot";
-import { BotCommandData, BotCommandDeployment } from "../entities/command";
+import type { BotCommand, BotCommandData } from "../entities/command";
+
+import { ActivityType, Collection } from "discord.js";
+import { BotCommandDeployment } from "../entities/command";
 
 function getGuildId(data: BotCommandData, info?: BotInfo): string {
     let globalGuildId: string = "0";
@@ -36,20 +39,8 @@ async function finalRegistration(
 
         if (guildId === "0") {
             await client.application?.commands.set(commandsData);
-            console.log(
-                "Registered global commands: ",
-                commandsData.map((data: BotCommandData) => {
-                    data.name;
-                })
-            );
         } else {
             await client.guilds.cache.get(guildId)?.commands.set(commandsData);
-            console.log(
-                `Registered commands to ${guildId}: `,
-                commandsData.map((data: BotCommandData) => {
-                    data.name;
-                })
-            );
         }
     }
 }
@@ -58,7 +49,7 @@ function registerCommands(bot: DiscordBot): void {
     const commands: Collection<string, BotCommandData[]> = new Collection();
 
     for (const iterator of bot.commands) {
-        const command = iterator[1];
+        const command: BotCommand = iterator[1];
         const guildId: string = getGuildId(command.data, bot.info);
 
         const commandArray: BotCommandData[] = commands.get(guildId) ?? [];
@@ -71,7 +62,9 @@ function registerCommands(bot: DiscordBot): void {
 
 export default function ready(bot: DiscordBot) {
     registerCommands(bot);
+
     console.log(`The bot "${bot.client.user?.tag}" is online`);
+
     bot.client.user?.setPresence({
         status: "online",
         activities: [
