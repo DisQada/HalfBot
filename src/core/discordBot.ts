@@ -4,11 +4,11 @@ import type { BotStyleData } from "../config/style";
 import type { BotCommandInteraction } from "../entities/command";
 
 import {
+    FilePath,
     aFilePath,
     allFilePaths,
     storeFilePathsInFolders
 } from "@disqada/pathfinder";
-import FilePath from "@disqada/pathfinder/dist/types/filePath";
 import {
     ApplicationCommandType,
     Client,
