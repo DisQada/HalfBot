@@ -1,6 +1,6 @@
 {
     "name": "@disqada/halfbot",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": " أداة تسهيل وتسريع برمجة بوتات دسكورد بلغة JavaScript أو TypeScript",
     "scripts": {
         "build": "tsc",

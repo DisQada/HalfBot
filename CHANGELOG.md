@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/DisQada/halfbot/compare/v1.1.0...v1.1.1) (2023-04-24)
+
+
+### Bug Fixes
+
+* **import:** fix importing 'FilePath' from '@disqada/pathfinder' ([9aa4d9d](https://github.com/DisQada/halfbot/commit/9aa4d9d627a09d71447432bc4a6d17cd23e1b27b))
+
 # [1.1.0](https://github.com/DisQada/halfbot/compare/v1.0.0...v1.1.0) (2023-04-23)
 
 
