@@ -11,10 +11,18 @@ export default async function interactionCreate(
     interaction: BotCommandInteraction
 ) {
     async function quickReply(reply: string, style?: BotStyle) {
-        await interaction.followUp({
-            embeds: [textToEmbed(reply, style)],
-            ephemeral: true
-        });
+        const embed = textToEmbed(reply, style);
+        if (interaction.deferred || interaction.replied) {
+            await interaction.followUp({
+                embeds: [embed],
+                ephemeral: true
+            });
+        } else {
+            await interaction.reply({
+                embeds: [embed],
+                ephemeral: true
+            });
+        }
     }
 
     if (!interaction.isCommand()) {
