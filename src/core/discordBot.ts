@@ -127,9 +127,9 @@ export class DiscordBot {
 
     private async registerAllModules() {
         const filePaths = allFilePaths()?.filter(
-            (filePath) =>
-                filePath.folder === Modules.Commands ||
-                filePath.folder === Modules.Events
+            (path) =>
+                path.fullPath.includes(Modules.Commands) ||
+                path.fullPath.includes(Modules.Events)
         );
         if (!filePaths) {
             return;
