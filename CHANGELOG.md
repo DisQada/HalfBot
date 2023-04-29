@@ -1,3 +1,11 @@
+## [1.1.2](https://github.com/DisQada/halfbot/compare/v1.1.1...v1.1.2) (2023-04-29)
+
+
+### Bug Fixes
+
+* **discordbot:** better module path checking ([c475a4a](https://github.com/DisQada/halfbot/commit/c475a4ab3c8b1bfd73295cefc83a207dbd54c168))
+* **interactioncreate:** replying if not deffered ([792b718](https://github.com/DisQada/halfbot/commit/792b718c038f9b6e7e7246ad229458121192c103))
+
 ## [1.1.1](https://github.com/DisQada/halfbot/compare/v1.1.0...v1.1.1) (2023-04-24)
 
 
