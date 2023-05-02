@@ -9,7 +9,7 @@ export default defineConfig({
             all: true,
             reporter: ["text"],
             provider: "c8",
-            include: ["src"],
+            include: ["dist"],
             exclude: ["**/index.{js,ts}", "**/*.{d.ts}"]
         }
     }
