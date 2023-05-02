@@ -2,7 +2,7 @@ import { expect, test } from "vitest";
 import { Logger } from "../../src/core/logger";
 import { RecordStates } from "../../src/helpers/data/enums";
 
-let logger: Logger = new Logger();
+const logger: Logger = new Logger();
 
 const record1 = {
     name: "test1",

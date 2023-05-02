@@ -1,5 +1,5 @@
 export class BotVars {
-    constructor(data: Object) {
+    constructor(data: object) {
         Object.assign(this, data);
     }
 }

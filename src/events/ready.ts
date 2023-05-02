@@ -7,7 +7,7 @@ import { ActivityType, Collection } from "discord.js";
 import { BotCommandDeployment } from "../entities/command";
 
 function getGuildId(data: BotCommandData, info?: BotInfo): string {
-    let globalGuildId: string = "0";
+    const globalGuildId: string = "0";
     if (!info) {
         return globalGuildId;
     }

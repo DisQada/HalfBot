@@ -45,9 +45,8 @@ const header: Header[] = [
 const footer: (string | Formatter)[] = [
     "Registered commands",
     function (
-        // @ts-expect-error
-        cellValue: any, // @ts-expect-error
-        columnIndex: number, // @ts-expect-error
+        cellValue: any,
+        columnIndex: number,
         rowIndex: number,
         rowData: [string, RecordStates, BotCommandDeployment, string][]
     ) {
@@ -58,7 +57,7 @@ const footer: (string | Formatter)[] = [
         // return `${((total / rowData.length) * 100).toFixed(2)}%`;
 
         const length = Object.keys(RecordStates).length * 0.5;
-        const numbers: number[] = Array.apply(null, Array(length)).map(() => 0);
+        const numbers: number[] = Array(length).map(() => 0);
         rowData.forEach((value) => {
             const state = value[1];
             numbers[state]++;
@@ -67,14 +66,13 @@ const footer: (string | Formatter)[] = [
         return numbers.join(" - ");
     },
     function (
-        // @ts-expect-error
-        cellValue: any, // @ts-expect-error
-        columnIndex: number, // @ts-expect-error
+        cellValue: any,
+        columnIndex: number,
         rowIndex: number,
         rowData: [string, RecordStates, BotCommandDeployment, string][]
     ) {
         const length = Object.keys(BotCommandDeployment).length * 0.5;
-        const numbers: number[] = Array.apply(null, Array(length)).map(() => 0);
+        const numbers: number[] = Array(length).map(() => 0);
         rowData.forEach((value) => {
             const deployment = value[2];
             numbers[deployment]++;

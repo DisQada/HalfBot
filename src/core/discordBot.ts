@@ -67,7 +67,7 @@ export class DiscordBot {
             this.info = new BotInfo(data);
         });
 
-        await this.retrieveData<Object>("vars", (data) => {
+        await this.retrieveData<object>("vars", (data) => {
             this.vars = new BotVars(data);
         });
 
