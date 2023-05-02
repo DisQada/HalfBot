@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import Link from "../../src/helpers/classes/link";
+import Link from "../../dist/helpers/classes/link";
 
 test("Link safe domains", async () => {
     const domains = await Link.getSafeDomains();

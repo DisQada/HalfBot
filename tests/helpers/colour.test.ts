@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import Colour from "../../src/helpers/classes/colour";
+import Colour from "../../dist/helpers/classes/colour";
 
 test("Colour class initialisation with number", () => {
     let colour = new Colour(0x000000);

@@ -1,6 +1,6 @@
 import { expect, test } from "vitest";
-import { Logger } from "../../src/core/logger";
-import { RecordStates } from "../../src/helpers/data/enums";
+import { Logger } from "../../dist/core/logger";
+import { RecordStates } from "../../dist/helpers/data/enums";
 
 const logger: Logger = new Logger();
 

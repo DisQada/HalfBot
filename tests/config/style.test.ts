@@ -1,6 +1,6 @@
 import { APIEmbed } from "discord.js";
 import { expect, test } from "vitest";
-import { BotStyle } from "../../src/config/style";
+import { BotStyle } from "../../dist/config/style";
 
 const style = new BotStyle({
     name: "halfbot",
@@ -65,5 +65,7 @@ test("applyTo - returning type", () => {
 
     const embeds = style.applyTo([{}]);
     expect(embeds).to.be.an("array");
-    expect(embeds.length).toEqual(1);
+    if (Array.isArray(embeds)) {
+        expect(embeds.length).toEqual(1);
+    }
 });

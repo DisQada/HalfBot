@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { BotVars } from "../../src/config/vars";
+import { BotVars } from "../../dist/config/vars";
 
 test("Vars class initialising", () => {
     const vars = new BotVars({

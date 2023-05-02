@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { BotInfo } from "../../src/config/info";
+import { BotInfo } from "../../dist/config/info";
 
 test("Info class initialising", () => {
     const info = new BotInfo({
