@@ -1,26 +1,17 @@
 {
     "env": {
+        "es2021": true,
         "node": true
     },
-    "extends": ["eslint:recommended"],
+    "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+    "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaVersion": "latest"
     },
-    "ignorePatterns": ["**/*.md"],
+    "plugins": ["@typescript-eslint"],
+    "ignorePatterns": ["dist", "types", "**/*.md"],
     "rules": {
-        "indent": ["error", 4],
-        "linebreak-style": ["error", "unix"],
-        "quotes": ["error", "double"],
-        "semi": ["error", "always"],
-        "prefer-const": "error",
-        "consistent-this": "error",
-        "comma-dangle": "error",
-        "comma-spacing": "error",
-        "comma-style": "error",
-        "no-trailing-spaces": "error",
-        "no-unused-vars": "warn",
-        "no-unused-labels": "warn",
-        "no-unused-expressions": "warn",
-        "array-callback-return": ["error", { "checkForEach": true }]
+        "@typescript-eslint/no-inferrable-types": "off",
+        "@typescript-eslint/no-explicit-any": "off"
     }
 }

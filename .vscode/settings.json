@@ -5,37 +5,13 @@
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
     "editor.trimAutoWhitespace": true,
-    "eslint.validate": ["javascript", "typescript"],
     "editor.codeActionsOnSave": {
         "source.fixAll": true,
         "source.organizeImports": true
     },
 
     "files.insertFinalNewline": true,
-    "files.eol": "\n",
-    "files.associations": {
-        "*.js": "javascript",
-        "*.ts": "typescript",
-        "*.json": "json",
-        "*.md": "markdown"
-    },
-    "files.exclude": {
-        "**/.git": true,
-        "**/.svn": true,
-        "**/.hg": true,
-        "**/CVS": true,
-        "**/.DS_Store": true,
-        "**/Thumbs.db": true,
-        "node_modules": true,
-        ".gitignore": true,
-        "package-lock.json": true,
-        "LICENSE": true
-    },
+    "files.eol": "auto",
 
-    "cSpell.words": ["disqada", "halfbot", "vars", "Vars"],
-
-    "eslint.workingDirectories": [
-        { "pattern": "**/src/**" },
-        { "pattern": "**/tests/**" }
-    ]
+    "cSpell.words": ["disqada", "halfbot", "inferrable", "tsc", "vars", "Vars"]
 }

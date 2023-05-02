@@ -1,45 +1,46 @@
 {
-	// Mapped from https://www.typescriptlang.org/tsconfig
-	"compilerOptions": {
-		// Type Checking
-		"allowUnreachableCode": false,
-		"allowUnusedLabels": false,
-		"exactOptionalPropertyTypes": true,
-		"noFallthroughCasesInSwitch": true,
-		"noImplicitOverride": true,
-		"noImplicitReturns": true,
-		"noImplicitAny": true,
-		"noImplicitThis": true,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"strict": true,
-		"useUnknownInCatchVariables": true,
-		"noUncheckedIndexedAccess": true,
+    // Mapped from https://www.typescriptlang.org/tsconfig
+    "compilerOptions": {
+        // Type Checking
+        "allowUnreachableCode": false,
+        "allowUnusedLabels": false,
+        "exactOptionalPropertyTypes": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitOverride": true,
+        "noImplicitReturns": true,
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": false,
+        "strict": true,
+        "alwaysStrict": true,
+        "useUnknownInCatchVariables": true,
+        "noUncheckedIndexedAccess": true,
 
-		// Modules
-		"module": "CommonJS",
-		"moduleResolution": "node",
-		"resolveJsonModule": true,
+        // Modules
+        "module": "CommonJS",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
 
-		// Emit
-		"declaration": true,
-		"importHelpers": true,
-		"newLine": "lf",
-		"noEmitHelpers": true,
-		"noEmitOnError": true,
-		"outDir": "dist",
-		"preserveConstEnums": true,
-		"removeComments": true,
-		"esModuleInterop": true,
-		"forceConsistentCasingInFileNames": true,
+        // Emit
+        "declaration": true,
+        "importHelpers": true,
+        "noEmitOnError": true,
+        "outDir": "dist",
+        "declarationDir": "types",
+        "preserveConstEnums": true,
+        "removeComments": false,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
 
-		// Language and Environment
-		"emitDecoratorMetadata": true,
-		"experimentalDecorators": true,
-		"lib": ["ESNext"],
-		"target": "ES2021",
-		"useDefineForClassFields": true
-	},
+        // Language and Environment
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "lib": ["ESNext"],
+        "target": "ES2021",
+        "useDefineForClassFields": true
+    },
 
-	"include": ["src"]
+    "compileOnSave": true,
+    "include": ["src"]
 }
