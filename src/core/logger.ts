@@ -1,87 +1,78 @@
-import table, { Formatter, Header } from "tty-table";
+import type { TableUserConfig } from "table";
+
+import { table } from "table";
 import { BotCommandDeployment } from "../entities/command";
-import { RecordStates } from "../helpers/data/enums";
+import { Modules, RecordStates } from "../helpers/data/enums";
 
-const header: Header[] = [
-    {
-        value: "name",
-        align: "center",
-        width: 15
-    },
-    {
-        value: "state",
-        align: "center",
-        width: 15,
-        formatter: function (value: RecordStates): string {
-            const str = RecordStates[value];
-
-            // return value === RecordStates.Success // @ts-expect-error
-            //     ? this.style(str, "bgGreen")
-            //     : value === RecordStates.Fail // @ts-expect-error
-            //     ? this.style(str, "bgYellow") // @ts-expect-error
-            //     : this.style(str, "bgRed");
-
-            return value === RecordStates.Success
-                ? `🟩 ${str}`
-                : value === RecordStates.Fail
-                ? `🟨 ${str}`
-                : `🟥 ${str}`;
-        }
-    },
-    {
-        value: "deployment",
-        align: "center",
-        width: 15,
-        formatter: function (value: BotCommandDeployment): string {
-            return BotCommandDeployment[value];
-        }
-    },
-    {
-        value: "message",
-        align: "center",
-        width: 30
+export function newArray(length: number): Array<number> {
+    const arr: number[] = Array(length);
+    for (let i = 0; i < length; i++) {
+        arr[i] = 0;
     }
-];
-const footer: (string | Formatter)[] = [
-    "Registered commands",
-    function (
-        cellValue: any,
-        columnIndex: number,
-        rowIndex: number,
-        rowData: [string, RecordStates, BotCommandDeployment, string][]
-    ) {
-        // const total = rowData.reduce((previous, current) => {
-        //     const successful = current[1] === RecordStates.Success;
-        //     return previous + (successful ? 1 : 0);
-        // }, 0);
-        // return `${((total / rowData.length) * 100).toFixed(2)}%`;
+    return arr;
+}
 
-        const length = Object.keys(RecordStates).length * 0.5;
-        const numbers: number[] = Array(length).map(() => 0);
-        rowData.forEach((value) => {
-            const state = value[1];
-            numbers[state]++;
-        });
+export function toNum(module: string): number {
+    switch (module) {
+        case Modules.Commands:
+            return 0;
 
-        return numbers.join(" - ");
-    },
-    function (
-        cellValue: any,
-        columnIndex: number,
-        rowIndex: number,
-        rowData: [string, RecordStates, BotCommandDeployment, string][]
-    ) {
-        const length = Object.keys(BotCommandDeployment).length * 0.5;
-        const numbers: number[] = Array(length).map(() => 0);
-        rowData.forEach((value) => {
-            const deployment = value[2];
-            numbers[deployment]++;
-        });
+        case Modules.Events:
+            return 1;
+    }
 
-        return numbers.join(" - ");
-    },
-    " "
-];
+    return -1;
+}
+
+export function toSymbol(state: RecordStates): string {
+    switch (state) {
+        case RecordStates.Success:
+            return "🟩";
+
+        case RecordStates.Fail:
+            return "🟨";
+
+        case RecordStates.Error:
+            return "🟥";
+
+        default:
+            return "⬜";
+    }
+}
+
+export function defaultConfig(header: string): TableUserConfig {
+    return {
+        header: {
+            alignment: "center",
+            content: header
+        },
+        columnDefault: {
+            alignment: "center",
+            verticalAlignment: "middle",
+            wrapWord: false
+        }
+    };
+}
+
+function fixRecord(record: any): typeof record {
+    record.state = `${toSymbol(record.state)} ${RecordStates[record.state]}`;
+
+    if (typeof record.deployment === "number") {
+        record.deployment = BotCommandDeployment[record.deployment];
+    }
+
+    return record;
+}
+
+function toArray(record: any): string[] {
+    return [
+        record.name,
+        record.state,
+        record.type?.substring(0, record.type.length - 1) || "",
+        record.deployment || "",
+        record.message || ""
+    ];
+}
 
 export class Logger {
     private records: Record[] = [];
@@ -95,14 +86,6 @@ export class Logger {
     }
 
     public add(record: Record): void {
-        if (!record.deployment) {
-            record.deployment = BotCommandDeployment.Global;
-        }
-
-        if (!record.message) {
-            record.message = "";
-        }
-
         this.records.push(record);
     }
 
@@ -111,15 +94,18 @@ export class Logger {
     }
 
     public static debug(logger: Logger) {
-        const rows = [...logger.records];
-
-        console.log(table(header, rows, footer).render());
+        const data1 = [
+            ["name", "state", "type", "deployment", "message"],
+            ...logger.records.map((r: any) => toArray(fixRecord(r)))
+        ];
+        console.log(table(data1, defaultConfig("Bot modules registration")));
     }
 }
 
 export interface Record {
     name: string;
     state: RecordStates;
+    type?: Modules;
     deployment?: BotCommandDeployment;
     message?: string;
 }

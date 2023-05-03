@@ -1,28 +1,34 @@
+import type { Record } from "../../src/core/logger";
+
 import { expect, test } from "vitest";
 import { Logger } from "../../dist/core/logger";
-import { RecordStates } from "../../dist/helpers/data/enums";
+import { BotCommandDeployment } from "../../dist/entities/command";
+import { Modules, RecordStates } from "../../dist/helpers/data/enums";
 
 const logger: Logger = new Logger();
 
-const record1 = {
+const record1: Record = {
     name: "test1",
     state: RecordStates.Success,
+    type: Modules.Commands,
+    deployment: BotCommandDeployment.Global,
     message: "test message"
 };
 
-const record2 = {
+const record2: Record = {
     name: "test-2",
     state: RecordStates.Fail,
+    type: Modules.Events,
     message: "another test message"
 };
 
-const record3 = {
+const record3: Record = {
     name: "test 3",
     state: RecordStates.Error
 };
 
 test("should create logger instance", () => {
-    expect(logger instanceof Logger).toBe(true);
+    expect(logger).toBeInstanceOf(Logger);
 });
 
 test("should have empty log records", () => {
