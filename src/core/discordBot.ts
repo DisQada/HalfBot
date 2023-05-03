@@ -26,7 +26,7 @@ import interactionCreate from "../events/interactionCreate";
 import ready from "../events/ready";
 import Importer from "../helpers/classes/importer";
 import { Modules, RecordStates } from "../helpers/data/enums";
-import { Logger } from "./logger";
+import { Logger, Record } from "./logger";
 config();
 
 export interface DiscordBotData {
@@ -106,7 +106,7 @@ export class DiscordBot {
         }
     }
 
-    private async registerCommands(command: BotCommand) {
+    private async registerCommand(command: BotCommand) {
         if (command.data.types.chatInput) {
             command.data.type = ApplicationCommandType.ChatInput;
             this.commands.set(command.data.name, command);
@@ -119,7 +119,7 @@ export class DiscordBot {
         }
     }
 
-    private async registerEvents(event: BotEvent<any>) {
+    private async registerEvent(event: BotEvent<any>) {
         this.client.on(event.data.name, (...args: any) =>
             event.execute(this, ...args)
         );
@@ -141,39 +141,44 @@ export class DiscordBot {
             const botModule: BotCommand | BotEvent<any> | any | void =
                 await Importer.importFile(filePath.fullPath);
 
+            let name;
+            if (typeof botModule === "object" && botModule?.data?.name) {
+                name = botModule?.data?.name;
+            } else {
+                const word = "modules";
+                const index = filePath.fullPath.indexOf(word);
+                name = filePath.fullPath.substring(index + word.length);
+            }
+
+            const record: Record = {
+                name: name,
+                state: RecordStates.Success
+            };
+
             if (botModule instanceof BotCommand) {
+                record.type = Modules.Commands;
+
                 if (BotCommand.isValid(botModule)) {
-                    this.registerCommands(botModule);
+                    this.registerCommand(botModule);
                 } else {
-                    logger.add({
-                        name: botModule.data.name,
-                        deployment: botModule.data.deployment,
-                        state: RecordStates.Fail,
-                        message: "The module is invalid"
-                    });
+                    record.state = RecordStates.Fail;
+                    record.message = `The command is invalid, a required property is missing`;
                 }
             } else if (botModule instanceof BotEvent) {
+                record.type = Modules.Events;
+
                 if (BotEvent.isValid(botModule)) {
-                    this.registerEvents(botModule);
+                    this.registerEvent(botModule);
                 } else {
-                    logger.add({
-                        name: botModule.data.name,
-                        state: RecordStates.Fail,
-                        message: "The module is invalid"
-                    });
+                    record.state = RecordStates.Fail;
+                    record.message = `The module is invalid, a required property is missing`;
                 }
             } else {
-                let name = filePath.fullPath;
-                if (typeof botModule === "object" && botModule?.data?.name) {
-                    name = botModule?.data?.name;
-                }
-
-                logger.add({
-                    name: name,
-                    state: RecordStates.Error,
-                    message: "Module file was empty or not exported correctly"
-                });
+                record.state = RecordStates.Error;
+                record.message = "The file was empty or not exported correctly";
             }
+
+            logger.add(record);
         }
 
         Logger.debug(logger);
