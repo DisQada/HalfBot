@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/DisQada/halfbot/compare/v1.1.2...v1.1.3) (2023-05-03)
+
+
+### Bug Fixes
+
+* **logger:** fix not logging valid modules ([cfe0f7c](https://github.com/DisQada/halfbot/commit/cfe0f7c171e2c14fe97664dfff817c1543ae59fe))
+
 ## [1.1.2](https://github.com/DisQada/halfbot/compare/v1.1.1...v1.1.2) (2023-04-29)
 
 
