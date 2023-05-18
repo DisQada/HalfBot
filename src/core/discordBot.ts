@@ -1,7 +1,10 @@
 import type { ClientOptions, Interaction } from "discord.js";
 import type { BotInfoData } from "../config/info";
 import type { BotStyleData } from "../config/style";
-import type { BotCommandInteraction } from "../entities/command";
+import {
+    BotCommandDeployment,
+    BotCommandInteraction
+} from "../entities/command";
 
 import {
     FilePath,
@@ -157,6 +160,7 @@ export class DiscordBot {
 
             if (botModule instanceof BotCommand) {
                 record.type = Modules.Commands;
+                record.deployment = botModule.data.deployment;
 
                 if (BotCommand.isValid(botModule)) {
                     this.registerCommand(botModule);
@@ -166,6 +170,7 @@ export class DiscordBot {
                 }
             } else if (botModule instanceof BotEvent) {
                 record.type = Modules.Events;
+                record.deployment = BotCommandDeployment.Global;
 
                 if (BotEvent.isValid(botModule)) {
                     this.registerEvent(botModule);
