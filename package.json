@@ -6,7 +6,8 @@
         "build": "eslint . --fix & tsc",
         "build:watch": "eslint . --fix & tsc -w",
         "test": "npm run build & vitest run",
-        "lint": "prettier . --write",
+        "format": "prettier . --write",
+        "lint": "eslint . --fix",
         "commit": "git-cz",
         "semantic-release": "semantic-release"
     },
