@@ -1,12 +1,13 @@
 {
     "recommendations": [
         "streetsidesoftware.code-spell-checker",
-        "dbaeumer.vscode-eslint",
         "visualstudioexptteam.vscodeintellicode",
-        "chamboug.js-auto-backticks",
-        "christian-kohler.npm-intellisense",
         "christian-kohler.path-intellisense",
+        "christian-kohler.npm-intellisense",
+        "chamboug.js-auto-backticks",
+        "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
+        "tabnine.tabnine-vscode",
         "gruntfuggly.todo-tree",
         "redhat.vscode-yaml"
     ]

@@ -1,8 +1,8 @@
 {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSaveMode": "file",
-    "editor.formatOnType": true,
     "editor.formatOnPaste": true,
+    "editor.formatOnType": true,
     "editor.formatOnSave": true,
     "editor.trimAutoWhitespace": true,
     "editor.codeActionsOnSave": {
@@ -11,5 +11,5 @@
     },
 
     "files.insertFinalNewline": true,
-    "files.eol": "auto",
+    "files.eol": "auto"
 }
