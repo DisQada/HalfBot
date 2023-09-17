@@ -30,5 +30,11 @@ jobs:
             - name: Build
               run: npm run build --if-present
 
+            - name: Lint code
+              run: npm run lint --if-present
+
+            - name: Format code
+              run: npm run format --if-present
+
             - name: Test code
               run: npm test
