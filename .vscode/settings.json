@@ -12,6 +12,4 @@
 
     "files.insertFinalNewline": true,
     "files.eol": "auto",
-
-    "cSpell.words": ["disqada", "halfbot", "inferrable", "tsc", "vars", "Vars"]
 }
