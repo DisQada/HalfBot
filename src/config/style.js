@@ -1,25 +1,18 @@
-import type { APIEmbed, HexColorString } from "discord.js";
-import Colour from "../helpers/classes/colour";
-import Link from "../helpers/classes/link";
+const Colour = require("../helpers/classes/colour");
+const Link = require("../helpers/classes/link");
 
-export interface BotStyleData {
-    name?: string;
-    colour?: number | HexColorString;
-    logoUrl?: string;
-}
+class BotStyle {
+    name;
+    colour;
+    logoLink;
 
-export class BotStyle {
-    public name: string;
-    public colour: Colour;
-    public logoLink: Link;
-
-    constructor(data?: BotStyleData) {
+    constructor(data) {
         this.name = data?.name ?? "Easy bot";
         this.colour = new Colour(data?.colour ?? 0xffffff);
         this.logoLink = new Link(data?.logoUrl ?? Link.defaultAvatarUrl);
     }
 
-    public applyToEmbed(embed: APIEmbed, skipFooter: boolean = false) {
+    applyToEmbed(embed, skipFooter = false) {
         embed.color = this.colour.hexNumber;
 
         if (!skipFooter) {
@@ -32,7 +25,7 @@ export class BotStyle {
         return embed;
     }
 
-    public applyToEmbeds(embeds: APIEmbed[]): typeof embeds {
+    applyToEmbeds(embeds) {
         const lastEmbed = embeds.length - 1;
         for (let i = 0; i < embeds.length; i++) {
             const embed = embeds[i];
@@ -46,7 +39,7 @@ export class BotStyle {
         return embeds;
     }
 
-    public applyTo(toApplyOn: APIEmbed | APIEmbed[]): typeof toApplyOn {
+    applyTo(toApplyOn) {
         if (Array.isArray(toApplyOn)) {
             return this.applyToEmbeds(toApplyOn);
         } else {
@@ -54,3 +47,7 @@ export class BotStyle {
         }
     }
 }
+
+module.exports = {
+    BotStyle
+};

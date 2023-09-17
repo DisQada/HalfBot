@@ -8,12 +8,7 @@
         "ecmaVersion": "latest",
         "sourceType": "script"
     },
-    "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
-    "parser": "@typescript-eslint/parser",
-    "plugins": ["@typescript-eslint"],
-    "ignorePatterns": ["dist", "types", "**/*.md"],
-    "rules": {
-        "@typescript-eslint/no-inferrable-types": "off",
-        "@typescript-eslint/no-explicit-any": "off"
-    }
+    "extends": ["eslint:recommended"],
+    "plugins": [],
+    "rules": {}
 }

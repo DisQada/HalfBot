@@ -1,13 +1,8 @@
-import type { Client } from "discord.js";
-import type { BotInfo } from "..";
-import type { DiscordBot } from "../core/discordBot";
-import type { BotCommand, BotCommandData } from "../entities/command";
+const { ActivityType, Collection } = require("discord.js");
+const { BotCommandDeployment } = require("../entities/command");
 
-import { ActivityType, Collection } from "discord.js";
-import { BotCommandDeployment } from "../entities/command";
-
-function getGuildId(data: BotCommandData, info?: BotInfo): string {
-    const globalGuildId: string = "0";
+function getGuildId(data, info) {
+    const globalGuildId = "0";
     if (!info) {
         return globalGuildId;
     }
@@ -29,13 +24,10 @@ function getGuildId(data: BotCommandData, info?: BotInfo): string {
     }
 }
 
-async function finalRegistration(
-    client: Client,
-    commandCollection: Collection<string, BotCommandData[]>
-) {
+async function finalRegistration(client, commandCollection) {
     for (const iterator of commandCollection) {
-        const guildId: string = iterator[0];
-        const commandsData: BotCommandData[] = iterator[1];
+        const guildId = iterator[0];
+        const commandsData = iterator[1];
 
         if (guildId === "0") {
             await client.application?.commands.set(commandsData);
@@ -45,14 +37,14 @@ async function finalRegistration(
     }
 }
 
-function registerCommands(bot: DiscordBot): void {
-    const commands: Collection<string, BotCommandData[]> = new Collection();
+function registerCommands(bot) {
+    const commands = new Collection();
 
     for (const iterator of bot.commands) {
-        const command: BotCommand = iterator[1];
-        const guildId: string = getGuildId(command.data, bot.info);
+        const command = iterator[1];
+        const guildId = getGuildId(command.data, bot.info);
 
-        const commandArray: BotCommandData[] = commands.get(guildId) ?? [];
+        const commandArray = commands.get(guildId) ?? [];
         commandArray.push(command.data);
         commands.set(guildId, commandArray);
     }
@@ -60,7 +52,7 @@ function registerCommands(bot: DiscordBot): void {
     finalRegistration(bot.client, commands);
 }
 
-export default function ready(bot: DiscordBot) {
+function ready(bot) {
     registerCommands(bot);
 
     console.log(`The bot "${bot.client.user?.tag}" is online`);
@@ -76,3 +68,5 @@ export default function ready(bot: DiscordBot) {
         ]
     });
 }
+
+module.exports = ready;

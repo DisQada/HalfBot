@@ -1,9 +1,8 @@
-import { expect, test } from "vitest";
-import Link from "../../dist/helpers/classes/link";
+const Link = require("../../src/helpers/classes/link");
 
 test("Link safe domains", async () => {
     const domains = await Link.getSafeDomains();
-    expect(domains).to.be.an("array");
+    expect(Array.isArray(domains)).toBeTruthy();
     expect(domains.length).toBeGreaterThan(1);
 });
 

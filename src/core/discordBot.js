@@ -1,54 +1,40 @@
-import type { ClientOptions, Interaction } from "discord.js";
-import type { BotInfoData } from "../config/info";
-import type { BotStyleData } from "../config/style";
-import {
-    BotCommandDeployment,
-    BotCommandInteraction
-} from "../entities/command";
-
-import {
+const { BotCommandDeployment } = require("../entities/command");
+const {
     FilePath,
     aFilePath,
     allFilePaths,
     storeFilePathsInFolders
-} from "@disqada/pathfinder";
-import {
+} = require("@disqada/pathfinder");
+const {
     ApplicationCommandType,
     Client,
     Collection,
     Events,
     GatewayIntentBits
-} from "discord.js";
-import { config } from "dotenv";
-import { BotInfo } from "../config/info";
-import { BotStyle } from "../config/style";
-import { BotVars } from "../config/vars";
-import { BotCommand } from "../entities/command";
-import { BotEvent } from "../entities/event";
-import interactionCreate from "../events/interactionCreate";
-import ready from "../events/ready";
-import Importer from "../helpers/classes/importer";
-import { Modules, RecordStates } from "../helpers/data/enums";
-import { Logger, Record } from "./logger";
-config();
+} = require("discord.js");
+const { BotInfo } = require("../config/info");
+const { BotStyle } = require("../config/style");
+const { BotVars } = require("../config/vars");
+const { BotCommand } = require("../entities/command");
+const { BotEvent } = require("../entities/event");
+const interactionCreate = require("../events/interactionCreate");
+const ready = require("../events/ready");
+const Importer = require("../helpers/classes/importer");
+const { Modules, RecordStates } = require("../helpers/data/enums");
+const { Logger } = require("./logger");
+require("dotenv").config();
 
-export interface DiscordBotData {
-    rootDirectory: string;
-}
+class DiscordBot {
+    vars = {};
+    info = { clientId: "" };
 
-export class DiscordBot {
-    public client: Client;
-    public vars: BotVars = {};
-    public info: BotInfo = { clientId: "" };
-    public style?: BotStyle;
+    commands = new Collection();
 
-    public commands: Collection<string, BotCommand> = new Collection();
-
-    public constructor(
-        data: DiscordBotData = {
+    constructor(
+        data = {
             rootDirectory: "bot"
         },
-        options: ClientOptions = {
+        options = {
             intents: [
                 GatewayIntentBits.Guilds,
                 GatewayIntentBits.GuildMessages,
@@ -65,16 +51,16 @@ export class DiscordBot {
         this.runBot();
     }
 
-    private async runBot() {
-        await this.retrieveData<BotInfoData>("info", (data) => {
+    async runBot() {
+        await this.retrieveData("info", (data) => {
             this.info = new BotInfo(data);
         });
 
-        await this.retrieveData<object>("vars", (data) => {
+        await this.retrieveData("vars", (data) => {
             this.vars = new BotVars(data);
         });
 
-        await this.retrieveData<BotStyleData>("style", (data) => {
+        await this.retrieveData("style", (data) => {
             this.style = new BotStyle(data);
         });
 
@@ -84,23 +70,19 @@ export class DiscordBot {
         await this.client.login(process.env.TOKEN);
     }
 
-    private runCoreEvents() {
+    runCoreEvents() {
         this.client.on(Events.ClientReady, () => ready(this));
-        this.client.on(Events.InteractionCreate, (interaction: Interaction) => {
-            const botInteraction: BotCommandInteraction =
-                interaction as BotCommandInteraction;
+        this.client.on(Events.InteractionCreate, (interaction) => {
+            const botInteraction = interaction;
             botInteraction.bot = this;
             interactionCreate(botInteraction);
         });
     }
 
-    private async retrieveData<DataType>(
-        fileName: string,
-        useData: (data: DataType) => void
-    ) {
+    async retrieveData(fileName, useData) {
         const filePath = aFilePath(fileName);
         if (filePath && filePath instanceof FilePath) {
-            const data = await Importer.importFile<DataType>(filePath.fullPath);
+            const data = await Importer.importFile(filePath.fullPath);
             if (data) {
                 useData(data);
             }
@@ -109,7 +91,7 @@ export class DiscordBot {
         }
     }
 
-    private async registerCommand(command: BotCommand) {
+    async registerCommand(command) {
         if (command.data.types.chatInput) {
             command.data.type = ApplicationCommandType.ChatInput;
             this.commands.set(command.data.name, command);
@@ -122,13 +104,13 @@ export class DiscordBot {
         }
     }
 
-    private async registerEvent(event: BotEvent<any>) {
-        this.client.on(event.data.name, (...args: any) =>
+    async registerEvent(event) {
+        this.client.on(event.data.name, (...args) =>
             event.execute(this, ...args)
         );
     }
 
-    private async registerAllModules() {
+    async registerAllModules() {
         const filePaths = allFilePaths()?.filter(
             (path) =>
                 path.fullPath.includes(Modules.Commands) ||
@@ -141,8 +123,7 @@ export class DiscordBot {
         const logger = new Logger();
 
         for (const filePath of filePaths) {
-            const botModule: BotCommand | BotEvent<any> | any | void =
-                await Importer.importFile(filePath.fullPath);
+            const botModule = await Importer.importFile(filePath.fullPath);
 
             let name;
             if (typeof botModule === "object" && botModule?.data?.name) {
@@ -153,7 +134,7 @@ export class DiscordBot {
                 name = filePath.fullPath.substring(index + word.length);
             }
 
-            const record: Record = {
+            const record = {
                 name: name,
                 state: RecordStates.Success
             };
@@ -189,3 +170,7 @@ export class DiscordBot {
         Logger.debug(logger);
     }
 }
+
+module.exports = {
+    DiscordBot
+};

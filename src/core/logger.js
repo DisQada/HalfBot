@@ -1,18 +1,16 @@
-import type { TableUserConfig } from "table";
+const { table } = require("table");
+const { BotCommandDeployment } = require("../entities/command");
+const { Modules, RecordStates } = require("../helpers/data/enums");
 
-import { table } from "table";
-import { BotCommandDeployment } from "../entities/command";
-import { Modules, RecordStates } from "../helpers/data/enums";
-
-export function newArray(length: number): Array<number> {
-    const arr: number[] = Array(length);
+function newArray(length) {
+    const arr = Array(length);
     for (let i = 0; i < length; i++) {
         arr[i] = 0;
     }
     return arr;
 }
 
-export function toNum(module: string): number {
+function toNum(module) {
     switch (module) {
         case Modules.Commands:
             return 0;
@@ -24,7 +22,7 @@ export function toNum(module: string): number {
     return -1;
 }
 
-export function toSymbol(state: RecordStates): string {
+function toSymbol(state) {
     switch (state) {
         case RecordStates.Success:
             return "🟩";
@@ -40,7 +38,7 @@ export function toSymbol(state: RecordStates): string {
     }
 }
 
-export function defaultConfig(header: string): TableUserConfig {
+function defaultConfig(header) {
     return {
         header: {
             alignment: "center",
@@ -54,7 +52,7 @@ export function defaultConfig(header: string): TableUserConfig {
     };
 }
 
-function fixRecord(record: any): typeof record {
+function fixRecord(record) {
     record.state = `${toSymbol(record.state)} ${RecordStates[record.state]}`;
 
     if (typeof record.deployment === "number") {
@@ -64,7 +62,7 @@ function fixRecord(record: any): typeof record {
     return record;
 }
 
-function toArray(record: any): string[] {
+function toArray(record) {
     return [
         record.name,
         record.state,
@@ -74,10 +72,10 @@ function toArray(record: any): string[] {
     ];
 }
 
-export class Logger {
-    private records: Record[] = [];
+class Logger {
+    records = [];
 
-    constructor(records?: Record[]) {
+    constructor(records) {
         if (!records) {
             return;
         }
@@ -85,27 +83,27 @@ export class Logger {
         this.records = records;
     }
 
-    public add(record: Record): void {
+    add(record) {
         this.records.push(record);
     }
 
-    public get count(): number {
+    get count() {
         return this.records.length;
     }
 
-    public static debug(logger: Logger) {
+    static debug(logger) {
         const data1 = [
             ["name", "state", "type", "deployment", "message"],
-            ...logger.records.map((r: any) => toArray(fixRecord(r)))
+            ...logger.records.map((r) => toArray(fixRecord(r)))
         ];
         console.log(table(data1, defaultConfig("Bot modules registration")));
     }
 }
 
-export interface Record {
-    name: string;
-    state: RecordStates;
-    type?: Modules;
-    deployment?: BotCommandDeployment;
-    message?: string;
-}
+module.exports = {
+    newArray,
+    toNum,
+    toSymbol,
+    defaultConfig,
+    Logger
+};

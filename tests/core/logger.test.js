@@ -1,13 +1,10 @@
-import type { Record } from "../../src/core/logger";
+const { Logger } = require("../../src/core/logger");
+const { BotCommandDeployment } = require("../../src/entities/command");
+const { Modules, RecordStates } = require("../../src/helpers/data/enums");
 
-import { expect, test } from "vitest";
-import { Logger } from "../../dist/core/logger";
-import { BotCommandDeployment } from "../../dist/entities/command";
-import { Modules, RecordStates } from "../../dist/helpers/data/enums";
+const logger = new Logger();
 
-const logger: Logger = new Logger();
-
-const record1: Record = {
+const record1 = {
     name: "test1",
     state: RecordStates.Success,
     type: Modules.Commands,
@@ -15,14 +12,14 @@ const record1: Record = {
     message: "test message"
 };
 
-const record2: Record = {
+const record2 = {
     name: "test-2",
     state: RecordStates.Fail,
     type: Modules.Events,
     message: "another test message"
 };
 
-const record3: Record = {
+const record3 = {
     name: "test 3",
     state: RecordStates.Error
 };

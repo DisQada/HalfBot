@@ -1,16 +1,10 @@
-import type { APIEmbed } from "discord.js";
-import { BotStyle } from "../config/style";
-import type { BotCommandInteraction } from "../entities/command";
-
-function textToEmbed(text: string, style?: BotStyle): APIEmbed {
+function textToEmbed(text, style) {
     const embed = { description: text };
     return style ? style.applyToEmbed(embed) : embed;
 }
 
-export default async function interactionCreate(
-    interaction: BotCommandInteraction
-) {
-    async function quickReply(reply: string, style?: BotStyle) {
+async function interactionCreate(interaction) {
+    async function quickReply(reply, style) {
         const embed = textToEmbed(reply, style);
         if (interaction.deferred || interaction.replied) {
             await interaction.followUp({
@@ -56,7 +50,7 @@ export default async function interactionCreate(
         if (reply.embeds) {
             if (style) {
                 reply.embeds = style.applyToEmbeds(
-                    reply.embeds.map((embed) => embed as APIEmbed)
+                    reply.embeds.map((embed) => embed)
                 );
             }
         } else if (reply.content) {
@@ -67,3 +61,5 @@ export default async function interactionCreate(
 
     await interaction.followUp(reply);
 }
+
+module.exports = interactionCreate;

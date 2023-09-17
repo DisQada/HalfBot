@@ -1,9 +1,5 @@
-import { HexColorString } from "discord.js";
-
-export default class Colour {
-    private hex: number;
-
-    constructor(colour: number | HexColorString) {
+module.exports = class Colour {
+    constructor(colour) {
         if (typeof colour === "number") {
             this.hex = colour;
         } else {
@@ -11,7 +7,7 @@ export default class Colour {
         }
     }
 
-    public get hexString(): string {
+    get hexString() {
         let stringNum = this.hex.toString(16);
 
         while (stringNum.length < 6) {
@@ -20,7 +16,7 @@ export default class Colour {
 
         return `#${stringNum}`;
     }
-    public get hexNumber(): number {
+    get hexNumber() {
         return this.hex;
     }
-}
+};

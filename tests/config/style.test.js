@@ -1,6 +1,4 @@
-import { APIEmbed } from "discord.js";
-import { expect, test } from "vitest";
-import { BotStyle } from "../../dist/config/style";
+const { BotStyle } = require("../../src/config/style");
 
 const style = new BotStyle({
     name: "halfbot",
@@ -8,11 +6,11 @@ const style = new BotStyle({
     logoUrl: "https://github.com/DisQada/halfbot"
 });
 
-const embedTestWithNoStyle: APIEmbed = {
+const embedTestWithNoStyle = {
     title: "test"
 };
 
-const embedTestWithStyle: APIEmbed = {
+const embedTestWithStyle = {
     title: "test",
     color: 0x0000ff,
     footer: {
@@ -22,7 +20,7 @@ const embedTestWithStyle: APIEmbed = {
 };
 
 test("Style class initialising", () => {
-    expect(style).to.be.an("object");
+    expect(typeof style).toBe("object");
     expect(style.name).toEqual("halfbot");
     expect(style.colour.hexNumber).toEqual(0x00fff0);
     expect(style.colour.hexString).toEqual("#00fff0");
@@ -61,10 +59,10 @@ test("applyToEmbeds - pre-style", () => {
 
 test("applyTo - returning type", () => {
     const embed = style.applyTo({});
-    expect(embed).to.be.an("object");
+    expect(typeof embed).toBe("object");
 
     const embeds = style.applyTo([{}]);
-    expect(embeds).to.be.an("array");
+    expect(Array.isArray(embeds)).toBeTruthy();
     if (Array.isArray(embeds)) {
         expect(embeds.length).toEqual(1);
     }

@@ -1,4 +1,4 @@
-export default [
+module.exports = [
     "google.com",
     "twitter.com",
     "youtube.com",
