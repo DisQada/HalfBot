@@ -11,12 +11,12 @@
         "semantic-release": "semantic-release"
     },
     "type": "commonjs",
-    "main": "./dist/index.js",
-    "module": "./dist/index.js",
+    "main": "./src/exports.js",
+    "module": "./src/exports.js",
     "exports": {
         ".": {
-            "node": "./dist/index.js",
-            "require": "./dist/index.js"
+            "node": "./src/exports.js",
+            "require": "./src/exports.js"
         }
     },
     "files": [
