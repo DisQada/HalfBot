@@ -1,3 +1,11 @@
+/**
+ * @typedef {object} BotInfoData
+ * @property {string} clientId
+ * @property {string} [devGuildId]
+ * @property {string} [supportGuildId]
+ * @interface
+ */
+
 class BotInfo {
     clientId;
     devGuildId;

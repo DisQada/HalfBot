@@ -100,6 +100,16 @@ class Logger {
     }
 }
 
+/**
+ * @typedef {object} Record
+ * @property {string} name
+ * @property {RecordStates} state
+ * @property {Modules} [type]
+ * @property {BotCommandDeployment} [deployment]
+ * @property {string} [message]
+ * @interface
+ */
+
 module.exports = {
     newArray,
     toNum,

@@ -1,6 +1,14 @@
 const Colour = require("../helpers/classes/colour");
 const Link = require("../helpers/classes/link");
 
+/**
+ * @typedef {object} BotStyleData
+ * @property {string} [name]
+ * @property {number|HexColorString} [colour]
+ * @property {string} [logoUrl]
+ * @interface
+ */
+
 class BotStyle {
     name;
     colour;

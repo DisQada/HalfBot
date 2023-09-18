@@ -24,6 +24,12 @@ const { Modules, RecordStates } = require("../helpers/data/enums");
 const { Logger } = require("./logger");
 require("dotenv").config();
 
+/**
+ * @typedef {object} DiscordBotData
+ * @property {string} rootDirectory
+ * @interface
+ */
+
 class DiscordBot {
     vars = {};
     info = { clientId: "" };

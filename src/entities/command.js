@@ -11,6 +11,30 @@ const BotCommandContextMenuType = Object.freeze({
     Message: "Message"
 });
 
+/**
+ * @typedef {Object} BotCommandData
+ * @property {string} description
+ * @property {BotCommandDeployment} deployment
+ * @property {string} category
+ * @property {Object} types
+ * @property {boolean} types.chatInput
+ * @property {BotCommandContextMenuType} [types.contextMenu]
+ * @extends {ChatInputApplicationCommandData | UserApplicationCommandData | MessageApplicationCommandData}
+ */
+
+/**
+ * @typedef {Object} BotCommandInteraction
+ * @property {DiscordBot} bot
+ * @extends {ChatInputCommandInteraction | UserContextMenuCommandInteraction | MessageContextMenuCommandInteraction}
+ */
+
+/**
+ * @async
+ * @callback BotCommandFunction
+ * @param {BotCommandInteraction} interaction
+ * @returns {Promise<InteractionReplyOptions | string | void>}
+ */
+
 class BotCommand {
     data;
     execute;

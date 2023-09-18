@@ -1,3 +1,17 @@
+/**
+ * @template {keyof ClientEvents} Key
+ * @typedef {object} BotEventData
+ * @property {Key} name
+ */
+
+/**
+ * @template {keyof ClientEvents} Key
+ * @callback BotEventFunction
+ * @param {DiscordBot} bot
+ * @param {...any} args
+ * @returns {any}
+ */
+
 class BotEvent {
     data;
     execute;
