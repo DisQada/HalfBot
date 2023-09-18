@@ -1,0 +1,90 @@
+{
+    "plugins": ["plugins/markdown"],
+    "recurseDepth": 10,
+    "sourceType": "module",
+    "source": {
+        "include": ["src"],
+        "exclude": ["node_modules", "docs", "tests"],
+        "includePattern": ".js$"
+    },
+    "tags": {
+        "allowUnknownTags": false,
+        "dictionaries": ["jsdoc", "closure"]
+    },
+    "templates": {
+        "cleverLinks": false,
+        "monospaceLinks": false,
+        "default": {
+            "includeDate": true,
+            "useLongnameInNav": true,
+            "outputSourceFiles": false,
+            "staticFiles": {
+                "include": ["./styles/"]
+            }
+        }
+    },
+    "opts": {
+        "recurse": true,
+        "verbose": true,
+        "encoding": "utf8",
+        "readme": "./README.md",
+        "destination": "./docs/",
+        "tutorials": "./tutorials",
+        "template": "./node_modules/docdash"
+    },
+    "docdash": {
+        "static": true,
+        "sort": true,
+        "search": true,
+        "commonNav": false,
+        "collapse": false,
+        "wrap": true,
+        "typedefs": true,
+        "navLevel": 0,
+        "private": false,
+        "removeQuotes": "none",
+        "ShortenTypes": false,
+        "scopeInOutputPath": true,
+        "nameInOutputPath": true,
+        "versionInOutputPath": true,
+        "sectionOrder": [
+            "Classes",
+            "Interfaces",
+            "Modules",
+            "Namespaces",
+            "Global",
+            "Events",
+            "Externals",
+            "Mixins",
+            "Tutorials"
+        ],
+        "disqus": "",
+        "scripts": ["dark.css", "prettify.css"],
+        "menu": {
+            "GitHub": {
+                "href": "https://www.github.com/DisQada/halfbot",
+                "target": "_blank",
+                "class": "menu-item",
+                "id": "github_link"
+            },
+            "npm": {
+                "href": "https://www.npmjs.com/package/@disqada/halfbot",
+                "target": "_blank",
+                "class": "menu-item",
+                "id": "npm_link"
+            }
+        },
+        "openGraph": {
+            "title": "halfbot documentation",
+            "type": "website",
+            "image": "https://avatars.githubusercontent.com/u/125831329?s=400&u=0e66c44ab9812477dc4fd2e7b1bf98236f0d3e2a&v=4",
+            "site_name": "halfbot documentation",
+            "url": "https://github.com/DisQada/halfbot"
+        },
+        "meta": {
+            "title": "halfbot documentation",
+            "description": "API documentation for halfbot package",
+            "keyword": "disqada"
+        }
+    }
+}

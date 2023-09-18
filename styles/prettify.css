@@ -1,0 +1,73 @@
+.pln {
+    color: #abb2bf;
+}
+
+/* string content */
+.str {
+    color: #98c379;
+}
+
+/* a keyword */
+.kwd {
+    color: #c678dd;
+}
+
+/* a comment */
+.com {
+    color: #5c6370;
+}
+
+/* a type name */
+.typ {
+    color: #e5c07b;
+}
+
+/* a literal value */
+.lit {
+    color: #e5c07b;
+}
+
+/* punctuation */
+.pun {
+    color: #5c6370;
+}
+
+/* lisp open bracket */
+.opn {
+    color: #abb2bf;
+}
+
+/* lisp close bracket */
+.clo {
+    color: #abb2bf;
+}
+
+/* a markup tag name */
+.tag {
+    color: #e06c75;
+}
+
+/* a markup attribute name */
+.atn {
+    color: #e5c07b;
+}
+
+/* a markup attribute value */
+.atv {
+    color: #61afef;
+}
+
+/* a declaration */
+.dec {
+    color: #ef5050;
+}
+
+/* a variable name */
+.var {
+    color: #d19a66;
+}
+
+/* a function name */
+.fun {
+    color: #61afef;
+}
