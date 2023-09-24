@@ -1,9 +1,5 @@
-class BotVars {
-    constructor(data) {
-        Object.assign(this, data);
-    }
-}
+/**
+ * @typedef {object} BotVars
+ */
 
-module.exports = {
-    BotVars
-};
+module.exports = {};

@@ -14,7 +14,6 @@ const {
 } = require("discord.js");
 const { BotInfo } = require("../config/info");
 const { BotStyle } = require("../config/style");
-const { BotVars } = require("../config/vars");
 const { BotCommand } = require("../entities/command");
 const { BotEvent } = require("../entities/event");
 const interactionCreate = require("../events/interactionCreate");
@@ -62,7 +61,7 @@ class DiscordBot {
         });
 
         await this.retrieveData("vars", (data) => {
-            this.vars = new BotVars(data);
+            Object.assign(this.vars, data);
         });
 
         await this.retrieveData("style", (data) => {
