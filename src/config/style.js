@@ -1,5 +1,5 @@
-const Colour = require("../helpers/classes/colour");
-const Link = require("../helpers/classes/link");
+const Colour = require("../func/colour");
+const Link = require("../func/link");
 
 /**
  * @typedef {object} BotStyleData

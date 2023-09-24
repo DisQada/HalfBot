@@ -19,7 +19,7 @@ const { BotCommand } = require("../entities/command");
 const { BotEvent } = require("../entities/event");
 const interactionCreate = require("../events/interactionCreate");
 const ready = require("../events/ready");
-const { Modules, RecordStates } = require("../helpers/data/enums");
+const { Modules, RecordStates } = require("../data/enums");
 const { Logger } = require("./logger");
 require("dotenv").config();
 

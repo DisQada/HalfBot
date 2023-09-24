@@ -1,6 +1,6 @@
 const { table } = require("table");
 const { BotCommandDeployment } = require("../entities/command");
-const { Modules, RecordStates } = require("../helpers/data/enums");
+const { Modules, RecordStates } = require("../data/enums");
 
 function newArray(length) {
     const arr = Array(length);

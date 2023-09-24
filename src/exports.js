@@ -4,10 +4,10 @@ const vars = require("./config/vars");
 const discordBot = require("./core/discordBot");
 const command = require("./entities/command");
 const event = require("./entities/event");
-const { asNumber, asString } = require("./helpers/classes/colour");
-const { isSafe } = require("./helpers/classes/url");
-const emojiCharacters = require("./helpers/data/emojiCharacters");
-const safeDomains = require("./helpers/data/safeDomains");
+const { asNumber, asString } = require("./func/colour");
+const { isSafe } = require("./func/url");
+const emojiCharacters = require("./data/emojiCharacters");
+const safeDomains = require("./data/safeDomains");
 
 module.exports = {
     info,
