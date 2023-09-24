@@ -19,7 +19,6 @@ const { BotCommand } = require("../entities/command");
 const { BotEvent } = require("../entities/event");
 const interactionCreate = require("../events/interactionCreate");
 const ready = require("../events/ready");
-const Importer = require("../helpers/classes/importer");
 const { Modules, RecordStates } = require("../helpers/data/enums");
 const { Logger } = require("./logger");
 require("dotenv").config();
@@ -88,7 +87,7 @@ class DiscordBot {
     async retrieveData(fileName, useData) {
         const filePath = aFilePath(fileName);
         if (filePath && filePath instanceof FilePath) {
-            const data = await Importer.importFile(filePath.fullPath);
+            const data = require(filePath.fullPath);
             if (data) {
                 useData(data);
             }
@@ -129,7 +128,7 @@ class DiscordBot {
         const logger = new Logger();
 
         for (const filePath of filePaths) {
-            const botModule = await Importer.importFile(filePath.fullPath);
+            const botModule = require(filePath.fullPath);
 
             let name;
             if (typeof botModule === "object" && botModule?.data?.name) {
