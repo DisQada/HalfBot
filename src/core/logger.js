@@ -1,7 +1,24 @@
+/**
+ * @file
+ * @ignore
+ */
+
+/**
+ * @module Logger
+ */
+
 const { table } = require("table");
 const { BotCommandDeployment } = require("../entities/command");
 const { RecordStates } = require("../data/enums");
 
+/**
+ * Get the default configurations for the table.
+ * @param {string} header - The name of the table.
+ * @returns {TableUserConfig} Ready to use configurations.
+ * @private
+ * @example
+ * const finalConfig = defaultConfig("Table name");
+ */
 function defaultConfig(header) {
     return {
         header: {
@@ -16,6 +33,16 @@ function defaultConfig(header) {
     };
 }
 
+/**
+ * Print the table for the records of a state.
+ * @param {SuccessRecord[] | FailRecord[]} records - The records to print in a table.
+ * @param {RecordStates} state - The state of the records.
+ * @returns {undefined}
+ * @private
+ * @example
+ * const records = [{ ... }];
+ * debug(records, RecordStates.Success);
+ */
 function logRecords(records, state) {
     if (!records || records.length === 0) {
         return;
