@@ -1,3 +1,8 @@
+/**
+ * @file
+ * @ignore
+ */
+
 const { BotCommandDeployment } = require("../entities/command");
 const {
     allFilePaths,
@@ -27,7 +32,14 @@ require("dotenv").config();
  * @interface
  */
 
+/**
+ * @class
+ */
 class DiscordBot {
+    /**
+     * @type {object}
+     * @property {BotConfig} config
+     */
     data = {
         config: {
             id: {
@@ -41,8 +53,16 @@ class DiscordBot {
         }
     };
 
+    /**
+     * @type {Collection<BotCommand>}
+     */
     commands = new Collection();
 
+    /**
+     * The initialization of a new DiscordBot.
+     * @param {DiscordBotData} data - Information about the DiscordBot.
+     * @param {ClientOptions} options - The bot's client options.
+     */
     constructor(
         data = {
             rootDirectory: "bot",
@@ -57,12 +77,16 @@ class DiscordBot {
         }
     ) {
         // TODO Check token and clientId validity
-
         this.client = new Client(options);
-
         this.runBot(data);
     }
 
+    /**
+     * Start and connect the bot.
+     * @param {DiscordBotData} data - Information about the DiscordBot.
+     * @returns {Promise<undefined>}
+     * @private
+     */
     async runBot(data) {
         await storeFilePathsInFolders([data.rootDirectory], true);
         await this.retrieveData(data.dataDirectory);
@@ -72,6 +96,10 @@ class DiscordBot {
         await this.client.login(process.env.TOKEN);
     }
 
+    /**
+     * Subscribe to the core events
+     * @returns {undefined}
+     */
     listenToEvents() {
         this.client.on(Events.ClientReady, () => ready(this));
         this.client.on(Events.InteractionCreate, (interaction) => {
@@ -80,6 +108,12 @@ class DiscordBot {
         });
     }
 
+    /**
+     * Inject data from the workspace files
+     * @param {string} dataDirectory
+     * @returns {Promise<undefined>}
+     * @private
+     */
     async retrieveData(dataDirectory) {
         const files = await getFilePathsInFolder(resolve(dataDirectory), false);
         for (let i = 0; i < files.length; i++) {
@@ -98,6 +132,12 @@ class DiscordBot {
         }
     }
 
+    /**
+     * Register a command inside the bot.
+     * @param {BotCommand} command - The bot command module.
+     * @returns {undefined}
+     * @private
+     */
     registerCommand(command) {
         if (command.data.types.chatInput) {
             command.data.type = ApplicationCommandType.ChatInput;
@@ -117,6 +157,12 @@ class DiscordBot {
         };
     }
 
+    /**
+     * Register an event inside the bot.
+     * @param {BotEvent<any>} event - The bot event module.
+     * @returns {undefined}
+     * @private
+     */
     registerEvent(event) {
         this.client.on(event.data.name, (...args) =>
             event.execute(this, ...args)
@@ -129,6 +175,11 @@ class DiscordBot {
         };
     }
 
+    /**
+     * Register bot modules to the client.
+     * @returns {Promise<undefined>}
+     * @private
+     */
     async registerAllModules() {
         const filePaths = allFilePaths()?.filter(
             (path) =>
