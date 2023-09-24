@@ -1,4 +1,4 @@
-const { applyToEmbed, applyToEmbeds } = require("../func/style");
+const { applyStyle } = require("../func/style");
 
 /**
  * Convert a text to an embed.
@@ -12,7 +12,7 @@ const { applyToEmbed, applyToEmbeds } = require("../func/style");
  */
 function textToEmbed(text, brand) {
     const embed = { description: text };
-    return applyToEmbed(embed, brand);
+    return applyStyle(embed, brand);
 }
 
 /**
@@ -69,7 +69,7 @@ async function interactionCreate(interaction) {
         };
     } else {
         if (reply.embeds) {
-            reply.embeds = applyToEmbeds(
+            reply.embeds = applyStyle(
                 reply.embeds.map((embed) => embed),
                 brand
             );
