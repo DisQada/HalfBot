@@ -4,7 +4,7 @@ const vars = require("./config/vars");
 const discordBot = require("./core/discordBot");
 const command = require("./entities/command");
 const event = require("./entities/event");
-const colour = require("./helpers/classes/colour");
+const { asNumber, asString } = require("./helpers/classes/colour");
 const importer = require("./helpers/classes/importer");
 const { isSafe } = require("./helpers/classes/url");
 const emojiCharacters = require("./helpers/data/emojiCharacters");
@@ -17,7 +17,8 @@ module.exports = {
     discordBot,
     command,
     event,
-    colour,
+    asNumber,
+    asString,
     importer,
     isSafe,
     emojiCharacters,
