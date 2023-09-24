@@ -5,9 +5,9 @@
 
 const { BotCommandDeployment } = require("../entities/command");
 const {
-    allFilePaths,
-    storeFilePathsInFolders,
-    getFilePathsInFolder
+    findPaths,
+    storeFolderPaths,
+    readFolderPaths
 } = require("@disqada/pathfinder");
 const {
     ApplicationCommandType,
@@ -88,7 +88,9 @@ class DiscordBot {
      * @private
      */
     async runBot(data) {
-        await storeFilePathsInFolders([data.rootDirectory], true);
+        await storeFolderPaths([data.rootDirectory], {
+            deepSearch: true
+        });
         await this.retrieveData(data.dataDirectory);
         await this.registerAllModules();
         this.listenToEvents();
@@ -115,7 +117,9 @@ class DiscordBot {
      * @private
      */
     async retrieveData(dataDirectory) {
-        const files = await getFilePathsInFolder(resolve(dataDirectory), false);
+        const files = await readFolderPaths(resolve(dataDirectory), {
+            deepSearch: false
+        });
         for (let i = 0; i < files.length; i++) {
             const index1 = files[i].indexOf(sep);
             const index2 = files[i].length - ".json".length;
@@ -181,12 +185,12 @@ class DiscordBot {
      * @private
      */
     async registerAllModules() {
-        const filePaths = allFilePaths()?.filter(
+        const filePaths = findPaths().filter(
             (path) =>
                 path.fullPath.includes(Modules.Commands) ||
                 path.fullPath.includes(Modules.Events)
         );
-        if (!filePaths || filePaths.length === 0) {
+        if (filePaths.length === 0) {
             return;
         }
 
