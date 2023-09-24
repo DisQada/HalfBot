@@ -12,10 +12,10 @@ function getGuildId(data, info) {
             return globalGuildId;
 
         case BotCommandDeployment.DevGuild:
-            return info.devGuildId ?? globalGuildId;
+            return info.id.guild.dev ?? globalGuildId;
 
         case BotCommandDeployment.SupportGuild:
-            return info.supportGuildId ?? globalGuildId;
+            return info.id.guild.support ?? globalGuildId;
 
         default:
             throw new Error(

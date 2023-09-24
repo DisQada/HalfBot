@@ -29,7 +29,11 @@ require("dotenv").config();
 
 class DiscordBot {
     vars = {};
-    info = { clientId: "" };
+    info = {
+        id: {
+            guild: {}
+        }
+    };
 
     commands = new Collection();
 
