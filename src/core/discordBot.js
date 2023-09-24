@@ -30,14 +30,14 @@ require("dotenv").config();
 class DiscordBot {
     data = {
         config: {
-        id: {
-            guild: {}
-        },
-        brand: {
-            name: "halfbot",
-            colour: 0xffffff,
-            logoUrl: "https://cdn.discordapp.com/embed/avatars/0.png"
-        }
+            id: {
+                guild: {}
+            },
+            brand: {
+                name: "halfbot",
+                colour: 0xffffff,
+                logoUrl: "https://cdn.discordapp.com/embed/avatars/0.png"
+            }
         }
     };
 
@@ -67,17 +67,16 @@ class DiscordBot {
         await storeFilePathsInFolders([data.rootDirectory], true);
         await this.retrieveData(data.dataDirectory);
         await this.registerAllModules();
-        this.runCoreEvents();
+        this.listenToEvents();
 
         await this.client.login(process.env.TOKEN);
     }
 
-    runCoreEvents() {
+    listenToEvents() {
         this.client.on(Events.ClientReady, () => ready(this));
         this.client.on(Events.InteractionCreate, (interaction) => {
-            const botInteraction = interaction;
-            botInteraction.bot = this;
-            interactionCreate(botInteraction);
+            interaction.bot = this;
+            interactionCreate(interaction);
         });
     }
 

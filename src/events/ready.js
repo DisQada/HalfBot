@@ -1,21 +1,18 @@
 const { ActivityType, Collection } = require("discord.js");
 const { BotCommandDeployment } = require("../entities/command");
 
-function getGuildId(data, config) {
+function getGuildId(data, guildIds) {
     const globalGuildId = "0";
-    if (!config) {
-        return globalGuildId;
-    }
 
     switch (data.deployment) {
         case BotCommandDeployment.Global:
             return globalGuildId;
 
         case BotCommandDeployment.DevGuild:
-            return config.id.guild.dev ?? globalGuildId;
+            return guildIds.dev ?? globalGuildId;
 
         case BotCommandDeployment.SupportGuild:
-            return config.id.guild.support ?? globalGuildId;
+            return guildIds.support ?? globalGuildId;
 
         default:
             throw new Error(
@@ -42,7 +39,7 @@ function registerCommands(bot) {
 
     for (const iterator of bot.commands) {
         const command = iterator[1];
-        const guildId = getGuildId(command.data, bot.data.config);
+        const guildId = getGuildId(command.data, bot.data.config.id.guild);
 
         const commandArray = commands.get(guildId) ?? [];
         commandArray.push(command.data);
@@ -55,9 +52,9 @@ function registerCommands(bot) {
 function ready(bot) {
     registerCommands(bot);
 
-    console.log(`The bot "${bot.client.user?.tag}" is online`);
+    console.log(`The bot "${bot.client.user.username}" is online`);
 
-    bot.client.user?.setPresence({
+    bot.client.user.setPresence({
         status: "online",
         activities: [
             {
