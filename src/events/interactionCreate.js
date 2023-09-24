@@ -37,14 +37,19 @@ async function interactionCreate(interaction) {
         return;
     }
 
-    await interaction.deferReply();
+    if (command.data.defer !== "false") {
+        await interaction.deferReply({
+            ephemeral: command.data.ephemeral
+        });
+    }
+
     let reply = await command.execute(interaction);
-    if (interaction.replied) {
+    if (!reply) {
+        quickReply("Done", brand);
         return;
     }
 
-    if (!reply) {
-        quickReply("Done", brand);
+    if (interaction.replied) {
         return;
     }
 
@@ -54,17 +59,18 @@ async function interactionCreate(interaction) {
         };
     } else {
         if (reply.embeds) {
-            reply.embeds = applyStyle(
-                reply.embeds.map((embed) => embed),
-                brand
-            );
+            reply.embeds = applyStyle(reply.embeds, brand);
         } else if (reply.content) {
             reply.embeds = [asEmbed(reply.content, brand)];
             delete reply.content;
         }
     }
 
-    await interaction.followUp(reply);
+    if (interaction.deferred || interaction.replied) {
+        await interaction.followUp(reply);
+    } else {
+        await interaction.reply(reply);
+    }
 }
 
 module.exports = interactionCreate;
