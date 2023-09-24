@@ -12,7 +12,6 @@ const {
     Events,
     GatewayIntentBits
 } = require("discord.js");
-const { BotInfo } = require("../config/info");
 const { BotStyle } = require("../config/style");
 const { BotCommand } = require("../entities/command");
 const { BotEvent } = require("../entities/event");
@@ -57,7 +56,7 @@ class DiscordBot {
 
     async runBot() {
         await this.retrieveData("info", (data) => {
-            this.info = new BotInfo(data);
+            Object.assign(this.info, data);
         });
 
         await this.retrieveData("vars", (data) => {

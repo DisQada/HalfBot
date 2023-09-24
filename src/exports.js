@@ -1,4 +1,3 @@
-const info = require("./config/info");
 const style = require("./config/style");
 const discordBot = require("./core/discordBot");
 const command = require("./entities/command");
@@ -9,7 +8,6 @@ const emojiCharacters = require("./data/emojiCharacters");
 const safeDomains = require("./data/safeDomains");
 
 module.exports = {
-    info,
     style,
     discordBot,
     command,
