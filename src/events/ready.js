@@ -42,7 +42,7 @@ function registerCommands(bot) {
 
     for (const iterator of bot.commands) {
         const command = iterator[1];
-        const guildId = getGuildId(command.data, bot.config);
+        const guildId = getGuildId(command.data, bot.data.config);
 
         const commandArray = commands.get(guildId) ?? [];
         commandArray.push(command.data);

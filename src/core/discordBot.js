@@ -1,9 +1,8 @@
 const { BotCommandDeployment } = require("../entities/command");
 const {
-    FilePath,
-    aFilePath,
     allFilePaths,
-    storeFilePathsInFolders
+    storeFilePathsInFolders,
+    getFilePathsInFolder
 } = require("@disqada/pathfinder");
 const {
     ApplicationCommandType,
@@ -18,16 +17,19 @@ const interactionCreate = require("../events/interactionCreate");
 const ready = require("../events/ready");
 const { Modules, RecordStates } = require("../data/enums");
 const { Logger } = require("./logger");
+const { resolve, sep } = require("path");
 require("dotenv").config();
 
 /**
  * @typedef {object} DiscordBotData
  * @property {string} rootDirectory
+ * @property {string} dataDirectory
  * @interface
  */
 
 class DiscordBot {
-    config = {
+    data = {
+        config: {
         id: {
             guild: {}
         },
@@ -36,13 +38,15 @@ class DiscordBot {
             colour: 0xffffff,
             logoUrl: "https://cdn.discordapp.com/embed/avatars/0.png"
         }
+        }
     };
 
     commands = new Collection();
 
     constructor(
         data = {
-            rootDirectory: "bot"
+            rootDirectory: "bot",
+            dataDirectory: "bot/data"
         },
         options = {
             intents: [
@@ -56,16 +60,12 @@ class DiscordBot {
 
         this.client = new Client(options);
 
-        storeFilePathsInFolders([data.rootDirectory], true);
-
-        this.runBot();
+        this.runBot(data);
     }
 
-    async runBot() {
-        await this.retrieveData("config", (data) => {
-            Object.assign(this.config, data);
-        });
-
+    async runBot(data) {
+        await storeFilePathsInFolders([data.rootDirectory], true);
+        await this.retrieveData(data.dataDirectory);
         await this.registerAllModules();
         this.runCoreEvents();
 
@@ -81,15 +81,21 @@ class DiscordBot {
         });
     }
 
-    async retrieveData(fileName, useData) {
-        const filePath = aFilePath(fileName);
-        if (filePath && filePath instanceof FilePath) {
-            const data = require(filePath.fullPath);
+    async retrieveData(dataDirectory) {
+        const files = await getFilePathsInFolder(resolve(dataDirectory), false);
+        for (let i = 0; i < files.length; i++) {
+            const index1 = files[i].indexOf(sep);
+            const index2 = files[i].length - ".json".length;
+            const name = files[i].substring(index1 + sep.length, index2);
+
+            const data = require(files[i]);
             if (data) {
-                useData(data);
+                if (name === "config") {
+                    Object.assign(this.data.config, data);
+                } else {
+                    this.data[name] = data;
+                }
             }
-        } else {
-            throw new Error(`Could not find ${fileName}`);
         }
     }
 
