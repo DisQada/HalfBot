@@ -1,3 +1,8 @@
+/**
+ * @file
+ * @ignore
+ */
+
 const { applyStyle, asEmbed } = require("../func/style");
 
 /**

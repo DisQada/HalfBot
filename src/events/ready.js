@@ -1,6 +1,19 @@
+/**
+ * @file
+ * @ignore
+ */
+
 const { ActivityType, Collection } = require("discord.js");
 const { BotCommandDeployment } = require("../entities/command");
 
+/**
+ * Get the correct server ID.
+ * @param {BotCommandData} data - The command data deciding where to register the command.
+ * @param {BotConfig} guildIds - The container of the server IDs.
+ * @returns {string} The server ID.
+ * @private
+ * @throws {Error} - if data.deployment wasn't of the enum values.
+ */
 function getGuildId(data, guildIds) {
     const globalGuildId = "0";
 
@@ -21,6 +34,13 @@ function getGuildId(data, guildIds) {
     }
 }
 
+/**
+ * Register the commands via the API.
+ * @param {Client} client - The client to register the commands for.
+ * @param {Collection<BotCommand>} commandCollection - The commands to register.
+ * @returns {Promise<undefined>}
+ * @private
+ */
 async function finalRegistration(client, commandCollection) {
     for (const iterator of commandCollection) {
         const guildId = iterator[0];
@@ -34,6 +54,12 @@ async function finalRegistration(client, commandCollection) {
     }
 }
 
+/**
+ * The initial step for registering the bot commands.
+ * @param {DiscordBot} bot - The bot to register the commands for.
+ * @returns {undefined}
+ * @private
+ */
 function registerCommands(bot) {
     const commands = new Collection();
 
@@ -49,6 +75,12 @@ function registerCommands(bot) {
     finalRegistration(bot.client, commands);
 }
 
+/**
+ * The client is ready and has connected successfully.
+ * @param {DiscordBot} bot - The bot of the client.
+ * @returns {undefined}
+ * @private
+ */
 function ready(bot) {
     registerCommands(bot);
 
