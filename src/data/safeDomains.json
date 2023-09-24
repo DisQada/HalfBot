@@ -1,4 +1,4 @@
-module.exports = [
+[
     "google.com",
     "twitter.com",
     "youtube.com",
@@ -12,4 +12,4 @@ module.exports = [
     "discord.gg",
     "itch.io",
     "top.gg"
-];
+]
