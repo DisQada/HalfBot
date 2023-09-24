@@ -30,7 +30,7 @@ async function interactionCreate(interaction) {
     }
 
     const command = interaction.bot.commands.get(interaction.commandName);
-    const brand = interaction.bot.info.brand;
+    const brand = interaction.bot.config.brand;
 
     if (!command) {
         quickReply("Error: Unknown command", brand);

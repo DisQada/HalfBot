@@ -1,5 +1,5 @@
 /**
- * @typedef {object} BotInfo
+ * @typedef {object} BotConfig
  * @property {object} id - The container of all IDs.
  * @property {string} [id.client] - The bot's client ID.
  * @property {object} id.guild - The server of all IDs.

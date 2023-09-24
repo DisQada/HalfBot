@@ -27,7 +27,7 @@ require("dotenv").config();
  */
 
 class DiscordBot {
-    info = {
+    config = {
         id: {
             guild: {}
         },
@@ -62,8 +62,8 @@ class DiscordBot {
     }
 
     async runBot() {
-        await this.retrieveData("info", (data) => {
-            Object.assign(this.info, data);
+        await this.retrieveData("config", (data) => {
+            Object.assign(this.config, data);
         });
 
         await this.registerAllModules();

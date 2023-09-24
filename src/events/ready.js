@@ -1,9 +1,9 @@
 const { ActivityType, Collection } = require("discord.js");
 const { BotCommandDeployment } = require("../entities/command");
 
-function getGuildId(data, info) {
+function getGuildId(data, config) {
     const globalGuildId = "0";
-    if (!info) {
+    if (!config) {
         return globalGuildId;
     }
 
@@ -12,10 +12,10 @@ function getGuildId(data, info) {
             return globalGuildId;
 
         case BotCommandDeployment.DevGuild:
-            return info.id.guild.dev ?? globalGuildId;
+            return config.id.guild.dev ?? globalGuildId;
 
         case BotCommandDeployment.SupportGuild:
-            return info.id.guild.support ?? globalGuildId;
+            return config.id.guild.support ?? globalGuildId;
 
         default:
             throw new Error(
@@ -42,7 +42,7 @@ function registerCommands(bot) {
 
     for (const iterator of bot.commands) {
         const command = iterator[1];
-        const guildId = getGuildId(command.data, bot.info);
+        const guildId = getGuildId(command.data, bot.config);
 
         const commandArray = commands.get(guildId) ?? [];
         commandArray.push(command.data);
