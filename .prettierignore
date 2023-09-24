@@ -1,6 +1,7 @@
 # Ignore folders
 .git/
 node_modules/
+docs/
 dist/
 types/
 

@@ -2,6 +2,7 @@
 .git/
 node_modules/
 docs/
+dist/
 types/
 
 # Don't ignore folders

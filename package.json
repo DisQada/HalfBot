@@ -12,7 +12,6 @@
     },
     "type": "commonjs",
     "main": "./src/exports.js",
-    "module": "./src/exports.js",
     "exports": {
         ".": {
             "node": "./src/exports.js",

@@ -3,11 +3,12 @@
     "words": [
         "analyzer",
         "disqada",
+        "disqus",
+        "docdash",
         "halfbot",
         "inferrable",
+        "Longname",
         "prerelease",
-        "tsc",
-        "vars",
-        "Vars"
+        "typedefs"
     ]
 }
