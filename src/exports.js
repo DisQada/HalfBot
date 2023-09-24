@@ -6,7 +6,7 @@ const command = require("./entities/command");
 const event = require("./entities/event");
 const colour = require("./helpers/classes/colour");
 const importer = require("./helpers/classes/importer");
-const link = require("./helpers/classes/link");
+const { isSafe } = require("./helpers/classes/url");
 const emojiCharacters = require("./helpers/data/emojiCharacters");
 const safeDomains = require("./helpers/data/safeDomains");
 
@@ -19,7 +19,7 @@ module.exports = {
     event,
     colour,
     importer,
-    link,
+    isSafe,
     emojiCharacters,
     safeDomains
 };
