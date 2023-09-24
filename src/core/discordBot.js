@@ -23,10 +23,10 @@ const ready = require("../events/ready");
 const { Modules, RecordStates } = require("../data/enums");
 const { logRecords } = require("./logger");
 const { resolve, sep } = require("path");
-require("dotenv").config();
 
 /**
  * @typedef {object} DiscordBotData
+ * @property {string} token
  * @property {string} rootDirectory
  * @property {string} dataDirectory
  * @interface
@@ -93,7 +93,7 @@ class DiscordBot {
         await this.registerAllModules();
         this.listenToEvents();
 
-        await this.client.login(process.env.TOKEN);
+        await this.client.login(data.token);
     }
 
     /**
