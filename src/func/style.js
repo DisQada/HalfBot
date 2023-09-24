@@ -11,6 +11,21 @@ const { APIEmbed } = require("discord.js");
 const { asNumber } = require("./colour");
 
 /**
+ * Convert a text to an embed.
+ * @param {string} text - The original text.
+ * @param {object} brand - The brand to style the embed with.
+ * @returns {APIEmbed} The resulting embed.
+ * @private
+ * @example
+ * const brand = {colour: 0xffffff};
+ * const result = asEmbed("halfbot", brand);
+ */
+function asEmbed(text, brand) {
+    const embed = { description: text };
+    return applyStyle(embed, brand);
+}
+
+/**
  * Apply brand style to an multiple embeds.
  * @param {APIEmbed | APIEmbed[]} embeds - The embeds to apply the style to.
  * @param {object} brand - The brand to get the style from.
@@ -83,5 +98,6 @@ function applyStyle(toApplyOn, brand) {
 }
 
 module.exports = {
+    asEmbed,
     applyStyle
 };

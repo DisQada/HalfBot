@@ -1,19 +1,4 @@
-const { applyStyle } = require("../func/style");
-
-/**
- * Convert a text to an embed.
- * @param {string} text - The original text.
- * @param {object} brand - The brand to style the embed with.
- * @returns {APIEmbed} The resulting embed.
- * @private
- * @example
- * const brand = {colour: 0xffffff};
- * const result = textToEmbed("halfbot", brand);
- */
-function textToEmbed(text, brand) {
-    const embed = { description: text };
-    return applyStyle(embed, brand);
-}
+const { applyStyle, asEmbed } = require("../func/style");
 
 /**
  * Handler of interactions called by the bot.
@@ -27,7 +12,7 @@ async function interactionCreate(interaction) {
      * @param {object} brand - The brand to style the reply with.
      */
     async function quickReply(reply, brand) {
-        const embed = textToEmbed(reply, brand);
+        const embed = asEmbed(reply, brand);
         const msg = {
             embeds: [embed],
             ephemeral: true
@@ -65,7 +50,7 @@ async function interactionCreate(interaction) {
 
     if (typeof reply === "string") {
         reply = {
-            embeds: [textToEmbed(reply, brand)]
+            embeds: [asEmbed(reply, brand)]
         };
     } else {
         if (reply.embeds) {
@@ -74,7 +59,7 @@ async function interactionCreate(interaction) {
                 brand
             );
         } else if (reply.content) {
-            reply.embeds = [textToEmbed(reply.content, brand)];
+            reply.embeds = [asEmbed(reply.content, brand)];
             delete reply.content;
         }
     }
