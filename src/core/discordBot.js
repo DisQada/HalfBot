@@ -12,7 +12,6 @@ const {
     Events,
     GatewayIntentBits
 } = require("discord.js");
-const { BotStyle } = require("../config/style");
 const { BotCommand } = require("../entities/command");
 const { BotEvent } = require("../entities/event");
 const interactionCreate = require("../events/interactionCreate");
@@ -32,6 +31,11 @@ class DiscordBot {
     info = {
         id: {
             guild: {}
+        },
+        brand: {
+            name: "halfbot",
+            colour: 0xffffff,
+            logoUrl: "https://cdn.discordapp.com/embed/avatars/0.png"
         }
     };
 
@@ -65,10 +69,6 @@ class DiscordBot {
 
         await this.retrieveData("vars", (data) => {
             Object.assign(this.vars, data);
-        });
-
-        await this.retrieveData("style", (data) => {
-            this.style = new BotStyle(data);
         });
 
         await this.registerAllModules();
