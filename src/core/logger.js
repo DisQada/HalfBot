@@ -1,42 +1,6 @@
 const { table } = require("table");
 const { BotCommandDeployment } = require("../entities/command");
-const { Modules, RecordStates } = require("../data/enums");
-
-function newArray(length) {
-    const arr = Array(length);
-    for (let i = 0; i < length; i++) {
-        arr[i] = 0;
-    }
-    return arr;
-}
-
-function toNum(module) {
-    switch (module) {
-        case Modules.Commands:
-            return 0;
-
-        case Modules.Events:
-            return 1;
-    }
-
-    return -1;
-}
-
-function toSymbol(state) {
-    switch (state) {
-        case RecordStates.Success:
-            return "🟩";
-
-        case RecordStates.Fail:
-            return "🟨";
-
-        case RecordStates.Error:
-            return "🟥";
-
-        default:
-            return "⬜";
-    }
-}
+const { RecordStates } = require("../data/enums");
 
 function defaultConfig(header) {
     return {
@@ -47,73 +11,57 @@ function defaultConfig(header) {
         columnDefault: {
             alignment: "center",
             verticalAlignment: "middle",
-            wrapWord: false
+            wrapWord: true
         }
     };
 }
 
-function fixRecord(record) {
-    record.state = `${toSymbol(record.state)} ${RecordStates[record.state]}`;
-
-    if (typeof record.deployment === "number") {
-        record.deployment = BotCommandDeployment[record.deployment];
+function logRecords(records, state) {
+    if (!records || records.length === 0) {
+        return;
     }
 
-    return record;
-}
-
-function toArray(record) {
-    return [
-        record.name,
-        record.state,
-        record.type?.substring(0, record.type.length - 1) || "",
-        record.deployment || "",
-        record.message || ""
-    ];
-}
-
-class Logger {
-    records = [];
-
-    constructor(records) {
-        if (!records) {
-            return;
-        }
-
-        this.records = records;
-    }
-
-    add(record) {
-        this.records.push(record);
-    }
-
-    get count() {
-        return this.records.length;
-    }
-
-    static debug(logger) {
-        const data1 = [
-            ["name", "state", "type", "deployment", "message"],
-            ...logger.records.map((r) => toArray(fixRecord(r)))
+    if (state === RecordStates.Success) {
+        const data = [
+            ["name", "type", "deployment"],
+            ...records.map((r) => {
+                return [
+                    r.name,
+                    r.type.substring(0, r.type.length - 1),
+                    BotCommandDeployment[r.deployment]
+                ];
+            })
         ];
-        console.log(table(data1, defaultConfig("Bot modules registration")));
+        const msg = "🟩 Successful registration 🟩";
+        console.log(table(data, defaultConfig(msg)));
+    } else {
+        const data = [
+            ["path", "message"],
+            ...records.map((r) => {
+                return [r.path, r.message];
+            })
+        ];
+        const msg = "🟥 Failure registration 🟥";
+        console.log(table(data, defaultConfig(msg)));
     }
 }
 
 /**
- * @typedef {object} Record
- * @property {string} name
- * @property {RecordStates} state
- * @property {Modules} [type]
- * @property {BotCommandDeployment} [deployment]
- * @property {string} [message]
+ * @typedef {object} SuccessRecord
+ * @property {string} name The name of the bot module that was successfully registered.
+ * @property {Modules} type The module type.
+ * @property {BotCommandDeployment} deployment The servers deployed to.
+ * @interface
+ * @public
+ */
+
+/**
+ * @typedef {object} FailRecord
+ * @property {string} path The path of the file that failed to be registered.
+ * @property {string} message Information about the failure.
  * @interface
  */
 
 module.exports = {
-    newArray,
-    toNum,
-    toSymbol,
-    defaultConfig,
-    Logger
+    logRecords
 };

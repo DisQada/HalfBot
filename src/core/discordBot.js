@@ -16,7 +16,7 @@ const { BotEvent } = require("../entities/event");
 const interactionCreate = require("../events/interactionCreate");
 const ready = require("../events/ready");
 const { Modules, RecordStates } = require("../data/enums");
-const { Logger } = require("./logger");
+const { logRecords } = require("./logger");
 const { resolve, sep } = require("path");
 require("dotenv").config();
 
@@ -98,7 +98,7 @@ class DiscordBot {
         }
     }
 
-    async registerCommand(command) {
+    registerCommand(command) {
         if (command.data.types.chatInput) {
             command.data.type = ApplicationCommandType.ChatInput;
             this.commands.set(command.data.name, command);
@@ -109,12 +109,24 @@ class DiscordBot {
             command.data.type = command.data.types.contextMenu + 2;
             this.commands.set(command.data.name, command);
         }
+
+        return {
+            name: command.data.name,
+            type: Modules.Commands,
+            deployment: command.data.deployment
+        };
     }
 
-    async registerEvent(event) {
+    registerEvent(event) {
         this.client.on(event.data.name, (...args) =>
             event.execute(this, ...args)
         );
+
+        return {
+            name: event.data.name,
+            type: Modules.Events,
+            deployment: BotCommandDeployment.Global
+        };
     }
 
     async registerAllModules() {
@@ -123,58 +135,42 @@ class DiscordBot {
                 path.fullPath.includes(Modules.Commands) ||
                 path.fullPath.includes(Modules.Events)
         );
-        if (!filePaths) {
+        if (!filePaths || filePaths.length === 0) {
             return;
         }
 
-        const logger = new Logger();
+        const records = [[], []];
 
-        for (const filePath of filePaths) {
-            const botModule = require(filePath.fullPath);
+        for (let i = 0; i < filePaths.length; i++) {
+            const botModule = require(filePaths[i].fullPath);
 
-            let name;
-            if (typeof botModule === "object" && botModule?.data?.name) {
-                name = botModule?.data?.name;
-            } else {
-                const word = "modules";
-                const index = filePath.fullPath.indexOf(word);
-                name = filePath.fullPath.substring(index + word.length);
+            if (
+                botModule instanceof BotCommand &&
+                BotCommand.isValid(botModule)
+            ) {
+                const record = this.registerCommand(botModule);
+                records[RecordStates.Success].push(record);
+                continue;
+            } else if (
+                botModule instanceof BotEvent &&
+                BotEvent.isValid(botModule)
+            ) {
+                const record = this.registerEvent(botModule);
+                records[RecordStates.Success].push(record);
+                continue;
             }
 
-            const record = {
-                name: name,
-                state: RecordStates.Success
-            };
-
-            if (botModule instanceof BotCommand) {
-                record.type = Modules.Commands;
-                record.deployment = botModule.data.deployment;
-
-                if (BotCommand.isValid(botModule)) {
-                    this.registerCommand(botModule);
-                } else {
-                    record.state = RecordStates.Fail;
-                    record.message = `The command is invalid, a required property is missing`;
-                }
-            } else if (botModule instanceof BotEvent) {
-                record.type = Modules.Events;
-                record.deployment = BotCommandDeployment.Global;
-
-                if (BotEvent.isValid(botModule)) {
-                    this.registerEvent(botModule);
-                } else {
-                    record.state = RecordStates.Fail;
-                    record.message = `The module is invalid, a required property is missing`;
-                }
-            } else {
-                record.state = RecordStates.Error;
-                record.message = "The file was empty or not exported correctly";
-            }
-
-            logger.add(record);
+            const word = "modules";
+            const index = filePaths[i].fullPath.indexOf(word);
+            records[RecordStates.Fail].push({
+                path: filePaths[i].fullPath.substring(index + word.length + 1),
+                message:
+                    "The module is invalid, maybe a required property is missing"
+            });
         }
 
-        Logger.debug(logger);
+        logRecords(records[RecordStates.Success], RecordStates.Success);
+        logRecords(records[RecordStates.Fail], RecordStates.Fail);
     }
 }
 

@@ -6,8 +6,7 @@ const Modules = Object.freeze({
 
 const RecordStates = Object.freeze({
     Success: 0,
-    Fail: 1,
-    Error: 2
+    Fail: 1
 });
 
 module.exports = {
