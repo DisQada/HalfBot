@@ -4,7 +4,6 @@
  * @ignore
  */
 
-const { ActivityType, Collection } = require("discord.js");
 const { BotCommandDeployment } = require("../entities/command");
 
 /**
@@ -92,8 +91,7 @@ async function ready(bot) {
         status: "online",
         activities: [
             {
-                name: "Operating ⚙ ...",
-                type: ActivityType.Listening,
+                name: "Operating ...",
                 url: "https://github.com/DisQada/halfbot"
             }
         ]

@@ -77,14 +77,9 @@ function applyStyle(toApplyOn, brand) {
     function applyToEmbeds(embeds, brand) {
         const lastEmbed = embeds.length - 1;
         for (let i = 0; i < embeds.length; i++) {
-            const embed = embeds[i];
-
-            if (embed) {
-                const options = {
-                    skipFooter: i < lastEmbed
-                };
-                embeds[i] = applyToEmbed(embed, brand, options);
-            }
+            embeds[i] = applyToEmbed(embeds[i], brand, {
+                skipFooter: i < lastEmbed
+            });
         }
 
         return embeds;

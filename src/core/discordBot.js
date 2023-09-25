@@ -186,20 +186,21 @@ class DiscordBot {
      * @private
      */
     async registerAllModules() {
-        const filePaths = findPaths().filter(
-            (path) =>
-                path.fullPath.includes(Modules.Commands) ||
-                path.fullPath.includes(Modules.Events)
-        );
-        if (filePaths.length === 0) {
+        const paths = findPaths()
+            .filter(
+                (fp) =>
+                    fp.fullPath.includes(Modules.Commands) ||
+                    fp.fullPath.includes(Modules.Events)
+            )
+            .map((fp) => fp.fullPath);
+        if (paths.length === 0) {
             return;
         }
 
         const records = [[], []];
 
-        for (let i = 0; i < filePaths.length; i++) {
-            const botModule = require(filePaths[i].fullPath);
-
+        for (let i = 0; i < paths.length; i++) {
+            const botModule = require(paths[i]);
             if (
                 botModule instanceof BotCommand &&
                 BotCommand.isValid(botModule)
@@ -217,9 +218,9 @@ class DiscordBot {
             }
 
             const word = "modules";
-            const index = filePaths[i].fullPath.indexOf(word);
+            const index = paths[i].indexOf(word);
             records[RecordStates.Fail].push({
-                path: filePaths[i].fullPath.substring(index + word.length + 1),
+                path: paths[i].substring(index + word.length + 1),
                 message:
                     "The module is invalid, maybe a required property is missing"
             });
