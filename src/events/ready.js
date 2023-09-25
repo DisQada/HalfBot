@@ -1,3 +1,4 @@
+/* eslint-disable jsdoc/require-example */
 /**
  * @file
  * @ignore

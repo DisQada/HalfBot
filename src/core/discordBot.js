@@ -1,3 +1,4 @@
+/* eslint-disable jsdoc/require-example */
 /**
  * @file
  * @ignore
@@ -26,9 +27,9 @@ const { resolve, sep } = require("path");
 
 /**
  * @typedef {object} DiscordBotData
- * @property {string} token
- * @property {string} rootDirectory
- * @property {string} dataDirectory
+ * @property {string} token The bot application's API token.
+ * @property {string} rootDirectory - The path to the folder containing all the bot files.
+ * @property {string} dataDirectory - The Path to the directory the json data files.
  * @interface
  */
 
@@ -99,7 +100,7 @@ class DiscordBot {
     }
 
     /**
-     * Subscribe to the core events
+     * Subscribe to the core events.
      * @returns {undefined}
      */
     listenToEvents() {
@@ -111,8 +112,8 @@ class DiscordBot {
     }
 
     /**
-     * Inject data from the workspace files
-     * @param {string} dataDirectory
+     * Inject data from the workspace files.
+     * @param {string} dataDirectory - The path to the directory the json data files.
      * @returns {Promise<undefined>}
      * @private
      */

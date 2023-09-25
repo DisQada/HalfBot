@@ -13,7 +13,7 @@ const { asNumber } = require("./colour");
 /**
  * Convert a text to an embed.
  * @param {string} text - The original text.
- * @param {object} brand - The brand to style the embed with.
+ * @param {{name:string,colour:number,logoUrl:URL}} brand - The brand to style the embed with.
  * @returns {APIEmbed} The resulting embed.
  * @private
  * @example
@@ -27,8 +27,8 @@ function asEmbed(text, brand) {
 
 /**
  * Apply brand style to an multiple embeds.
- * @param {APIEmbed | APIEmbed[]} embeds - The embeds to apply the style to.
- * @param {object} brand - The brand to get the style from.
+ * @param {APIEmbed | APIEmbed[]} toApplyOn - The embeds to apply the style to.
+ * @param {{name:string,colour:number,logoUrl:URL}} brand - The brand to get the style from.
  * @returns {APIEmbed | APIEmbed[]} The embeds array after applying the style to it.
  * @example
  * let embed = {title: 'halfbot'};
