@@ -35,33 +35,13 @@ function getGuildId(data, guildIds) {
 }
 
 /**
- * Register the commands via the API.
- * @param {Client} client - The client to register the commands for.
- * @param {Collection<BotCommand>} commandCollection - The commands to register.
- * @returns {Promise<undefined>}
- * @private
- */
-async function finalRegistration(client, commandCollection) {
-    for (const iterator of commandCollection) {
-        const guildId = iterator[0];
-        const commandsData = iterator[1];
-
-        if (guildId === "0") {
-            await client.application?.commands.set(commandsData);
-        } else {
-            await client.guilds.cache.get(guildId)?.commands.set(commandsData);
-        }
-    }
-}
-
-/**
- * The initial step for registering the bot commands.
+ * Preparing the bot commands for registration.
  * @param {DiscordBot} bot - The bot to register the commands for.
  * @returns {undefined}
  * @private
  */
-function registerCommands(bot) {
-    const commands = new Collection();
+function prepareCommands(bot) {
+    const commands = new Map();
 
     for (const iterator of bot.commands) {
         const command = iterator[1];
@@ -72,7 +52,27 @@ function registerCommands(bot) {
         commands.set(guildId, commandArray);
     }
 
-    finalRegistration(bot.client, commands);
+    return commands;
+}
+
+/**
+ * Register the commands via the API.
+ * @param {Client} client - The client to register the commands for.
+ * @param {Map<BotCommand>} commandMap - The commands to register.
+ * @returns {Promise<undefined>}
+ * @private
+ */
+async function registerCommands(client, commandMap) {
+    for (const iterator of commandMap) {
+        const commandsData = iterator[1];
+        const guildId = iterator[0];
+
+        if (guildId === "0") {
+            await client.application?.commands.set(commandsData);
+        } else {
+            await client.guilds.cache.get(guildId)?.commands.set(commandsData);
+        }
+    }
 }
 
 /**
@@ -81,8 +81,9 @@ function registerCommands(bot) {
  * @returns {undefined}
  * @private
  */
-function ready(bot) {
-    registerCommands(bot);
+async function ready(bot) {
+    const commands = prepareCommands(bot);
+    await registerCommands(bot.client, commands);
 
     console.log(`The bot "${bot.client.user.username}" is online`);
 
