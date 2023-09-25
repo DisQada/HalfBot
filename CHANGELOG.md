@@ -1,3 +1,58 @@
+# [2.0.0](https://github.com/DisQada/halfbot/compare/v1.1.3...v2.0.0) (2023-09-25)
+
+
+### Bug Fixes
+
+* **discordbot:** use the correct function ([ab6c18c](https://github.com/DisQada/halfbot/commit/ab6c18cd74d854141ae35015d6a1ab0e5463d265))
+* **logger:** include deployment in bot logs ([c72b02a](https://github.com/DisQada/halfbot/commit/c72b02affe8e13909469a4ae0d546843d90b410f))
+* **style:** remove this ([d63b83f](https://github.com/DisQada/halfbot/commit/d63b83fcc09b0d38e599c801ef23c0efe2247694))
+
+
+### Build System
+
+* **@disqada/pathfinder:** upgrade to the next major version ([c17a5c0](https://github.com/DisQada/halfbot/commit/c17a5c0385e3c58404f7c8c0c68c88b9148f5dd8))
+* **dotenv:** removed dependancy ([046f979](https://github.com/DisQada/halfbot/commit/046f9796515d919c5769950547de7833b142a891))
+
+
+### Code Refactoring
+
+* **botinfo:** change object structure ([5c8ba7d](https://github.com/DisQada/halfbot/commit/5c8ba7d4df15cee075e7220c500c027e7c86f33b))
+* **botinfo:** rename BotInfo to BotConfig ([3600d8c](https://github.com/DisQada/halfbot/commit/3600d8c709c83944c0f6c2a72a9d10e8202d56db))
+* **botinfo:** replace BotInfo class with object ([929ed6d](https://github.com/DisQada/halfbot/commit/929ed6d14e120f1941f1568c20428c7c72029d40))
+* **botstyle:** replace BotStyle class with functions ([1b13403](https://github.com/DisQada/halfbot/commit/1b13403155fcd230242c3c12510bc0572a4d3eb9))
+* **BotVars:** replace BotVars calss with object ([c3f2f9d](https://github.com/DisQada/halfbot/commit/c3f2f9da9fccae9c04d19a892802dffeca09bb50))
+* **importer:** delete Importer ([0170bc3](https://github.com/DisQada/halfbot/commit/0170bc3368bcddba7ac95819becb8239e459d209))
+* **style:** merge 3 functions into one ([7df1bbb](https://github.com/DisQada/halfbot/commit/7df1bbbbb20d123dd80b6056d9775c76d856454a))
+* **vars:** delete DiscordBot.vars ([820ac39](https://github.com/DisQada/halfbot/commit/820ac39f311d0e1ff1490e026cf4fd3076fe518d))
+
+
+### Features
+
+* **asembed:** export textToEmbed as asEmbed ([5a011f5](https://github.com/DisQada/halfbot/commit/5a011f57c1ce0439a488f4ce2b9aeab29f7a52b9))
+* **colour:** replace Colour class with functions ([9b7e1a5](https://github.com/DisQada/halfbot/commit/9b7e1a510bb672438240fbb7f81987185a92b6bd))
+* **command.data:** add ability to skip defer or ephemeral it ([e418204](https://github.com/DisQada/halfbot/commit/e4182044c4160de0d318d94d5555e44b853aa894))
+* **data/:** inject all JSON files inside data folder ([7ca46d5](https://github.com/DisQada/halfbot/commit/7ca46d53b731ab1b98d5904f5366e04f141d0bbf))
+* replace Link class with functions ([f224e5c](https://github.com/DisQada/halfbot/commit/f224e5c6657aefbda2fc7074bff86333c1efcfc0))
+
+
+### BREAKING CHANGES
+
+* **@disqada/pathfinder:** @disqada/pathfinder upgraded to it's next major version
+* **dotenv:** dotenv is no longer a dependency
+* **data/:** Property config of DiscordBot class has been moved inside data property
+* **botinfo:** Property info inside DiscordBot class is renamed to config
+* **vars:** vars property inside DiscordBot class is deleted
+* **style:** applyTo, applyToEmbed and applyToEmbeds functions are replaced with applyStyle
+function
+* **botstyle:** BotStyle class is deleted, the style property inside DiscordBot class is deleted
+and applyTo... embeds now require the brand object as a second parameter
+* **botinfo:** BotInfo old properties are replaced with new ones
+* **botinfo:** BotInfo class is deleted
+* **BotVars:** BotVars class deleted
+* **importer:** Importer class deleted
+* **colour:** The Colour class doesn't exist anymore
+* Link class doesn't exist anymore
+
 ## [1.1.3](https://github.com/DisQada/halfbot/compare/v1.1.2...v1.1.3) (2023-05-03)
 
 
