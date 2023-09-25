@@ -1,10 +1,6 @@
 /**
- * @file
- * @ignore
- */
-
-/**
  * @module Enums
+ * @private
  */
 
 /**
@@ -13,6 +9,7 @@
  * @property {"commands"} Commands
  * @property {"events"} Events
  * @property {"modals"} Modals
+ * @private
  */
 const Modules = Object.freeze({
     Commands: "commands",
@@ -25,6 +22,7 @@ const Modules = Object.freeze({
  * @enum {number}
  * @property {0} Success
  * @property {1} Fail
+ * @private
  */
 const RecordStates = Object.freeze({
     Success: 0,

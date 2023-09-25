@@ -1,11 +1,8 @@
 /* eslint-disable jsdoc/require-example */
-/**
- * @file
- * @ignore
- */
 
 /**
  * @module Command
+ * @memberof Entities
  */
 
 /**

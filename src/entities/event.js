@@ -1,21 +1,20 @@
 /* eslint-disable jsdoc/require-example */
-/**
- * @file
- * @ignore
- */
 
 /**
  * @module Event
+ * @memberof Entities
  */
 
+const { Events } = require("discord.js");
+
 /**
- * @template {keyof ClientEvents} Key
+ * @template {Events} Key
  * @typedef {object} BotEventData
  * @property {Key} name The name of the event.
  */
 
 /**
- * @template {keyof ClientEvents} Key
+ * @template {Events} Key
  * @callback BotEventFunction
  * @param {DiscordBot} bot - The entire bot instance.
  * @param {...any} args

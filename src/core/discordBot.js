@@ -1,8 +1,4 @@
 /* eslint-disable jsdoc/require-example */
-/**
- * @file
- * @ignore
- */
 
 const { BotCommandDeployment } = require("../entities/command");
 const {
@@ -102,6 +98,7 @@ class DiscordBot {
     /**
      * Subscribe to the core events.
      * @returns {undefined}
+     * @private
      */
     listenToEvents() {
         this.client.on(Events.ClientReady, () => ready(this));

@@ -1,14 +1,10 @@
-/**
- * @file
- * @ignore
- */
-
 const { applyStyle, asEmbed } = require("../func/style");
 
 /**
  * Handler of interactions called by the bot.
  * @param {BotCommandInteraction} interaction - The interaction to handle.
  * @returns {Promise<undefined>}
+ * @private
  */
 async function interactionCreate(interaction) {
     /**

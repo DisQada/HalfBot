@@ -1,10 +1,6 @@
 /**
- * @file
- * @ignore
- */
-
-/**
  * @module Style
+ * @memberof Func
  */
 
 const { APIEmbed } = require("discord.js");
@@ -15,7 +11,6 @@ const { asNumber } = require("./colour");
  * @param {string} text - The original text.
  * @param {{name:string,colour:number,logoUrl:URL}} brand - The brand to style the embed with.
  * @returns {APIEmbed} The resulting embed.
- * @private
  * @example
  * const brand = {colour: 0xffffff};
  * const result = asEmbed("halfbot", brand);

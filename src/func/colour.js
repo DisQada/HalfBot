@@ -1,10 +1,6 @@
 /**
- * @file
- * @ignore
- */
-
-/**
  * @module Colour
+ * @memberof Func
  */
 
 /**

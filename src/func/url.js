@@ -1,10 +1,6 @@
 /**
- * @file
- * @ignore
- */
-
-/**
  * @module Url
+ * @memberof Func
  */
 
 /**

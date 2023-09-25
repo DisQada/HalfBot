@@ -1,10 +1,6 @@
 /**
- * @file
- * @ignore
- */
-
-/**
  * @module Logger
+ * @private
  */
 
 const { table } = require("table");
@@ -79,7 +75,7 @@ function logRecords(records, state) {
  * @property {Modules} type The module type.
  * @property {BotCommandDeployment} deployment The servers deployed to.
  * @interface
- * @public
+ * @private
  */
 
 /**
@@ -87,6 +83,7 @@ function logRecords(records, state) {
  * @property {string} path The path of the file that failed to be registered.
  * @property {string} message Information about the failure.
  * @interface
+ * @private
  */
 
 module.exports = {

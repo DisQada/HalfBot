@@ -1,8 +1,4 @@
 /* eslint-disable jsdoc/require-example */
-/**
- * @file
- * @ignore
- */
 
 const { BotCommandDeployment } = require("../entities/command");
 
@@ -11,8 +7,8 @@ const { BotCommandDeployment } = require("../entities/command");
  * @param {BotCommandData} data - The command data deciding where to register the command.
  * @param {BotConfig} guildIds - The container of the server IDs.
  * @returns {string} The server ID.
- * @private
  * @throws {Error} - if data.deployment wasn't of the enum values.
+ * @private
  */
 function getGuildId(data, guildIds) {
     const globalGuildId = "0";
