@@ -121,7 +121,7 @@ class DiscordBot {
             deepSearch: false
         });
         for (let i = 0; i < files.length; i++) {
-            const index1 = files[i].indexOf(sep);
+            const index1 = files[i].lastIndexOf(sep);
             const index2 = files[i].length - ".json".length;
             const name = files[i].substring(index1 + sep.length, index2);
 
