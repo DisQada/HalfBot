@@ -91,9 +91,9 @@ function applyStyle(toApplyOn, brand) {
     }
 
     if (Array.isArray(toApplyOn)) {
-        return this.applyToEmbeds(toApplyOn, brand);
+        return applyToEmbeds(toApplyOn, brand);
     } else {
-        return this.applyToEmbed(toApplyOn, brand);
+        return applyToEmbed(toApplyOn, brand);
     }
 }
 
