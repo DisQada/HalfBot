@@ -21,14 +21,14 @@ class BotEvent {
         this.execute = execute;
     }
 
-    static isValid(command) {
-        if (!command.data || !command.execute) {
+    static isValid(event) {
+        if (!event.data || !event.execute) {
             return false;
         }
 
         const required = ["name"];
         const hasRequiredData = required.every(
-            (property) => property in command.data
+            (property) => property in event.data
         );
 
         return hasRequiredData;
