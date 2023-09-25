@@ -52,13 +52,23 @@ function applyStyle(toApplyOn, brand) {
      * embed = applyToEmbed(embed, brand);
      */
     function applyToEmbed(embed, brand, options = { skipFooter: false }) {
-        embed.color = asNumber(brand.colour);
+        if (brand.colour) {
+            embed.color = asNumber(brand.colour);
+        }
 
         if (!options.skipFooter) {
-            embed.footer = {
-                text: brand.name,
-                icon_url: brand.logoUrl
-            };
+            if (brand.name) {
+                if (!embed.footer) {
+                    embed.footer = {};
+                }
+                embed.footer.text = brand.name;
+            }
+            if (brand.logoUrl) {
+                if (!embed.footer) {
+                    embed.footer = {};
+                }
+                embed.footer.icon_url = brand.logoUrl;
+            }
         }
 
         return embed;
@@ -83,6 +93,10 @@ function applyStyle(toApplyOn, brand) {
         }
 
         return embeds;
+    }
+
+    if (!toApplyOn) {
+        return;
     }
 
     if (Array.isArray(toApplyOn)) {

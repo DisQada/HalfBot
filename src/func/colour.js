@@ -19,10 +19,18 @@
  * // num = 0xffffff
  */
 function asNumber(colour) {
+    let num;
+
     if (typeof colour === "number") {
-        return colour;
+        num = colour;
+    } else if (typeof colour === "string") {
+        num = Number.parseInt(colour.substring(1), 16);
+    }
+
+    if (num) {
+        return num;
     } else {
-        return Number.parseInt(colour.substring(1), 16);
+        return 0;
     }
 }
 
@@ -38,16 +46,22 @@ function asNumber(colour) {
  * // num = "#ffffff"
  */
 function asString(colour) {
-    if (typeof colour === "string") {
-        return colour;
-    } else {
-        let str = colour.toString(16);
+    let str;
 
+    if (typeof colour === "string") {
+        str = colour.startsWith("#") ? colour.substring(1) : colour;
+    } else if (typeof colour === "number") {
+        str = colour.toString(16);
+    }
+
+    if (str) {
         while (str.length < 6) {
             str = "0" + str;
         }
 
         return `#${str}`;
+    } else {
+        return `#000000`;
     }
 }
 

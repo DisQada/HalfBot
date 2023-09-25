@@ -18,9 +18,17 @@ function isSafe(url) {
     const safeDomains = require("../data/safeDomains");
     try {
         const urlObj = new URL(url);
-        return safeDomains.includes(urlObj.hostname);
+        const parts = urlObj.hostname.split(".");
+
+        const rootDomain =
+            parts.length === 2
+                ? urlObj.hostname
+                : urlObj.hostname.substring(urlObj.hostname.indexOf(".") + 1);
+
+        const trustedDomain = safeDomains.includes(rootDomain);
+        const correctProtocol = urlObj.protocol.includes("http");
+        return trustedDomain && correctProtocol;
     } catch (err) {
-        console.error(err);
         return false;
     }
 }
