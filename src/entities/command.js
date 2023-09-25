@@ -1,14 +1,14 @@
 // eslint-disable-next-line no-unused-vars
 const BotCommandDeployment = Object.freeze({
-    Global: "Global",
-    DevGuild: "DevGuild",
-    SupportGuild: "SupportGuild"
+    Global: 0,
+    DevGuild: 1,
+    SupportGuild: 2
 });
 
 // eslint-disable-next-line no-unused-vars
 const BotCommandContextMenuType = Object.freeze({
-    User: "User",
-    Message: "Message"
+    User: 0,
+    Message: 1
 });
 
 /**
