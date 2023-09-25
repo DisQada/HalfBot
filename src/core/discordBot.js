@@ -20,7 +20,7 @@ const {
 const { BotCommand } = require("../entities/command");
 const { BotEvent } = require("../entities/event");
 const interactionCreate = require("../events/interactionCreate");
-const ready = require("../events/ready");
+const { ready } = require("../events/ready");
 const { Modules, RecordStates } = require("../data/enums");
 const { logRecords } = require("./logger");
 const { resolve, sep } = require("path");

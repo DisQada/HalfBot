@@ -98,4 +98,8 @@ async function ready(bot) {
     });
 }
 
-module.exports = ready;
+module.exports = {
+    ready,
+    getGuildId,
+    prepareCommands
+};
