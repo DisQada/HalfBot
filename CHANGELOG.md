@@ -1,3 +1,15 @@
+# [2.1.0](https://github.com/DisQada/halfbot/compare/v2.0.0...v2.1.0) (2023-09-30)
+
+
+### Bug Fixes
+
+* **discordbot:** keep DiscordBotData default values ([62a9553](https://github.com/DisQada/halfbot/commit/62a955353e5dac4d01753589755d2abed6e29025))
+
+
+### Features
+
+* Use data.module to define type ([4d102b1](https://github.com/DisQada/halfbot/commit/4d102b122ee307527ff7930a201dcaec2f0ab34f))
+
 # [2.0.0](https://github.com/DisQada/halfbot/compare/v1.1.3...v2.0.0) (2023-09-25)
 
 
