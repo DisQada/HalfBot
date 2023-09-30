@@ -189,20 +189,23 @@ class DiscordBot {
 
         for (let i = 0; i < paths.length; i++) {
             const botModule = require(paths[i]);
-            if (
-                botModule instanceof BotCommand &&
-                BotCommand.isValid(botModule)
-            ) {
-                const record = this.registerCommand(botModule);
-                records[RecordStates.Success].push(record);
-                continue;
-            } else if (
-                botModule instanceof BotEvent &&
-                BotEvent.isValid(botModule)
-            ) {
-                const record = this.registerEvent(botModule);
-                records[RecordStates.Success].push(record);
-                continue;
+
+            if (botModule.data && botModule.data.module) {
+                if (
+                    botModule.data.module === "command" &&
+                    BotCommand.isValid(botModule)
+                ) {
+                    const record = this.registerCommand(botModule);
+                    records[RecordStates.Success].push(record);
+                    continue;
+                } else if (
+                    botModule.data.module === "event" &&
+                    BotEvent.isValid(botModule)
+                ) {
+                    const record = this.registerEvent(botModule);
+                    records[RecordStates.Success].push(record);
+                    continue;
+                }
             }
 
             const word = "modules";
