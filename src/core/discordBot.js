@@ -91,7 +91,7 @@ class DiscordBot {
         await storeFolderPaths([data.rootDirectory], {
             deepSearch: true
         });
-        await this.retrieveData(data.dataDirectory);
+        await this.storeData(data.dataDirectory);
         await this.registerAllModules();
         this.listenToEvents();
 
@@ -117,7 +117,7 @@ class DiscordBot {
      * @returns {Promise<undefined>}
      * @private
      */
-    async retrieveData(dataDirectory) {
+    async storeData(dataDirectory) {
         const files = await readFolderPaths(resolve(dataDirectory), {
             deepSearch: false
         });
