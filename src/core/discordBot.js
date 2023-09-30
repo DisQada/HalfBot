@@ -6,13 +6,7 @@ const {
     storeFolderPaths,
     readFolderPaths
 } = require("@disqada/pathfinder");
-const {
-    ApplicationCommandType,
-    Client,
-    Collection,
-    Events,
-    GatewayIntentBits
-} = require("discord.js");
+const { Client, Collection, Events, GatewayIntentBits } = require("discord.js");
 const { BotCommand } = require("../entities/command");
 const { BotEvent } = require("../entities/event");
 const interactionCreate = require("../events/interactionCreate");
@@ -148,16 +142,7 @@ class DiscordBot {
      * @returns {undefined}
      */
     registerCommand(command) {
-        if (command.data.types.chatInput) {
-            command.data.type = ApplicationCommandType.ChatInput;
-            this.commands.set(command.data.name, command);
-        }
-
-        if (command.data.types.contextMenu) {
-            // Note: The 2 is ApplicationCommandType.User
-            command.data.type = command.data.types.contextMenu + 2;
-            this.commands.set(command.data.name, command);
-        }
+        this.commands.set(command.data.name, command);
 
         return {
             name: command.data.name,
