@@ -1,7 +1,10 @@
 {
+    "enabled": true,
+    "caseSensitive": true,
     "language": "en-GB",
     "words": [
         "analyzer",
+        "Codeo",
         "disqada",
         "disqus",
         "docdash",
