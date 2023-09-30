@@ -19,6 +19,7 @@ const interactionCreate = require("../events/interactionCreate");
 const { ready } = require("../events/ready");
 const { Modules, RecordStates } = require("../data/enums");
 const { logRecords } = require("./logger");
+const { BotConfig } = require("../data/config");
 const { resolve, sep } = require("path");
 
 /**
@@ -54,6 +55,11 @@ class DiscordBot {
      * @type {Collection<BotCommand>}
      */
     commands = new Collection();
+
+    /**
+     * @type {Client}
+     */
+    client;
 
     /**
      * The initialization of a new DiscordBot.
@@ -115,7 +121,6 @@ class DiscordBot {
      * Inject data from the workspace files.
      * @param {string} dataDirectory - The path to the directory the json data files.
      * @returns {Promise<undefined>}
-     * @private
      */
     async storeData(dataDirectory) {
         const files = await readFolderPaths(resolve(dataDirectory), {
@@ -141,7 +146,6 @@ class DiscordBot {
      * Register a command inside the bot.
      * @param {BotCommand} command - The bot command module.
      * @returns {undefined}
-     * @private
      */
     registerCommand(command) {
         if (command.data.types.chatInput) {
@@ -166,7 +170,6 @@ class DiscordBot {
      * Register an event inside the bot.
      * @param {BotEvent<any>} event - The bot event module.
      * @returns {undefined}
-     * @private
      */
     registerEvent(event) {
         this.client.on(event.data.name, (...args) =>
