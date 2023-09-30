@@ -86,13 +86,7 @@ class BotCommand {
             return false;
         }
 
-        const required = [
-            "name",
-            "description",
-            "deployment",
-            "category",
-            "types"
-        ];
+        const required = ["name", "description"];
         const hasRequiredData = required.every(
             (property) => property in command.data
         );

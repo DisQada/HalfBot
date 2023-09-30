@@ -14,19 +14,15 @@ function getGuildId(data, guildIds) {
     const globalGuildId = "0";
 
     switch (data.deployment) {
-        case BotCommandDeployment.Global:
-            return globalGuildId;
-
         case BotCommandDeployment.DevGuild:
             return guildIds.dev ?? globalGuildId;
 
         case BotCommandDeployment.SupportGuild:
             return guildIds.support ?? globalGuildId;
 
+        case BotCommandDeployment.Global:
         default:
-            throw new Error(
-                "Unknown BotCommandDeployment value: " + data.deployment
-            );
+            return globalGuildId;
     }
 }
 

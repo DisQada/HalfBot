@@ -42,8 +42,7 @@ describe("getGuildId", () => {
             deployment: "Unknown"
         };
 
-        expect(() => {
-            getGuildId(data, guildIds);
-        }).toThrow("Unknown BotCommandDeployment value: Unknown");
+        const result = getGuildId(data, guildIds);
+        expect(result).toBe("0");
     });
 });
