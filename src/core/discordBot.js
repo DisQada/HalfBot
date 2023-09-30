@@ -61,10 +61,7 @@ class DiscordBot {
      * @param {ClientOptions} options - The bot's client options.
      */
     constructor(
-        data = {
-            rootDirectory: "bot",
-            dataDirectory: "bot/data"
-        },
+        data,
         options = {
             intents: [
                 GatewayIntentBits.Guilds,
@@ -73,6 +70,12 @@ class DiscordBot {
             ]
         }
     ) {
+        const data2 = {
+            rootDirectory: "bot",
+            dataDirectory: "bot/data"
+        };
+        Object.assign(data2, data);
+
         // TODO Check token and clientId validity
         this.client = new Client(options);
         this.runBot(data);
