@@ -14,7 +14,10 @@
 const BotCommandDeployment = Object.freeze({
     Global: 0,
     DevGuild: 1,
-    SupportGuild: 2
+    SupportGuild: 2,
+    [0]: "Global",
+    [1]: "DevGuild",
+    [2]: "SupportGuild"
 });
 
 /**
