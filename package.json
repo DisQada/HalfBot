@@ -24,13 +24,13 @@
         "README.md",
         "LICENSE"
     ],
-    "homepage": "https://disqada.github.io/halfbot",
+    "homepage": "https://disqada.github.io/HalfBot",
     "repository": {
         "type": "git",
-        "url": "https://github.com/DisQada/halfbot.git"
+        "url": "https://github.com/DisQada/HalfBot.git"
     },
     "bugs": {
-        "url": "https://github.com/DisQada/halfbot/issues"
+        "url": "https://github.com/DisQada/HalfBot/issues"
     },
     "keywords": [
         "discord.js",
