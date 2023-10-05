@@ -1,6 +1,6 @@
 {
     "name": "@disqada/halfbot",
-    "version": "2.1.0",
+    "version": "2.1.1",
     "description": "A tool to facilitate and accelerate the development of Discord bots",
     "scripts": {
         "test": "jest",
