@@ -11,5 +11,7 @@
     },
 
     "files.insertFinalNewline": true,
-    "files.eol": "auto"
+    "files.eol": "auto",
+
+    "js/ts.implicitProjectConfig.checkJs": true
 }
