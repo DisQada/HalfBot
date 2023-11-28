@@ -1,19 +1,14 @@
-/* eslint-disable jsdoc/require-example */
-
-const { BotCommandDeployment } = require("../entities/command");
+const { Client, Events, GatewayIntentBits } = require("discord.js");
+const { BotCommand } = require("../entities/command");
+const { BotEvent } = require("../entities/event");
+const interactionCreate = require("../events/interactionCreate");
+const { ready } = require("../events/ready");
+const { logRecords } = require("./logger");
 const {
     findPaths,
     storeFolderPaths,
     readFolderPaths
 } = require("@disqada/pathfinder");
-const { Client, Collection, Events, GatewayIntentBits } = require("discord.js");
-const { BotCommand } = require("../entities/command");
-const { BotEvent } = require("../entities/event");
-const interactionCreate = require("../events/interactionCreate");
-const { ready } = require("../events/ready");
-const { Modules, RecordStates } = require("../data/enums");
-const { logRecords } = require("./logger");
-const { BotConfig } = require("../data/config");
 const { resolve, sep } = require("path");
 
 /**
@@ -55,9 +50,9 @@ class DiscordBot {
     };
 
     /**
-     * @type {Collection<BotCommand>}
+     * @type {Map<string, BotCommand>}
      */
-    commands = new Collection();
+    commands = new Map();
 
     /**
      * @type {import("discord.js").Client}
@@ -67,27 +62,27 @@ class DiscordBot {
     /**
      * The initialization of a new DiscordBot.
      * @param {BotOptions} options - Information about the DiscordBot.
-     * @param {ClientOptions} options - The bot's client options.
      */
-    constructor(
-        data,
-        options = {
+    constructor(options) {
+        /** @type {Partial<BotOptions>} */
+        const defaultOptions = {
+            client: {
             intents: [
                 GatewayIntentBits.Guilds,
                 GatewayIntentBits.GuildMessages,
                 GatewayIntentBits.GuildMembers
             ]
+            },
+            directories: {
+                root: "bot",
+                data: "bot/data"
         }
-    ) {
-        const data2 = {
-            rootDirectory: "bot",
-            dataDirectory: "bot/data"
         };
-        Object.assign(data2, data);
+        Object.assign(defaultOptions, options);
 
         // TODO Check token and clientId validity
-        this.client = new Client(options);
-        this.runBot(data);
+        this.client = new Client(options.client);
+        this.runBot(options);
     }
 
     /**
@@ -97,15 +92,17 @@ class DiscordBot {
      * @async
      * @private
      */
-    async runBot(data) {
-        await storeFolderPaths([data.rootDirectory], {
+    async runBot(options) {
+        // @ts-expect-error
+        await storeFolderPaths([options.directories.root], {
             deepSearch: true
         });
-        await this.storeData(data.dataDirectory);
+        // @ts-expect-error
+        await this.storeData(options.directories.data);
         await this.registerAllModules();
         this.listenToEvents();
 
-        await this.client.login(data.token);
+        await this.client.login(options.token);
     }
 
     /**
@@ -116,19 +113,21 @@ class DiscordBot {
     listenToEvents() {
         this.client.on(Events.ClientReady, () => ready(this));
         this.client.on(Events.InteractionCreate, (interaction) => {
+            // @ts-expect-error
             interaction.bot = this;
+            // @ts-expect-error
             interactionCreate(interaction);
         });
     }
 
     /**
      * Inject data from the workspace files.
-     * @param {string} dataDirectory - The path to the directory the json data files.
+     * @param {string} directory - The path to the directory the json data files.
      * @returns {Promise<void>}
      * @async
      */
-    async storeData(dataDirectory) {
-        const files = await readFolderPaths(resolve(dataDirectory), {
+    async storeData(directory) {
+        const files = await readFolderPaths(resolve(directory), {
             deepSearch: false
         });
         for (let i = 0; i < files.length; i++) {
