@@ -1,17 +1,17 @@
 {
     "root": true,
     "env": {
-        "jest/globals": true,
-        "es6": false,
-        "node": true
+        "jest": true,
+        "es6": true,
+        "node": true,
+        "commonjs": true
     },
-    "extends": ["eslint:recommended", "plugin:jest/recommended"],
     "parserOptions": {
         "ecmaVersion": "latest",
         "sourceType": "module"
     },
+    "extends": ["eslint:recommended", "plugin:jest/recommended"],
     "plugins": ["jest"],
-    "ignorePatterns": [],
     "rules": {
         "jest/no-conditional-expect": "off"
     }
