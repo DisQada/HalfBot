@@ -39,7 +39,7 @@ async function interactionCreate(interaction) {
         return;
     }
 
-    if (command.data.defer !== "false") {
+    if (command.data.defer !== false) {
         await interaction.deferReply({
             ephemeral: command.data.ephemeral
         });
