@@ -27,7 +27,7 @@ const { resolve, sep } = require("path");
 
 /**
  * @typedef {object} BotData
- * @property {import("../interface/config").Config} config
+ * @property {import("../def/config").Config} config
  */
 
 /**

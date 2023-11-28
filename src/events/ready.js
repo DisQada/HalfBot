@@ -1,7 +1,7 @@
 /**
  * Get the correct server ID.
  * @param {BotCommandData} data - The command data deciding where to register the command.
- * @param {BotConfig} guildIds - The container of the server IDs.
+ * @param {import("../def/config").GuildIDs} guildIds - The container of the server IDs.
  * @returns {string} The server ID.
  * @throws {Error} - if data.deployment wasn't of the enum values.
  * @category Events
@@ -11,13 +11,13 @@ function getGuildId(data, guildIds) {
     const globalGuildId = "0";
 
     switch (data.deployment) {
-        case BotCommandDeployment.DevGuild:
+        case "dev":
             return guildIds.dev ?? globalGuildId;
 
-        case BotCommandDeployment.SupportGuild:
+        case "support":
             return guildIds.support ?? globalGuildId;
 
-        case BotCommandDeployment.Global:
+        case "global":
         default:
             return globalGuildId;
     }

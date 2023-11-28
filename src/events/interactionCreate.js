@@ -11,7 +11,7 @@ async function interactionCreate(interaction) {
     /**
      * A shortcut to a full reply.
      * @param {string} reply - The message to reply with.
-     * @param {object} brand - The brand to style the reply with.
+     * @param {import("../def/config").Brand} brand - The brand to style the reply with.
      */
     async function quickReply(reply, brand) {
         const embed = asEmbed(reply, brand);

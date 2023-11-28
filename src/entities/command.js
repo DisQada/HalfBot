@@ -5,38 +5,13 @@
 /**
  * @typedef {object} BaseCommandData
  * @property {string} category
- * @property {import("../interface/types").DeploymentType} [deployment]
+ * @property {import("../def/enums").DeploymentType} [deployment]
  * @property {"command"} module Bot module type
  */
 
 /**
  * @typedef {BaseCommandInteraction & (import("discord.js").ChatInputCommandInteraction | import("discord.js").UserContextMenuCommandInteraction | import("discord.js").MessageContextMenuCommandInteraction)} CommandInteraction
  */
-
-/**
- * @enum {number}
- * @property {0} Global Global registration.
- * @property {1} DevGuild Testing server only registration.
- * @property {2} SupportGuild Support / main server registration.
- */
-const BotCommandDeployment = Object.freeze({
-    Global: 0,
-    DevGuild: 1,
-    SupportGuild: 2,
-    [0]: "Global",
-    [1]: "DevGuild",
-    [2]: "SupportGuild"
-});
-
-/**
- * @enum {number}
- * @property {0} User User context menu.
- * @property {1} Message Message context menu.
- */
-const BotCommandContextMenuType = Object.freeze({
-    User: 0,
-    Message: 1
-});
 
 /**
  * @typedef {object} BaseCommandInteraction
@@ -94,7 +69,5 @@ class BotCommand {
 }
 
 module.exports = {
-    BotCommand,
-    BotCommandDeployment,
-    BotCommandContextMenuType
+    BotCommand
 };
