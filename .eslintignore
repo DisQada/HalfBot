@@ -1,13 +1,21 @@
-# Ignore folders
+### IGNORE ###
+
+# Project folders
 .git/
 node_modules/
-docs/
-dist/
-types/
 
-# Don't ignore folders
+# Generated output
+types/
+docs/
+
+# Markdown files
+*.md
+
+# Special files
+LICENSE
+
+### DON'T IGNORE ###
+
+# Project settings folders
 !.vscode/
 !.github/
-
-# Ignore all Markdown files:
-*.md
