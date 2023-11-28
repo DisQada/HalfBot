@@ -78,7 +78,7 @@ async function ready(bot) {
     const commands = prepareCommands(bot);
     await registerCommands(bot.client, commands);
 
-    console.log(`The bot "${bot.client.user.username}" is online`);
+    console.log(`-> The bot "${bot.client.user.username}" is online <-`);
 
     bot.client.user.setPresence({
         status: "online",

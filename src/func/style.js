@@ -30,6 +30,12 @@ function asEmbed(text, brand) {
  * @category Style
  */
 function applyStyle(toApplyOn, brand) {
+    if (Array.isArray(toApplyOn)) {
+        return applyToEmbeds(toApplyOn, brand);
+    } else {
+        return applyToEmbed(toApplyOn, brand);
+    }
+
     /**
      * Apply brand style to an embed.
      * @param {import("discord.js").APIEmbed} embed - The embed to apply the style to.
@@ -48,16 +54,15 @@ function applyStyle(toApplyOn, brand) {
 
         if (!options.skipFooter) {
             if (brand.name) {
-                if (!embed.footer) {
-                    embed.footer = {};
+                if (embed.footer) {
+                    embed.footer.text = brand.name;
+                } else {
+                    embed.footer = { text: brand.name };
                 }
-                embed.footer.text = brand.name;
-            }
-            if (brand.logoUrl) {
-                if (!embed.footer) {
-                    embed.footer = {};
+
+                if (brand.logoUrl) {
+                    embed.footer.icon_url = brand.logoUrl;
                 }
-                embed.footer.icon_url = brand.logoUrl;
             }
         }
 
@@ -83,16 +88,6 @@ function applyStyle(toApplyOn, brand) {
         }
 
         return embeds;
-    }
-
-    if (!toApplyOn) {
-        return;
-    }
-
-    if (Array.isArray(toApplyOn)) {
-        return applyToEmbeds(toApplyOn, brand);
-    } else {
-        return applyToEmbed(toApplyOn, brand);
     }
 }
 
