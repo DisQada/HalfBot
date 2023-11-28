@@ -1,19 +1,36 @@
+const { table } = require("table");
+
 /**
- * @module Logger
+ * State of a bot module registration
+ * @typedef {"success" | "fail"} RecordType
+ */
+
+/**
+ * @typedef {SuccessRecord | FailRecord} Record
+ */
+
+/**
+ * @typedef {object} SuccessRecord
+ * @property {string} name Name of the module
+ * @property {import("../def/enums").ModuleType} type Bot module type
+ * @property {import("../def/enums").DeploymentType} deployment The servers deployed to
  * @private
  */
 
-const { table } = require("table");
-const { BotCommandDeployment } = require("../entities/command");
-const { RecordStates } = require("../data/enums");
+/**
+ * @typedef {object} FailRecord
+ * @property {string} path Path of the file failed to be registered
+ * @property {string} message Information about the failure
+ * @private
+ */
 
 /**
  * Get the default configurations for the table.
  * @param {string} header - The name of the table.
- * @returns {TableUserConfig} Ready to use configurations.
- * @private
+ * @returns {import("table").TableUserConfig} Ready to use configurations.
  * @example
  * const finalConfig = defaultConfig("Table name");
+ * @private
  */
 function defaultConfig(header) {
     return {
@@ -31,28 +48,24 @@ function defaultConfig(header) {
 
 /**
  * Print the table for the records of a state.
- * @param {SuccessRecord[] | FailRecord[]} records - The records to print in a table.
- * @param {RecordStates} state - The state of the records.
- * @returns {undefined}
- * @private
+ * @param {Record[]} records - The records to print in a table.
+ * @param {RecordType} state - The state of the records.
+ * @returns {void}
  * @example
  * const records = [{ ... }];
  * debug(records, RecordStates.Success);
+ * @private
  */
 function logRecords(records, state) {
     if (!records || records.length === 0) {
         return;
     }
 
-    if (state === RecordStates.Success) {
+    if (state === "success") {
         const data = [
             ["name", "type", "deployment"],
-            ...records.map((r) => {
-                return [
-                    r.name,
-                    r.type.substring(0, r.type.length - 1),
-                    BotCommandDeployment[r.deployment]
-                ];
+            ...records.map((/** @type {SuccessRecord} */ r) => {
+                return [r.name, r.type, r.deployment];
             })
         ];
         const msg = "🟩 Successful registration 🟩";
@@ -60,7 +73,7 @@ function logRecords(records, state) {
     } else {
         const data = [
             ["path", "message"],
-            ...records.map((r) => {
+            ...records.map((/** @type {FailRecord} */ r) => {
                 return [r.path, r.message];
             })
         ];
@@ -68,23 +81,6 @@ function logRecords(records, state) {
         console.log(table(data, defaultConfig(msg)));
     }
 }
-
-/**
- * @typedef {object} SuccessRecord
- * @property {string} name The name of the bot module that was successfully registered.
- * @property {Modules} type The module type.
- * @property {BotCommandDeployment} deployment The servers deployed to.
- * @interface
- * @private
- */
-
-/**
- * @typedef {object} FailRecord
- * @property {string} path The path of the file that failed to be registered.
- * @property {string} message Information about the failure.
- * @interface
- * @private
- */
 
 module.exports = {
     logRecords

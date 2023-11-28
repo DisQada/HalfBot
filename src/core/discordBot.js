@@ -67,16 +67,16 @@ class DiscordBot {
         /** @type {Partial<BotOptions>} */
         const defaultOptions = {
             client: {
-            intents: [
-                GatewayIntentBits.Guilds,
-                GatewayIntentBits.GuildMessages,
-                GatewayIntentBits.GuildMembers
-            ]
+                intents: [
+                    GatewayIntentBits.Guilds,
+                    GatewayIntentBits.GuildMessages,
+                    GatewayIntentBits.GuildMembers
+                ]
             },
             directories: {
                 root: "bot",
                 data: "bot/data"
-        }
+            }
         };
         Object.assign(defaultOptions, options);
 
@@ -149,32 +149,32 @@ class DiscordBot {
     /**
      * Register a command inside the bot.
      * @param {import("../entities/command").BotCommand} command - The bot command module.
-     * @returns {undefined}
+     * @returns {import("./logger").SuccessRecord}
      */
     registerCommand(command) {
         this.commands.set(command.data.name, command);
 
         return {
             name: command.data.name,
-            type: Modules.Commands,
-            deployment: command.data.deployment
+            type: command.data.module,
+            deployment: command.data.deployment ?? "global"
         };
     }
 
     /**
      * Register an event inside the bot.
      * @param {import("../entities/event").BotEvent<any>} event - The bot event module.
-     * @returns {undefined}
+     * @returns {import("./logger").SuccessRecord}
      */
     registerEvent(event) {
         this.client.on(event.data.name, (...args) =>
-            event.execute(this, ...args)
+            event.execute(this, [...args])
         );
 
         return {
             name: event.data.name,
-            type: Modules.Events,
-            deployment: BotCommandDeployment.Global
+            type: event.data.module,
+            deployment: "global"
         };
     }
 
@@ -185,17 +185,20 @@ class DiscordBot {
      * @private
      */
     async registerAllModules() {
-        const paths = findPaths()
+        const paths = findPaths({})
             .filter(
                 (fp) =>
-                    fp.fullPath.includes(Modules.Commands) ||
-                    fp.fullPath.includes(Modules.Events)
+                    fp.fullPath.includes("command") ||
+                    fp.fullPath.includes("event")
             )
             .map((fp) => fp.fullPath);
         if (paths.length === 0) {
             return;
         }
 
+        /**
+         * @type {[import("./logger").SuccessRecord[], import("./logger").FailRecord[]]}
+         */
         const records = [[], []];
 
         for (let i = 0; i < paths.length; i++) {
@@ -207,29 +210,29 @@ class DiscordBot {
                     BotCommand.isValid(botModule)
                 ) {
                     const record = this.registerCommand(botModule);
-                    records[RecordStates.Success].push(record);
+                    records[0].push(record);
                     continue;
                 } else if (
                     botModule.data.module === "event" &&
                     BotEvent.isValid(botModule)
                 ) {
                     const record = this.registerEvent(botModule);
-                    records[RecordStates.Success].push(record);
+                    records[0].push(record);
                     continue;
                 }
             }
 
             const word = "modules";
             const index = paths[i].indexOf(word);
-            records[RecordStates.Fail].push({
+            records[1].push({
                 path: paths[i].substring(index + word.length + 1),
                 message:
                     "The module is invalid, maybe a required property is missing"
             });
         }
 
-        logRecords(records[RecordStates.Success], RecordStates.Success);
-        logRecords(records[RecordStates.Fail], RecordStates.Fail);
+        logRecords(records[0], "success");
+        logRecords(records[1], "fail");
     }
 }
 
