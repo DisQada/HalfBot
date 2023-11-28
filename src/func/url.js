@@ -7,7 +7,7 @@
  * @category Url
  */
 function isSafe(url) {
-    const safeDomains = require("../data/safeDomains");
+    const safeDomains = require("../data/domains.json");
     try {
         const urlObj = new URL(url);
         const parts = urlObj.hostname.split(".");

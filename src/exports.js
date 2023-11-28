@@ -8,7 +8,7 @@ const { BotEvent } = require("./entities/event");
 const { asNumber, asString } = require("./func/colour");
 const { asEmbed, applyStyle } = require("./func/style");
 const { isSafe } = require("./func/url");
-const emojiCharacters = require("./data/emojiCharacters.json");
+const emojiChars = require("./data/emojiChars.json");
 
 module.exports = {
     DiscordBot,
@@ -21,5 +21,5 @@ module.exports = {
     asEmbed,
     applyStyle,
     isSafe,
-    emojiCharacters
+    emojiChars
 };
