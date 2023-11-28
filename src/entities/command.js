@@ -1,8 +1,16 @@
-/* eslint-disable jsdoc/require-example */
+/**
+ * @typedef {BaseCommandData & (import("discord.js").ChatInputApplicationCommandData | import("discord.js").UserApplicationCommandData | import("discord.js").MessageApplicationCommandData)} CommandData
+ */
 
 /**
- * @module Command
- * @memberof Entities
+ * @typedef {object} BaseCommandData
+ * @property {string} category
+ * @property {import("../interface/types").DeploymentType} [deployment]
+ * @property {"command"} module Bot module type
+ */
+
+/**
+ * @typedef {BaseCommandInteraction & (import("discord.js").ChatInputCommandInteraction | import("discord.js").UserContextMenuCommandInteraction | import("discord.js").MessageContextMenuCommandInteraction)} CommandInteraction
  */
 
 /**
@@ -31,48 +39,35 @@ const BotCommandContextMenuType = Object.freeze({
 });
 
 /**
- * @typedef {object} BotCommandData
- * @property {string} description About the command.
- * @property {BotCommandDeployment} deployment Where to register the command.
- * @property {string} category The category of the command.
- * @property {object} types The type of the command.
- * @property {boolean} types.chatInput Whether the command is of type (chat input).
- * @property {BotCommandContextMenuType} [types.contextMenu] What type of context menu the command is.
- * @augments ChatInputApplicationCommandData | UserApplicationCommandData | MessageApplicationCommandData
+ * @typedef {object} BaseCommandInteraction
+ * @prop {import("../core/discordBot").DiscordBot} bot
  */
 
 /**
- * @typedef {object} BotCommandInteraction
- * @property {DiscordBot} bot The entire bot instance.
- * @augments ChatInputCommandInteraction | UserContextMenuCommandInteraction | MessageContextMenuCommandInteraction
- */
-
-/**
- * @async
- * @function
- * @callback BotCommandFunction
- * @param {BotCommandInteraction} interaction
- * @returns {Promise<InteractionReplyOptions | string | undefined>}
+ * @callback CommandFunction
+ * @param {CommandInteraction} interaction
+ * @returns {Promise<import("discord.js").ReplyOptions | string | void> | import("discord.js").ReplyOptions| string | void}
  */
 
 /**
  * @class
+ * @category Modules
  */
 class BotCommand {
     /**
-     * @type {BotCommandData}
+     * @type {CommandData}
      */
     data;
 
     /**
-     * @type {BotCommandFunction}
+     * @type {CommandFunction}
      */
     execute;
 
     /**
      * The initialization of a new bot command.
-     * @param {BotCommandData} data - The information about the command.
-     * @param {BotCommandFunction} execute - The function to execute the command.
+     * @param {CommandData} data - The information about the command.
+     * @param {CommandFunction} execute - The function to execute the command.
      */
     constructor(data, execute) {
         this.data = data;

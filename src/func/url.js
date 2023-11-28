@@ -1,14 +1,10 @@
 /**
- * @module Url
- * @memberof Func
- */
-
-/**
  * Check the safety of an url.
  * @param {string} url - The url to check.
  * @returns {boolean} True if it's safe, false otherwise.
  * @example
  * if (isSafe("https://discord.com")) { ... }
+ * @category Url
  */
 function isSafe(url) {
     const safeDomains = require("../data/safeDomains");

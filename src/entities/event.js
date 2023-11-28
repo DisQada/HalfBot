@@ -1,40 +1,35 @@
-/* eslint-disable jsdoc/require-example */
-
 /**
- * @module Event
- * @memberof Entities
- */
-
-const { Events } = require("discord.js");
-
-/**
- * @template {Events} Key
- * @typedef {object} BotEventData
- * @property {Key} name The name of the event.
+ *
+ * @template {keyof import("discord.js").ClientEvents} Key
+ * @typedef {object} EventData
+ * @prop {Key} name Event name / caller
+ * @prop {"event"} module Bot module type
  */
 
 /**
- * @template {Events} Key
- * @callback BotEventFunction
- * @param {DiscordBot} bot - The entire bot instance.
- * @param {...any} args
- * @returns {any}
+ *
+ * @template {keyof import("discord.js").ClientEvents} Key
+ * @callback EventFunction
+ * @param {import("../core/discordBot").DiscordBot} bot
+ * @param {...import("discord.js").ClientEvents[Key]} args
+ * @return {any}
  */
 
 /**
  * @class
- * @template {keyof ClientEvents} Key
+ * @category Modules
+ * @template {keyof import("discord.js").ClientEvents} Key
  */
 class BotEvent {
-    /** @type {BotEventData<Key>} */
+    /** @type {EventData<Key>} */
     data;
-    /** @type {BotEventFunction<Key>} */
+    /** @type {EventFunction<Key>} */
     execute;
 
     /**
      * The initialization of a new bot event.
-     * @param {BotEventData<Key>} data - The information about the event.
-     * @param {BotEventFunction<Key>} execute - The function to execute the event.
+     * @param {EventData<Key>} data - The information about the event.
+     * @param {EventFunction<Key>} execute - The function to execute the event.
      */
     constructor(data, execute) {
         this.data = data;
@@ -61,5 +56,7 @@ class BotEvent {
 }
 
 module.exports = {
-    BotEvent
+    BotEvent,
+    EventData,
+    EventFunction
 };

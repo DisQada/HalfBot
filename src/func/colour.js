@@ -1,9 +1,4 @@
 /**
- * @module Colour
- * @memberof Func
- */
-
-/**
  * Get a colour as a number.
  * @param {string | number} colour - The colour value.
  * @returns {number} The colour as a number.
@@ -13,6 +8,7 @@
  * @example
  * const num = asNumber(0xffffff);
  * // num = 0xffffff
+ * @category Colour
  */
 function asNumber(colour) {
     let num;
@@ -40,6 +36,7 @@ function asNumber(colour) {
  * @example
  * const num = asNumber(0xffffff);
  * // num = "#ffffff"
+ * @category Colour
  */
 function asString(colour) {
     let str;

@@ -1,13 +1,10 @@
-/* eslint-disable jsdoc/require-example */
-
-const { BotCommandDeployment } = require("../entities/command");
-
 /**
  * Get the correct server ID.
  * @param {BotCommandData} data - The command data deciding where to register the command.
  * @param {BotConfig} guildIds - The container of the server IDs.
  * @returns {string} The server ID.
  * @throws {Error} - if data.deployment wasn't of the enum values.
+ * @category Events
  * @private
  */
 function getGuildId(data, guildIds) {
@@ -28,8 +25,9 @@ function getGuildId(data, guildIds) {
 
 /**
  * Preparing the bot commands for registration.
- * @param {DiscordBot} bot - The bot to register the commands for.
- * @returns {undefined}
+ * @param {import("../core/discordBot").DiscordBot} bot - The bot to register the commands for.
+ * @returns {Map<string, import("../entities/command").BotCommand[]>}
+ * @category Events
  * @private
  */
 function prepareCommands(bot) {
@@ -49,9 +47,10 @@ function prepareCommands(bot) {
 
 /**
  * Register the commands via the API.
- * @param {Client} client - The client to register the commands for.
- * @param {Map<BotCommand>} commandMap - The commands to register.
- * @returns {Promise<undefined>}
+ * @param {import("discord.js").Client} client - The client to register the commands for.
+ * @param {Map<string, import("../entities/command").BotCommand>} commandMap - The commands to register.
+ * @returns {Promise<void>}
+ * @category Events
  * @private
  */
 async function registerCommands(client, commandMap) {
@@ -69,8 +68,10 @@ async function registerCommands(client, commandMap) {
 
 /**
  * The client is ready and has connected successfully.
- * @param {DiscordBot} bot - The bot of the client.
- * @returns {undefined}
+ * @param {import("../core/discordBot").DiscordBot} bot - The bot of the client.
+ * @returns {Promise<void>}
+ * @category Events
+ * @async
  * @private
  */
 async function ready(bot) {

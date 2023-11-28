@@ -3,7 +3,8 @@ const { applyStyle, asEmbed } = require("../func/style");
 /**
  * Handler of interactions called by the bot.
  * @param {BotCommandInteraction} interaction - The interaction to handle.
- * @returns {Promise<undefined>}
+ * @returns {Promise<void>}
+ * @category Events
  * @private
  */
 async function interactionCreate(interaction) {

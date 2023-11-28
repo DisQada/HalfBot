@@ -17,20 +17,26 @@ const { BotConfig } = require("../data/config");
 const { resolve, sep } = require("path");
 
 /**
- * @typedef {object} DiscordBotData
+ * @typedef {object} BotOptions
  * @property {string} token The bot application's API token.
- * @property {string} rootDirectory - The path to the folder containing all the bot files.
- * @property {string} dataDirectory - The Path to the directory the json data files.
- * @interface
+ * @property {object} [directories]
+ * @property {string} [directories.root] - The path to the folder containing all the bot files.
+ * @property {string} [directories.data] - The Path to the directory the json data files.
+ * @property {import("discord.js").ClientOptions} client
+ */
+
+/**
+ * @typedef {object} BotData
+ * @property {import("../interface/config").Config} config
  */
 
 /**
  * @class
+ * @category Core
  */
 class DiscordBot {
     /**
-     * @type {object}
-     * @property {BotConfig} config
+     * @type {BotData}
      */
     data = {
         config: {
@@ -51,13 +57,13 @@ class DiscordBot {
     commands = new Collection();
 
     /**
-     * @type {Client}
+     * @type {import("discord.js").Client}
      */
     client;
 
     /**
      * The initialization of a new DiscordBot.
-     * @param {DiscordBotData} data - Information about the DiscordBot.
+     * @param {BotOptions} options - Information about the DiscordBot.
      * @param {ClientOptions} options - The bot's client options.
      */
     constructor(
@@ -83,8 +89,9 @@ class DiscordBot {
 
     /**
      * Start and connect the bot.
-     * @param {DiscordBotData} data - Information about the DiscordBot.
-     * @returns {Promise<undefined>}
+     * @param {BotOptions} options - Information about the DiscordBot.
+     * @returns {Promise<void>}
+     * @async
      * @private
      */
     async runBot(data) {
@@ -100,7 +107,7 @@ class DiscordBot {
 
     /**
      * Subscribe to the core events.
-     * @returns {undefined}
+     * @returns {void}
      * @private
      */
     listenToEvents() {
@@ -114,7 +121,8 @@ class DiscordBot {
     /**
      * Inject data from the workspace files.
      * @param {string} dataDirectory - The path to the directory the json data files.
-     * @returns {Promise<undefined>}
+     * @returns {Promise<void>}
+     * @async
      */
     async storeData(dataDirectory) {
         const files = await readFolderPaths(resolve(dataDirectory), {
@@ -138,7 +146,7 @@ class DiscordBot {
 
     /**
      * Register a command inside the bot.
-     * @param {BotCommand} command - The bot command module.
+     * @param {import("../entities/command").BotCommand} command - The bot command module.
      * @returns {undefined}
      */
     registerCommand(command) {
@@ -153,7 +161,7 @@ class DiscordBot {
 
     /**
      * Register an event inside the bot.
-     * @param {BotEvent<any>} event - The bot event module.
+     * @param {import("../entities/event").BotEvent<any>} event - The bot event module.
      * @returns {undefined}
      */
     registerEvent(event) {
@@ -170,7 +178,8 @@ class DiscordBot {
 
     /**
      * Register bot modules to the client.
-     * @returns {Promise<undefined>}
+     * @returns {Promise<void>}
+     * @async
      * @private
      */
     async registerAllModules() {
