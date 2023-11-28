@@ -1,3 +1,10 @@
+## [2.1.1](https://github.com/DisQada/HalfBot/compare/v2.1.0...v2.1.1) (2023-10-05)
+
+
+### Bug Fixes
+
+* **Logger:** Deployment value in records ([66c6538](https://github.com/DisQada/HalfBot/commit/66c6538aa0c15ef026a8fd133534268c1353bff9))
+
 # [2.1.0](https://github.com/DisQada/halfbot/compare/v2.0.0...v2.1.0) (2023-09-30)
 
 
