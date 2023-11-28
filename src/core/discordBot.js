@@ -47,6 +47,9 @@ class DiscordBot {
                 name: "halfbot",
                 colour: 0xffffff,
                 logoUrl: "https://cdn.discordapp.com/embed/avatars/0.png"
+            },
+            presence: {
+                status: "online"
             }
         }
     };

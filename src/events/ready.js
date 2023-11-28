@@ -79,16 +79,7 @@ async function ready(bot) {
     await registerCommands(bot.client, commands);
 
     console.log(`-> The bot "${bot.client.user.username}" is online <-`);
-
-    bot.client.user.setPresence({
-        status: "online",
-        activities: [
-            {
-                name: "Operating ...",
-                url: "https://github.com/DisQada/halfbot"
-            }
-        ]
-    });
+    bot.client.user.setPresence(bot.data.config.presence);
 }
 
 module.exports = {
