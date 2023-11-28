@@ -1,6 +1,6 @@
 /**
  * Get the correct server ID.
- * @param {BotCommandData} data - The command data deciding where to register the command.
+ * @param {import("../entities/command").CommandData} data - The command data deciding where to register the command.
  * @param {import("../def/config").GuildIDs} guildIds - The container of the server IDs.
  * @returns {string} The server ID.
  * @throws {Error} - if data.deployment wasn't of the enum values.

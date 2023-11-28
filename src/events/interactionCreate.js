@@ -2,7 +2,7 @@ const { applyStyle, asEmbed } = require("../func/style");
 
 /**
  * Handler of interactions called by the bot.
- * @param {BotCommandInteraction} interaction - The interaction to handle.
+ * @param {import("../entities/command").CommandInteraction} interaction - The interaction to handle.
  * @returns {Promise<void>}
  * @category Events
  * @private

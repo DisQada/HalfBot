@@ -7,9 +7,11 @@ const { asNumber } = require("./colour");
  * @returns {import("discord.js").APIEmbed} The resulting embed.
  * @example
  * const brand = {colour: 0xffffff};
- * const result = asEmbed("halfbot", brand);
+ * const result = asEmbed("HalfBot", brand);
+ * @category Style
  */
 function asEmbed(text, brand) {
+    /** @type {import("discord.js").APIEmbed} */
     const embed = { description: text };
     return applyStyle(embed, brand);
 }
@@ -20,11 +22,11 @@ function asEmbed(text, brand) {
  * @param {import("../def/config").Brand} brand - The brand to get the style from.
  * @returns {import("discord.js").APIEmbed | import("discord.js").APIEmbed[]} The embeds array after applying the style to it.
  * @example
- * let embed = {title: 'halfbot'};
+ * let embed = {title: 'HalfBot'};
  * const brand = {colour: 0xffffff};
  * embed = applyStyle(embed, brand);
  * @example
- * let embeds = [{title: 'halfbot'}];
+ * let embeds = [{title: 'HalfBot'}];
  * const brand = {colour: 0xffffff};
  * embeds = applyStyle(embeds, brand);
  * @category Style
