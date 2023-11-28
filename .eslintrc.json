@@ -8,20 +8,7 @@
         "ecmaVersion": "latest",
         "sourceType": "script"
     },
-    "extends": ["eslint:recommended", "plugin:jsdoc/recommended-error"],
-    "plugins": ["jsdoc"],
-    "rules": {
-        "jsdoc/check-syntax": "warn",
-        "jsdoc/no-bad-blocks": "warn",
-        "jsdoc/informative-docs": "warn",
-        "jsdoc/check-indentation": "warn",
-        "jsdoc/no-undefined-types": "warn",
-        "jsdoc/require-description": "warn",
-        "jsdoc/check-line-alignment": "warn",
-        "jsdoc/no-blank-block-descriptions": "warn",
-        "jsdoc/require-throws": "error",
-        "jsdoc/require-asterisk-prefix": "error",
-        "jsdoc/require-description-complete-sentence": "error",
-        "jsdoc/require-hyphen-before-param-description": "error"
-    }
+    "extends": ["eslint:recommended"],
+    "plugins": [],
+    "rules": {}
 }
