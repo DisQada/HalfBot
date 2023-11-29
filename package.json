@@ -5,9 +5,9 @@
     "description": "A tool to facilitate and accelerate the development of Discord bots",
     "scripts": {
         "config": "npm explore @disqada/typedoc -- npm run config",
-        "build": "npm explore @disqada/typedoc -- npm run build",
+        "types": "npm explore @disqada/typedoc -- npm run types",
         "clean": "npm explore @disqada/typedoc -- npm run clean",
-        "doc": "npm explore @disqada/typedoc -- npm run doc",
+        "docs": "npm explore @disqada/typedoc -- npm run docs",
         "test": "jest",
         "lint": "eslint . --fix",
         "format": "prettier . --write",
@@ -62,7 +62,7 @@
         "table": "^6.8.1"
     },
     "devDependencies": {
-        "@disqada/typedoc": "^1.0.3",
+        "@disqada/typedoc": "^1.2.1",
         "@types/jest": "^29.5.10",
         "commitizen": "^4.3.0",
         "cz-conventional-changelog": "^3.3.0",

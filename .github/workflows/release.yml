@@ -30,8 +30,8 @@ jobs:
             - name: Config
               run: npm explore @disqada/typedoc -- npm run config
 
-            - name: Build
-              run: npm explore @disqada/typedoc -- npm run build
+            - name: Generate types
+              run: npm explore @disqada/typedoc -- npm run types
 
             - name: Clean types
               run: npm explore @disqada/typedoc -- npm run clean
