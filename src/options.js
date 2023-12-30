@@ -37,7 +37,7 @@
  * @typedef {object} Config
  * @property {IDs} id - The container of all IDs.
  * @property {Brand} brand - The container of the bot's brand information.
- * @property {import("discord.js").PresenceData} presence
+ * @property {PresenceData} presence
  */
 
 /**
@@ -142,6 +142,105 @@
  * @param {import("./class/discordBot").DiscordBot} bot
  * @param {...import("discord.js").ClientEvents[Key]} args
  * @returns {any}
+ */
+
+// Discord
+
+/**
+ * the combined sum of characters in all `title`, `description`, `field.name`, `field.value`, `footer.text`, and `author.name` fields across all embeds attached to a message must not exceed 6000 characters
+ * @typedef {object} Embed
+ * @property {string} [url]
+ * @property {string} [title] max length = 256
+ * @property {string} [description] max length = 4096
+ * @property {number} [color] integer value representing color
+ * @property {Timestamp} [timestamp]
+ * @property {EmbedAuthor} [author]
+ * @property {EmbedImage} [image]
+ * @property {EmbedThumbnail} [thumbnail]
+ * @property {EmbedFooter} [footer]
+ * @property {EmbedField[]} [fields] max length = 25
+ */
+
+/**
+ * @typedef {object} EmbedAuthor
+ * @property {string} name max length = 256
+ * @property {string} [url] only supports http(s)
+ * @property {string} [iconUrl] only supports http(s) and attachments
+ * @property {string} [proxyIconUrl]
+ */
+
+/**
+ * @typedef {object} EmbedImage
+ * @property {string} url
+ * @property {string} [proxyUrl]
+ * @property {number} [height] integer
+ * @property {number} [width] integer
+ */
+
+/**
+ * @typedef {object} EmbedThumbnail
+ * @property {string} url
+ * @property {string} [proxyUrl]
+ * @property {number} [height] integer
+ * @property {number} [width] integer
+ */
+
+/**
+ * @typedef {object} EmbedFooter
+ * @property {string} text max length = 2048
+ * @property {string} [iconUrl] only supports http(s) and attachments
+ * @property {string} [proxyIconUrl]
+ */
+
+/**
+ * @typedef {object} EmbedField
+ * @property {string} name max length = 256
+ * @property {string} value max length = 1024
+ * @property {boolean} [inline] whether to display this field inline with other fields
+ */
+
+/**
+ * ISO 8601 timestamp, example: `2022-09-27 18:00:00.000`
+ * @typedef {`${string}-${string}-${string}`} Timestamp
+ */
+
+/**
+ * @typedef {object} PresenceData
+ * @property {PresenceStatusData} [status]
+ * @property {boolean} [afk]
+ * @property {ActivitiesOptions[]} [activities]
+ * @property {number | number[]} [shardId]
+ */
+
+/**
+ * @typedef {ClientPresenceStatus | "invisible"} PresenceStatusData
+ */
+
+/**
+ * @typedef {"online" | "idle" | "dnd"} ClientPresenceStatus
+ */
+
+/**
+ * @typedef {Omit<ActivityOptions, "shardId">} ActivitiesOptions
+ */
+/**
+ * @typedef {object} ActivityOptions
+ * @property {string} [name]
+ * @property {string} [url]
+ * @property {Exclude<ActivityType, 4>} [type]
+ * @property {number | readonly number[]} [shardId]
+ */
+
+/**
+ * @enum {number}
+ * @typedef {0 | 1 | 2 | 3 | 4 | 5} ActivityType
+ * @property {0} Playing Playing {game}
+ * @property {1} Streaming Streaming {details}
+ * @property {2} Listening Listening to {name}
+ * @property {3} Watching Watching {details}
+ * @property {4} Custom {emoji} {details}
+ * @property {5} Competing Competing in {name}
+ * @see https://discord.com/developers/docs/topics/gateway-events#activity-object-activity-types
  */
 
 module.exports = {};
