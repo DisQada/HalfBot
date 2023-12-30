@@ -1,7 +1,7 @@
-const { applyStyle, asEmbed } = require("../../../src/func/style");
+const { applyStyle, asEmbed } = require("../../src/func/style");
 
 const brand = {
-    name: "halfbot",
+    name: "HalfBot",
     colour: 0xffffff,
     logoUrl: "https://cdn.discordapp.com/embed/avatars/0.png"
 };
@@ -15,7 +15,7 @@ describe("Test asEmbed function", () => {
             color: brand.colour,
             footer: {
                 text: brand.name,
-                icon_url: brand.logoUrl
+                iconUrl: brand.logoUrl
             }
         });
     });
@@ -34,7 +34,7 @@ describe("Test applyStyle function", () => {
             color: brand.colour,
             footer: {
                 text: brand.name,
-                icon_url: brand.logoUrl
+                iconUrl: brand.logoUrl
             }
         });
     });
@@ -61,7 +61,7 @@ describe("Test applyStyle function", () => {
                 color: brand.colour,
                 footer: {
                     text: brand.name,
-                    icon_url: brand.logoUrl
+                    iconUrl: brand.logoUrl
                 }
             }
         ]);

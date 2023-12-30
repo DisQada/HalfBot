@@ -1,4 +1,4 @@
-const { asNumber, asString } = require("../../../src/func/colour");
+const { asNumber, asString } = require("../../src/func/colour");
 
 describe("Test asNumber function", () => {
     it("should return the same number", () => {
