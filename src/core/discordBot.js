@@ -1,7 +1,7 @@
 const { Client, Events, GatewayIntentBits } = require("discord.js");
 const interactionCreate = require("../events/interactionCreate");
 const { ready } = require("../events/ready");
-const { logRecords } = require("./logger");
+const { logSuccessRecords, logFailRecords } = require("../func/log");
 const {
     findPaths,
     storeFolderPaths,
@@ -148,7 +148,7 @@ class DiscordBot {
     /**
      * Register a command inside the bot.
      * @param {import("../entities/command").BotCommand} command - The bot command module.
-     * @returns {import("./logger").SuccessRecord}
+     * @returns {import("../func/log").SuccessRecord}
      */
     registerCommand(command) {
         this.commands.set(command.data.name, command);
@@ -163,7 +163,7 @@ class DiscordBot {
     /**
      * Register an event inside the bot.
      * @param {import("../entities/event").BotEvent<any>} event - The bot event module.
-     * @returns {import("./logger").SuccessRecord}
+     * @returns {import("../func/log").SuccessRecord}
      */
     registerEvent(event) {
         this.client.on(event.data.name, (...args) =>
@@ -195,35 +195,35 @@ class DiscordBot {
             return;
         }
 
-        /**
-         * @type {[import("./logger").SuccessRecord[], import("./logger").FailRecord[]]}
-         */
-        const records = [[], []];
+        /** @type {import("../func/log").SuccessRecord[]} */
+        const successRecords = [];
+        /** @type {import("../func/log").FailRecord[]} */
+        const failRecords = [];
 
         for (let i = 0; i < paths.length; i++) {
             const botModule = require(paths[i]);
 
             if (validCommand(botModule)) {
                 const record = this.registerCommand(botModule);
-                records[0].push(record);
+                successRecords.push(record);
                 continue;
             } else if (validEvent(botModule)) {
                 const record = this.registerEvent(botModule);
-                records[0].push(record);
+                successRecords.push(record);
                 continue;
             }
 
             const word = "modules";
             const index = paths[i].indexOf(word);
-            records[1].push({
+            failRecords.push({
                 path: paths[i].substring(index + word.length + 1),
                 message:
                     "The module is invalid, maybe a required property is missing"
             });
         }
 
-        logRecords(records[0], "success");
-        logRecords(records[1], "fail");
+        console.log(logSuccessRecords(successRecords));
+        console.log(logFailRecords(failRecords));
     }
 }
 

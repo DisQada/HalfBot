@@ -1,11 +1,6 @@
 const { table } = require("table");
 
 /**
- * State of a bot module registration
- * @typedef {"success" | "fail"} RecordType
- */
-
-/**
  * @typedef {SuccessRecord | FailRecord} Record
  */
 
@@ -36,52 +31,67 @@ function defaultConfig(header) {
     return {
         header: {
             alignment: "center",
-            content: header
+            content: header,
+            wrapWord: false
         },
         columnDefault: {
             alignment: "center",
             verticalAlignment: "middle",
-            wrapWord: true
+            wrapWord: true,
+            width: 45
         }
     };
 }
 
 /**
- * Print the table for the records of a state.
- * @param {Record[]} records - The records to print in a table.
- * @param {RecordType} state - The state of the records.
- * @returns {void}
+ * Log the table for successful records.
+ * @param {SuccessRecord[]} records - The records to log as a table.
+ * @returns {string} The table as a string.
  * @example
  * const records = [{ ... }];
- * debug(records, RecordStates.Success);
+ * logSuccessRecords(records);
  * @private
  */
-function logRecords(records, state) {
-    if (!records || records.length === 0) {
-        return;
-    }
+function logSuccessRecords(records) {
+    const data = [["name", "type", "deployment"]];
 
-    if (state === "success") {
-        const data = [
-            ["name", "type", "deployment"],
-            ...records.map((/** @type {SuccessRecord} */ r) => {
+    if (records.length > 0) {
+        data.push(
+            ...records.map((r) => {
                 return [r.name, r.type, r.deployment];
             })
-        ];
-        const msg = "🟩 Successful registration 🟩";
-        console.log(table(data, defaultConfig(msg)));
-    } else {
-        const data = [
-            ["path", "message"],
-            ...records.map((/** @type {FailRecord} */ r) => {
+        );
+    }
+
+    const msg = "🟩 Successful registration 🟩";
+    return table(data, defaultConfig(msg));
+}
+
+/**
+ * Log the table for failed records.
+ * @param {FailRecord[]} records - The records to log as a table.
+ * @returns {string} The table as a string.
+ * @example
+ * const records = [{ ... }];
+ * logFailRecords(records);
+ * @private
+ */
+function logFailRecords(records) {
+    const data = [["path", "message"]];
+
+    if (records.length > 0) {
+        data.push(
+            ...records.map((r) => {
                 return [r.path, r.message];
             })
-        ];
-        const msg = "🟥 Failure registration 🟥";
-        console.log(table(data, defaultConfig(msg)));
+        );
     }
+
+    const msg = "🟥 Failure registration 🟥";
+    return table(data, defaultConfig(msg));
 }
 
 module.exports = {
-    logRecords
+    logSuccessRecords,
+    logFailRecords
 };
