@@ -25,7 +25,7 @@ jobs:
                   registry-url: https://registry.npmjs.org
 
             - name: Install dependencies
-              run: npm ci && npm i -D semantic-release @semantic-release/changelog @semantic-release/git
+              run: npm ci && npm i --no-save @semantic-release/changelog @semantic-release/git
 
             - name: Config
               run: npm explore @disqada/typedoc -- npm run config
@@ -37,7 +37,7 @@ jobs:
               run: npm explore @disqada/typedoc -- npm run clean
 
             - name: Release
-              run: npm run semantic-release
+              run: npx semantic-release
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
