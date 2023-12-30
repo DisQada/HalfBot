@@ -1,9 +1,9 @@
 {
     "root": true,
     "env": {
+        "jest": true,
         "es6": true,
-        "node": true,
-        "commonjs": true
+        "node": true
     },
     "parserOptions": {
         "ecmaVersion": "latest",
@@ -11,9 +11,10 @@
     },
     "extends": [
         "eslint:recommended",
+        "plugin:jest/recommended",
         "plugin:import/recommended",
         "plugin:promise/recommended"
     ],
-    "plugins": ["import", "promise"],
+    "plugins": ["jest", "import", "promise"],
     "rules": {}
 }

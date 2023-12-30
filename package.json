@@ -8,9 +8,9 @@
         "types": "npm explore @disqada/typedoc -- npm run types",
         "clean": "npm explore @disqada/typedoc -- npm run clean",
         "docs": "npm explore @disqada/typedoc -- npm run docs",
-        "test": "npx jest",
-        "lint": "eslint . --fix",
-        "format": "prettier . --write"
+        "lint": "eslint . --fix --ignore-path .gitignore",
+        "format": "prettier . --write --ignore-path .gitignore",
+        "test": "npx jest"
     },
     "type": "commonjs",
     "main": "./src/exports.js",
