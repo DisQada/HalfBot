@@ -1,6 +1,4 @@
 const { Client, Events, GatewayIntentBits } = require("discord.js");
-const { BotCommand } = require("../entities/command");
-const { BotEvent } = require("../entities/event");
 const interactionCreate = require("../events/interactionCreate");
 const { ready } = require("../events/ready");
 const { logRecords } = require("./logger");
@@ -10,6 +8,7 @@ const {
     readFolderPaths
 } = require("@disqada/pathfinder");
 const { resolve, sep } = require("path");
+const { validCommand, validEvent } = require("../func/validate");
 
 /**
  * @typedef {object} BotOptions
@@ -50,7 +49,7 @@ class DiscordBot {
     };
 
     /**
-     * @type {Map<string, BotCommand>}
+     * @type {Map<string, import("../entities/command").BotCommand>}
      */
     commands = new Map();
 
@@ -204,22 +203,14 @@ class DiscordBot {
         for (let i = 0; i < paths.length; i++) {
             const botModule = require(paths[i]);
 
-            if (botModule.data && botModule.data.module) {
-                if (
-                    botModule.data.module === "command" &&
-                    BotCommand.isValid(botModule)
-                ) {
-                    const record = this.registerCommand(botModule);
-                    records[0].push(record);
-                    continue;
-                } else if (
-                    botModule.data.module === "event" &&
-                    BotEvent.isValid(botModule)
-                ) {
-                    const record = this.registerEvent(botModule);
-                    records[0].push(record);
-                    continue;
-                }
+            if (validCommand(botModule)) {
+                const record = this.registerCommand(botModule);
+                records[0].push(record);
+                continue;
+            } else if (validEvent(botModule)) {
+                const record = this.registerEvent(botModule);
+                records[0].push(record);
+                continue;
             }
 
             const word = "modules";
