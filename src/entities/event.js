@@ -16,7 +16,7 @@
 /**
  * @template {keyof import("discord.js").ClientEvents} Key
  * @callback EventFunction
- * @param {import("../core/discordBot").DiscordBot} bot
+ * @param {import("../class/discordBot").DiscordBot} bot
  * @param {...import("discord.js").ClientEvents[Key]} args
  * @returns {any}
  */

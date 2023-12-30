@@ -22,7 +22,7 @@
 
 /**
  * @typedef {object} BaseCommandInteraction
- * @property {import("../core/discordBot").DiscordBot} bot
+ * @property {import("../class/discordBot").DiscordBot} bot
  */
 
 /**

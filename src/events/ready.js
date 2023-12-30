@@ -25,7 +25,7 @@ function getGuildId(data, guildIds) {
 
 /**
  * Preparing the bot commands for registration.
- * @param {import("../core/discordBot").DiscordBot} bot - The bot to register the commands for.
+ * @param {import("../class/discordBot").DiscordBot} bot - The bot to register the commands for.
  * @returns {Map<string, import("../entities/command").BotCommand[]>}
  * @category Events
  * @private
@@ -68,7 +68,7 @@ async function registerCommands(client, commandMap) {
 
 /**
  * The client is ready and has connected successfully.
- * @param {import("../core/discordBot").DiscordBot} bot - The bot of the client.
+ * @param {import("../class/discordBot").DiscordBot} bot - The bot of the client.
  * @returns {Promise<void>}
  * @category Events
  * @async
