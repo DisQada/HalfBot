@@ -1,93 +1,93 @@
 /**
  * Get the correct server ID.
- * @param {import("../options").CommandData} data - The command data deciding where to register the command.
- * @param {import("../options").GuildIDs} guildIds - The container of the server IDs.
+ * @param {import('../options').CommandData} data - The command data deciding where to register the command.
+ * @param {import('../options').GuildIDs} guildIds - The container of the server IDs.
  * @returns {string} The server ID.
  * @throws {Error} - if data.deployment wasn't of the enum values.
  * @category Events
  * @private
  */
 function getGuildId(data, guildIds) {
-    const globalGuildId = "0";
+  const globalGuildId = '0'
 
-    switch (data.deployment) {
-        case "dev":
-            return guildIds.dev ?? globalGuildId;
+  switch (data.deployment) {
+    case 'dev':
+      return guildIds.dev ?? globalGuildId
 
-        case "support":
-            return guildIds.support ?? globalGuildId;
+    case 'support':
+      return guildIds.support ?? globalGuildId
 
-        case "global":
-        default:
-            return globalGuildId;
-    }
+    case 'global':
+    default:
+      return globalGuildId
+  }
 }
 
 /**
  * Preparing the bot commands for registration.
- * @param {import("../class/discordBot").DiscordBot} bot - The bot to register the commands for.
- * @returns {Map<string, import("../options").CommandData[]>}
+ * @param {import('../class/discordBot').DiscordBot} bot - The bot to register the commands for.
+ * @returns {Map<string, import('../options').CommandData[]>}
  * @category Events
  * @private
  */
 function prepareCommands(bot) {
-    const commands = new Map();
+  const commands = new Map()
 
-    for (const iterator of bot.commands) {
-        const command = iterator[1];
-        const guildId = getGuildId(command.data, bot.data.config.id.guild);
+  for (const iterator of bot.commands) {
+    const command = iterator[1]
+    const guildId = getGuildId(command.data, bot.data.config.id.guild)
 
-        const commandArray = commands.get(guildId) ?? [];
-        commandArray.push(command.data);
-        commands.set(guildId, commandArray);
-    }
+    const commandArray = commands.get(guildId) ?? []
+    commandArray.push(command.data)
+    commands.set(guildId, commandArray)
+  }
 
-    return commands;
+  return commands
 }
 
 /**
  * Register the commands via the API.
- * @param {import("discord.js").Client} client - The client to register the commands for.
- * @param {Map<string, import("../options").CommandData[]>} commandMap - The commands to register.
+ * @param {import('discord.js').Client} client - The client to register the commands for.
+ * @param {Map<string, import('../options').CommandData[]>} commandMap - The commands to register.
  * @returns {Promise<void>}
  * @category Events
  * @private
  */
 async function registerCommands(client, commandMap) {
-    for (const iterator of commandMap) {
-        const commandsData = iterator[1];
-        const guildId = iterator[0];
+  for (const iterator of commandMap) {
+    const commandsData = iterator[1]
+    const guildId = iterator[0]
 
-        if (guildId === "0") {
-            await client.application?.commands.set(commandsData);
-        } else {
-            await client.application?.commands.set(commandsData, guildId);
-        }
+    if (guildId === '0') {
+      await client.application?.commands.set(commandsData)
+    } else {
+      await client.application?.commands.set(commandsData, guildId)
     }
+  }
 }
 
 /**
  * The client is ready and has connected successfully.
- * @param {import("../class/discordBot").DiscordBot} bot - The bot of the client.
+ * @param {import('../class/discordBot').DiscordBot} bot - The bot of the client.
  * @returns {Promise<void>}
  * @category Events
  * @async
  * @private
  */
 async function ready(bot) {
-    const commands = prepareCommands(bot);
-    await registerCommands(bot.client, commands);
+  const commands = prepareCommands(bot)
+  await registerCommands(bot.client, commands)
 
-    if (bot.client.user) {
-        console.log(`-> The Bot "${bot.client.user.username}" Is Online <-`);
-        bot.client.user.setPresence(bot.data.config.presence);
-    } else {
-        console.log("-> Bot Is Online <-");
-    }
+  if (bot.client.user) {
+    console.log(`-> The Bot '${bot.client.user.username}' Is Online <-`)
+    bot.client.user.setPresence(bot.data.config.presence)
+  } else {
+    console.log('-> Bot Is Online <-')
+  }
 }
 
 module.exports = {
-    ready,
-    getGuildId,
-    prepareCommands
-};
+  ready,
+  getGuildId,
+  prepareCommands
+}

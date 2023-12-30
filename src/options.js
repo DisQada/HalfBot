@@ -7,12 +7,12 @@
 
 /**
  * Possible types for a bot module
- * @typedef {"command" | "event"} Modules
+ * @typedef {'command' | 'event'} Modules
  */
 
 /**
  * Deployment of a bot module
- * @typedef {"global" | "dev" | "support"} Deployments
+ * @typedef {'global' | 'dev' | 'support'} Deployments
  */
 
 // Core
@@ -23,7 +23,7 @@
  * @property {object} [directories]
  * @property {string} [directories.root] - The path to the folder containing all the bot files.
  * @property {string} [directories.data] - The Path to the directory the json data files.
- * @property {import("discord.js").ClientOptions} client
+ * @property {import('discord.js').ClientOptions} client
  */
 
 /**
@@ -92,7 +92,7 @@
  */
 
 /**
- * @typedef {BaseCommandData & import("discord.js").ApplicationCommandData} CommandData
+ * @typedef {BaseCommandData & import('discord.js').ApplicationCommandData} CommandData
  */
 
 /**
@@ -101,46 +101,46 @@
  * @property {Deployments} [deployment]
  * @property {boolean} [defer]
  * @property {boolean} [ephemeral]
- * @property {"command"} module Bot module type
+ * @property {'command'} module Bot module type
  */
 
 /**
- * @typedef {BaseCommandInteraction & (import("discord.js").ChatInputCommandInteraction | import("discord.js").UserContextMenuCommandInteraction | import("discord.js").MessageContextMenuCommandInteraction)} CommandInteraction
+ * @typedef {BaseCommandInteraction & (import('discord.js').ChatInputCommandInteraction | import('discord.js').UserContextMenuCommandInteraction | import('discord.js').MessageContextMenuCommandInteraction)} CommandInteraction
  */
 
 /**
  * @typedef {object} BaseCommandInteraction
- * @property {import("./class/discordBot").DiscordBot} bot
+ * @property {import('./class/discordBot').DiscordBot} bot
  */
 
 /**
  * @callback CommandFunction
  * @param {CommandInteraction} interaction
- * @returns {Promise<import("discord.js").InteractionReplyOptions | string | void> | import("discord.js").InteractionReplyOptions| string | void}
+ * @returns {Promise<import('discord.js').InteractionReplyOptions | string | void> | import('discord.js').InteractionReplyOptions| string | void}
  */
 
 // Event
 
 /**
  * The full object of a event file
- * @template {keyof import("discord.js").ClientEvents} Key
+ * @template {keyof import('discord.js').ClientEvents} Key
  * @typedef {object} BotEvent
  * @property {EventData<Key>} data
  * @property {EventFunction<Key>} execute
  */
 
 /**
- * @template {keyof import("discord.js").ClientEvents} Key
+ * @template {keyof import('discord.js').ClientEvents} Key
  * @typedef {object} EventData
  * @property {Key} name Event name / caller
- * @property {"event"} module Bot module type
+ * @property {'event'} module Bot module type
  */
 
 /**
- * @template {keyof import("discord.js").ClientEvents} Key
+ * @template {keyof import('discord.js').ClientEvents} Key
  * @callback EventFunction
- * @param {import("./class/discordBot").DiscordBot} bot
- * @param {...import("discord.js").ClientEvents[Key]} args
+ * @param {import('./class/discordBot').DiscordBot} bot
+ * @param {...import('discord.js').ClientEvents[Key]} args
  * @returns {any}
  */
 
@@ -213,15 +213,15 @@
  */
 
 /**
- * @typedef {ClientPresenceStatus | "invisible"} PresenceStatusData
+ * @typedef {ClientPresenceStatus | 'invisible'} PresenceStatusData
  */
 
 /**
- * @typedef {"online" | "idle" | "dnd"} ClientPresenceStatus
+ * @typedef {'online' | 'idle' | 'dnd'} ClientPresenceStatus
  */
 
 /**
- * @typedef {Omit<ActivityOptions, "shardId">} ActivitiesOptions
+ * @typedef {Omit<ActivityOptions, 'shardId'>} ActivitiesOptions
  */
 /**
  * @typedef {object} ActivityOptions
@@ -243,4 +243,4 @@
  * @see https://discord.com/developers/docs/topics/gateway-events#activity-object-activity-types
  */
 
-module.exports = {};
+module.exports = {}

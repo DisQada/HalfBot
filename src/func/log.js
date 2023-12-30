@@ -1,78 +1,78 @@
-const { table } = require("table");
+const { table } = require('table')
 
 /**
  * Get the default configurations for the table.
  * @param {string} header - The name of the table.
- * @returns {import("table").TableUserConfig} Ready to use configurations.
+ * @returns {import('table').TableUserConfig} Ready to use configurations.
  * @example
- * const finalConfig = defaultConfig("Table name");
+ * const finalConfig = defaultConfig('Table name')
  * @private
  */
 function defaultConfig(header) {
-    return {
-        header: {
-            alignment: "center",
-            content: header,
-            wrapWord: false
-        },
-        columnDefault: {
-            alignment: "center",
-            verticalAlignment: "middle",
-            wrapWord: true,
-            width: 45
-        }
-    };
+  return {
+    header: {
+      alignment: 'center',
+      content: header,
+      wrapWord: false
+    },
+    columnDefault: {
+      alignment: 'center',
+      verticalAlignment: 'middle',
+      wrapWord: true,
+      width: 45
+    }
+  }
 }
 
 /**
  * Log the table for successful records.
- * @param {import("../options").SuccessRecord[]} records - The records to log as a table.
+ * @param {import('../options').SuccessRecord[]} records - The records to log as a table.
  * @returns {string} The table as a string.
  * @example
- * const records = [{ ... }];
- * logSuccessRecords(records);
+ * const records = [{ ... }]
+ * logSuccessRecords(records)
  * @private
  */
 function logSuccessRecords(records) {
-    const data = [["name", "type", "deployment"]];
+  const data = [['name', 'type', 'deployment']]
 
-    if (records.length > 0) {
-        data.push(
-            ...records.map((r) => {
-                return [r.name, r.type, r.deployment];
-            })
-        );
-    }
+  if (records.length > 0) {
+    data.push(
+      ...records.map((r) => {
+        return [r.name, r.type, r.deployment]
+      })
+    )
+  }
 
-    const msg = "🟩 Successful registration 🟩";
-    return table(data, defaultConfig(msg));
+  const msg = '🟩 Successful registration 🟩'
+  return table(data, defaultConfig(msg))
 }
 
 /**
  * Log the table for failed records.
- * @param {import("../options").FailRecord[]} records - The records to log as a table.
+ * @param {import('../options').FailRecord[]} records - The records to log as a table.
  * @returns {string} The table as a string.
  * @example
- * const records = [{ ... }];
- * logFailRecords(records);
+ * const records = [{ ... }]
+ * logFailRecords(records)
  * @private
  */
 function logFailRecords(records) {
-    const data = [["path", "message"]];
+  const data = [['path', 'message']]
 
-    if (records.length > 0) {
-        data.push(
-            ...records.map((r) => {
-                return [r.path, r.message];
-            })
-        );
-    }
+  if (records.length > 0) {
+    data.push(
+      ...records.map((r) => {
+        return [r.path, r.message]
+      })
+    )
+  }
 
-    const msg = "🟥 Failure registration 🟥";
-    return table(data, defaultConfig(msg));
+  const msg = '🟥 Failure registration 🟥'
+  return table(data, defaultConfig(msg))
 }
 
 module.exports = {
-    logSuccessRecords,
-    logFailRecords
-};
+  logSuccessRecords,
+  logFailRecords
+}

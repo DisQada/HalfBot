@@ -1,58 +1,58 @@
 name: Generate Documentation
 
 on:
-    release:
-        types: [released, published]
-    workflow_dispatch:
+  release:
+    types: [released, published]
+  workflow_dispatch:
 
 permissions:
-    contents: read
-    pages: write
-    id-token: write
+  contents: read
+  pages: write
+  id-token: write
 
 concurrency:
-    group: "pages"
-    cancel-in-progress: false
+  group: 'pages'
+  cancel-in-progress: false
 
 jobs:
-    deploy:
-        environment:
-            name: github-pages
-            url: ${{ steps.deployment.outputs.page_url }}
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v3
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
 
-            - name: Setup Node.js
-              uses: actions/setup-node@v3
-              with:
-                  node-version: "lts/*"
-                  registry-url: https://registry.npmjs.org
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 'lts/*'
+          registry-url: https://registry.npmjs.org
 
-            - name: Install dependencies
-              run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
-            - name: Config
-              run: npm explore @disqada/typedoc -- npm run config
+      - name: Config
+        run: npm explore @disqada/typedoc -- npm run config
 
-            - name: Generate types
-              run: npm explore @disqada/typedoc -- npm run types
+      - name: Generate types
+        run: npm explore @disqada/typedoc -- npm run types
 
-            - name: Clean types
-              run: npm explore @disqada/typedoc -- npm run clean
+      - name: Clean types
+        run: npm explore @disqada/typedoc -- npm run clean
 
-            - name: Generate docs
-              run: npm explore @disqada/typedoc -- npm run docs
+      - name: Generate docs
+        run: npm explore @disqada/typedoc -- npm run docs
 
-            - name: Setup Pages
-              uses: actions/configure-pages@v3
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
 
-            - name: Upload artifact
-              uses: actions/upload-pages-artifact@v2
-              with:
-                  path: "./docs"
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: './docs'
 
-            - name: Deploy to GitHub Pages
-              id: deployment
-              uses: actions/deploy-pages@v2
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2

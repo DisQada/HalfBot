@@ -1,14 +1,14 @@
 {
-    "recommendations": [
-        "streetsidesoftware.code-spell-checker",
-        "visualstudioexptteam.vscodeintellicode",
-        "christian-kohler.path-intellisense",
-        "christian-kohler.npm-intellisense",
-        "chamboug.js-auto-backticks",
-        "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode",
-        "gruntfuggly.todo-tree",
-        "redhat.vscode-yaml",
-        "yzhang.markdown-all-in-one"
-    ]
+  "recommendations": [
+    "streetsidesoftware.code-spell-checker",
+    "visualstudioexptteam.vscodeintellicode",
+    "christian-kohler.path-intellisense",
+    "christian-kohler.npm-intellisense",
+    "chamboug.js-auto-backticks",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "gruntfuggly.todo-tree",
+    "redhat.vscode-yaml",
+    "yzhang.markdown-all-in-one"
+  ]
 }

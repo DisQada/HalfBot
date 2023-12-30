@@ -1,12 +1,12 @@
 {
-    "$schema": "https://gist.github.com/Nabil-Alsaiad/15b755cc4f125d0ac068d356341477a6/raw",
+  "$schema": "https://gist.github.com/Nabil-Alsaiad/15b755cc4f125d0ac068d356341477a6/raw",
 
-    "root": "src",
-    "types": "types",
-    "out": "docs",
+  "root": "src",
+  "types": "types",
+  "out": "docs",
 
-    "links": {
-        "DisQada": "https://github.com/DisQada",
-        "Developer": "https://links.nabilalsaiad.com"
-    }
+  "links": {
+    "DisQada": "https://github.com/DisQada",
+    "Developer": "https://links.nabilalsaiad.com"
+  }
 }

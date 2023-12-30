@@ -3,27 +3,27 @@
  * @param {string | number} colour - The colour value.
  * @returns {number} The colour as a number.
  * @example
- * const num = asNumber("#ffffff");
+ * const num = asNumber('#ffffff')
  * // num = 0xffffff
  * @example
- * const num = asNumber(0xffffff);
+ * const num = asNumber(0xffffff)
  * // num = 0xffffff
  * @category Colour
  */
 function asNumber(colour) {
-    let num;
+  let num
 
-    if (typeof colour === "number") {
-        num = colour;
-    } else if (typeof colour === "string") {
-        num = Number.parseInt(colour.substring(1), 16);
-    }
+  if (typeof colour === 'number') {
+    num = colour
+  } else if (typeof colour === 'string') {
+    num = Number.parseInt(colour.substring(1), 16)
+  }
 
-    if (num) {
-        return num;
-    } else {
-        return 0;
-    }
+  if (num) {
+    return num
+  } else {
+    return 0
+  }
 }
 
 /**
@@ -31,34 +31,34 @@ function asNumber(colour) {
  * @param {string | number} colour - The colour value.
  * @returns {string} The colour as a string.
  * @example
- * const num = asNumber("#ffffff");
- * // num = "#ffffff"
+ * const num = asNumber('#ffffff')
+ * // num = '#ffffff'
  * @example
- * const num = asNumber(0xffffff);
- * // num = "#ffffff"
+ * const num = asNumber(0xffffff)
+ * // num = '#ffffff'
  * @category Colour
  */
 function asString(colour) {
-    let str;
+  let str
 
-    if (typeof colour === "string") {
-        str = colour.startsWith("#") ? colour.substring(1) : colour;
-    } else if (typeof colour === "number") {
-        str = colour.toString(16);
+  if (typeof colour === 'string') {
+    str = colour.startsWith('#') ? colour.substring(1) : colour
+  } else if (typeof colour === 'number') {
+    str = colour.toString(16)
+  }
+
+  if (str) {
+    while (str.length < 6) {
+      str = '0' + str
     }
 
-    if (str) {
-        while (str.length < 6) {
-            str = "0" + str;
-        }
-
-        return `#${str}`;
-    } else {
-        return `#000000`;
-    }
+    return `#${str}`
+  } else {
+    return `#000000`
+  }
 }
 
 module.exports = {
-    asNumber,
-    asString
-};
+  asNumber,
+  asString
+}

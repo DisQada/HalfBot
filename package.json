@@ -1,69 +1,69 @@
 {
-    "displayName": "HalfBot",
-    "name": "@disqada/halfbot",
-    "version": "2.1.1",
-    "description": "A tool to facilitate and accelerate the development of Discord bots",
-    "scripts": {
-        "config": "npm explore @disqada/typedoc -- npm run config",
-        "types": "npm explore @disqada/typedoc -- npm run types",
-        "clean": "npm explore @disqada/typedoc -- npm run clean",
-        "docs": "npm explore @disqada/typedoc -- npm run docs",
-        "lint": "eslint . --fix --ignore-path .gitignore",
-        "format": "prettier . --write --ignore-path .gitignore",
-        "test": "npx jest"
-    },
-    "type": "commonjs",
-    "main": "./src/exports.js",
-    "types": "./types/exports.d.ts",
-    "exports": {
-        ".": {
-            "require": "./src/exports.js",
-            "default": "./src/exports.js",
-            "types": "./types/exports.d.ts"
-        }
-    },
-    "files": [
-        "src/",
-        "types/",
-        "CHANGELOG.md",
-        "README.md",
-        "LICENSE.txt"
-    ],
-    "homepage": "https://disqada.github.io/HalfBot",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/DisQada/HalfBot.git"
-    },
-    "bugs": {
-        "url": "https://github.com/DisQada/HalfBot/issues"
-    },
-    "keywords": [
-        "discord.js",
-        "discord",
-        "half",
-        "bot",
-        "client"
-    ],
-    "author": {
-        "name": "The Alpha",
-        "email": "contact@nabilalsaiad.com",
-        "url": "https://links.nabilalsaiad.com"
-    },
-    "contributors": [],
-    "license": "Apache-2.0",
-    "dependencies": {
-        "@disqada/pathfinder": "^2.0.3",
-        "discord.js": "^14.10.2",
-        "table": "^6.8.1"
-    },
-    "devDependencies": {
-        "@disqada/typedoc": "^1.2.1",
-        "@types/jest": "*",
-        "eslint": "*",
-        "eslint-plugin-import": "*",
-        "eslint-plugin-jest": "*",
-        "eslint-plugin-jsdoc": "*",
-        "eslint-plugin-promise": "*",
-        "prettier": "*"
+  "displayName": "HalfBot",
+  "name": "@disqada/halfbot",
+  "version": "2.1.1",
+  "description": "A tool to facilitate and accelerate the development of Discord bots",
+  "scripts": {
+    "config": "npm explore @disqada/typedoc -- npm run config",
+    "types": "npm explore @disqada/typedoc -- npm run types",
+    "clean": "npm explore @disqada/typedoc -- npm run clean",
+    "docs": "npm explore @disqada/typedoc -- npm run docs",
+    "lint": "eslint . --fix --ignore-path .gitignore",
+    "format": "prettier . --write --ignore-path .gitignore",
+    "test": "npx jest"
+  },
+  "type": "commonjs",
+  "main": "./src/exports.js",
+  "types": "./types/exports.d.ts",
+  "exports": {
+    ".": {
+      "require": "./src/exports.js",
+      "default": "./src/exports.js",
+      "types": "./types/exports.d.ts"
     }
+  },
+  "files": [
+    "src/",
+    "types/",
+    "CHANGELOG.md",
+    "README.md",
+    "LICENSE.txt"
+  ],
+  "homepage": "https://disqada.github.io/HalfBot",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DisQada/HalfBot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DisQada/HalfBot/issues"
+  },
+  "keywords": [
+    "discord.js",
+    "discord",
+    "half",
+    "bot",
+    "client"
+  ],
+  "author": {
+    "name": "The Alpha",
+    "email": "contact@nabilalsaiad.com",
+    "url": "https://links.nabilalsaiad.com"
+  },
+  "contributors": [],
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@disqada/pathfinder": "^2.0.3",
+    "discord.js": "^14.10.2",
+    "table": "^6.8.1"
+  },
+  "devDependencies": {
+    "@disqada/typedoc": "^1.2.1",
+    "@types/jest": "*",
+    "eslint": "*",
+    "eslint-plugin-import": "*",
+    "eslint-plugin-jest": "*",
+    "eslint-plugin-jsdoc": "*",
+    "eslint-plugin-promise": "*",
+    "prettier": "*"
+  }
 }
