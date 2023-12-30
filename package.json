@@ -14,15 +14,12 @@
     },
     "type": "commonjs",
     "main": "./src/exports.js",
-    "module": "./src/exports.js",
     "types": "./types/exports.d.ts",
     "exports": {
         ".": {
-            "node": "./src/exports.js",
             "require": "./src/exports.js",
-            "import": "./src/exports.js",
-            "types": "./types/exports.d.ts",
-            "default": "./src/exports.js"
+            "default": "./src/exports.js",
+            "types": "./types/exports.d.ts"
         }
     },
     "files": [
@@ -68,8 +65,5 @@
         "eslint-plugin-jsdoc": "*",
         "eslint-plugin-promise": "*",
         "prettier": "*"
-    },
-    "publishConfig": {
-        "access": "public"
     }
 }
