@@ -11,26 +11,12 @@ const { resolve, sep } = require("path");
 const { validCommand, validEvent } = require("../func/validate");
 
 /**
- * @typedef {object} BotOptions
- * @property {string} token The bot application's API token.
- * @property {object} [directories]
- * @property {string} [directories.root] - The path to the folder containing all the bot files.
- * @property {string} [directories.data] - The Path to the directory the json data files.
- * @property {import("discord.js").ClientOptions} client
- */
-
-/**
- * @typedef {object} BotData
- * @property {import("../def/config").Config} config
- */
-
-/**
  * @class
  * @category Core
  */
 class DiscordBot {
     /**
-     * @type {BotData}
+     * @type {import("../options").BotData}
      */
     data = {
         config: {
@@ -49,7 +35,7 @@ class DiscordBot {
     };
 
     /**
-     * @type {Map<string, import("../entities/command").BotCommand>}
+     * @type {Map<string, import("../options").BotCommand>}
      */
     commands = new Map();
 
@@ -60,10 +46,10 @@ class DiscordBot {
 
     /**
      * The initialization of a new DiscordBot.
-     * @param {BotOptions} options - Information about the DiscordBot.
+     * @param {import("../options").BotOptions} options - Information about the DiscordBot.
      */
     constructor(options) {
-        /** @type {Partial<BotOptions>} */
+        /** @type {Partial<import("../options").BotOptions>} */
         const defaultOptions = {
             client: {
                 intents: [
@@ -86,7 +72,7 @@ class DiscordBot {
 
     /**
      * Start and connect the bot.
-     * @param {BotOptions} options - Information about the DiscordBot.
+     * @param {import("../options").BotOptions} options - Information about the DiscordBot.
      * @returns {Promise<void>}
      * @async
      * @private
@@ -147,8 +133,8 @@ class DiscordBot {
 
     /**
      * Register a command inside the bot.
-     * @param {import("../entities/command").BotCommand} command - The bot command module.
-     * @returns {import("../func/log").SuccessRecord}
+     * @param {import("../options").BotCommand} command - The bot command module.
+     * @returns {import("../options").SuccessRecord}
      */
     registerCommand(command) {
         this.commands.set(command.data.name, command);
@@ -162,8 +148,8 @@ class DiscordBot {
 
     /**
      * Register an event inside the bot.
-     * @param {import("../entities/event").BotEvent<any>} event - The bot event module.
-     * @returns {import("../func/log").SuccessRecord}
+     * @param {import("../options").BotEvent<any>} event - The bot event module.
+     * @returns {import("../options").SuccessRecord}
      */
     registerEvent(event) {
         this.client.on(event.data.name, (...args) =>
@@ -195,9 +181,9 @@ class DiscordBot {
             return;
         }
 
-        /** @type {import("../func/log").SuccessRecord[]} */
+        /** @type {import("../options").SuccessRecord[]} */
         const successRecords = [];
-        /** @type {import("../func/log").FailRecord[]} */
+        /** @type {import("../options").FailRecord[]} */
         const failRecords = [];
 
         for (let i = 0; i < paths.length; i++) {

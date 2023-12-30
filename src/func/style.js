@@ -3,7 +3,7 @@ const { asNumber } = require("./colour");
 /**
  * Convert a text to an embed.
  * @param {string} text - The original text.
- * @param {import("../def/config").Brand} brand - The brand to style the embed with.
+ * @param {import("../options").Brand} brand - The brand to style the embed with.
  * @returns {import("discord.js").APIEmbed} The resulting embed.
  * @example
  * const brand = {colour: 0xffffff};
@@ -19,7 +19,7 @@ function asEmbed(text, brand) {
 /**
  * Apply brand style to an multiple embeds.
  * @param {import("discord.js").APIEmbed | import("discord.js").APIEmbed[]} toApplyOn - The embeds to apply the style to.
- * @param {import("../def/config").Brand} brand - The brand to get the style from.
+ * @param {import("../options").Brand} brand - The brand to get the style from.
  * @returns {import("discord.js").APIEmbed | import("discord.js").APIEmbed[]} The embeds array after applying the style to it.
  * @example
  * let embed = {title: 'HalfBot'};
@@ -41,8 +41,8 @@ function applyStyle(toApplyOn, brand) {
     /**
      * Apply brand style to an embed.
      * @param {import("discord.js").APIEmbed} embed - The embed to apply the style to.
-     * @param {import("../def/config").Brand} brand - The brand to get the style from.
-     * @param {import("../def/options").StyleOptions} options - Configuration options for the process.
+     * @param {import("../options").Brand} brand - The brand to get the style from.
+     * @param {import("../options").StyleOptions} options - Configuration options for the process.
      * @returns {import("discord.js").APIEmbed} The embed after applying the style to it.
      * @example
      * let embed = {title: 'HalfBot'};
@@ -74,7 +74,7 @@ function applyStyle(toApplyOn, brand) {
     /**
      * Apply brand style to an multiple embeds.
      * @param {import("discord.js").APIEmbed[]} embeds - The embeds to apply the style to.
-     * @param {import("../def/config").Brand} brand - The brand to get the style from.
+     * @param {import("../options").Brand} brand - The brand to get the style from.
      * @returns {import("discord.js").APIEmbed[]} The embeds array after applying the style to it.
      * @example
      * let embeds = [{title: 'halfbot'}];

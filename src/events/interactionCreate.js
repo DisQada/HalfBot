@@ -2,7 +2,7 @@ const { applyStyle, asEmbed } = require("../func/style");
 
 /**
  * Handler of interactions called by the bot.
- * @param {import("../entities/command").CommandInteraction} interaction - The interaction to handle.
+ * @param {import("../options").CommandInteraction} interaction - The interaction to handle.
  * @returns {Promise<void>}
  * @category Events
  * @private
@@ -11,7 +11,7 @@ async function interactionCreate(interaction) {
     /**
      * A shortcut to a full reply.
      * @param {string} reply - The message to reply with.
-     * @param {import("../def/config").Brand} brand - The brand to style the reply with.
+     * @param {import("../options").Brand} brand - The brand to style the reply with.
      */
     async function quickReply(reply, brand) {
         const embed = asEmbed(reply, brand);

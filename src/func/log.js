@@ -1,25 +1,6 @@
 const { table } = require("table");
 
 /**
- * @typedef {SuccessRecord | FailRecord} Record
- */
-
-/**
- * @typedef {object} SuccessRecord
- * @property {string} name Name of the module
- * @property {import("../def/enums").ModuleType} type Bot module type
- * @property {import("../def/enums").DeploymentType} deployment The servers deployed to
- * @private
- */
-
-/**
- * @typedef {object} FailRecord
- * @property {string} path Path of the file failed to be registered
- * @property {string} message Information about the failure
- * @private
- */
-
-/**
  * Get the default configurations for the table.
  * @param {string} header - The name of the table.
  * @returns {import("table").TableUserConfig} Ready to use configurations.
@@ -45,7 +26,7 @@ function defaultConfig(header) {
 
 /**
  * Log the table for successful records.
- * @param {SuccessRecord[]} records - The records to log as a table.
+ * @param {import("../options").SuccessRecord[]} records - The records to log as a table.
  * @returns {string} The table as a string.
  * @example
  * const records = [{ ... }];
@@ -69,7 +50,7 @@ function logSuccessRecords(records) {
 
 /**
  * Log the table for failed records.
- * @param {FailRecord[]} records - The records to log as a table.
+ * @param {import("../options").FailRecord[]} records - The records to log as a table.
  * @returns {string} The table as a string.
  * @example
  * const records = [{ ... }];

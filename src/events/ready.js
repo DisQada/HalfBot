@@ -1,7 +1,7 @@
 /**
  * Get the correct server ID.
- * @param {import("../entities/command").CommandData} data - The command data deciding where to register the command.
- * @param {import("../def/config").GuildIDs} guildIds - The container of the server IDs.
+ * @param {import("../options").CommandData} data - The command data deciding where to register the command.
+ * @param {import("../options").GuildIDs} guildIds - The container of the server IDs.
  * @returns {string} The server ID.
  * @throws {Error} - if data.deployment wasn't of the enum values.
  * @category Events
@@ -26,7 +26,7 @@ function getGuildId(data, guildIds) {
 /**
  * Preparing the bot commands for registration.
  * @param {import("../class/discordBot").DiscordBot} bot - The bot to register the commands for.
- * @returns {Map<string, import("../entities/command").BotCommand[]>}
+ * @returns {Map<string, import("../options").BotCommand[]>}
  * @category Events
  * @private
  */
@@ -48,7 +48,7 @@ function prepareCommands(bot) {
 /**
  * Register the commands via the API.
  * @param {import("discord.js").Client} client - The client to register the commands for.
- * @param {Map<string, import("../entities/command").BotCommand>} commandMap - The commands to register.
+ * @param {Map<string, import("../options").BotCommand>} commandMap - The commands to register.
  * @returns {Promise<void>}
  * @category Events
  * @private

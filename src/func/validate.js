@@ -1,6 +1,6 @@
 /**
  * Check a command's validity.
- * @param {import("../entities/command").BotCommand} obj - The command to check.
+ * @param {import("../options").BotCommand} obj - The command to check.
  * @returns {boolean} True if valid, false otherwise.
  * @category Validate
  * @private
@@ -23,7 +23,7 @@ function validCommand(obj) {
 
 /**
  * Check an event's validity.
- * @param {import("../entities/event").BotEvent<any>} obj - The event to check.
+ * @param {import("../options").BotEvent<any>} obj - The event to check.
  * @returns {boolean} True if valid, false otherwise.
  * @category Validate
  * @private
