@@ -1,3 +1,24 @@
+# [3.0.0](https://github.com/DisQada/HalfBot/compare/v2.1.1...v3.0.0) (2023-12-30)
+
+
+### Bug Fixes
+
+* Use correct type ([d6358ec](https://github.com/DisQada/HalfBot/commit/d6358ecf1ec11a6496e5f4ebbe405936d6cea517))
+
+
+### Code Refactoring
+
+* Delete "emojiChars.json" ([99deb8f](https://github.com/DisQada/HalfBot/commit/99deb8ff69776b36658ef668aa1bdf9b96fad0b1))
+* Delete "url.js" ([ba3de3e](https://github.com/DisQada/HalfBot/commit/ba3de3eeb216999a225b6ce37187f059290b5ab4))
+* Replace bot module classes ([8d7f19c](https://github.com/DisQada/HalfBot/commit/8d7f19c39037a162f3897b44a952f3d7d4bd34f4))
+
+
+### BREAKING CHANGES
+
+* the array variable "emojiChars" has been deleted and no longer exists
+* the function "isSafe" has been deleted and no longer exists
+* BotCommand class and BotEvent class has been deleted and no longer exist, normal JS objects shall now be used instead
+
 ## [2.1.1](https://github.com/DisQada/HalfBot/compare/v2.1.0...v2.1.1) (2023-10-05)
 
 ### Bug Fixes
