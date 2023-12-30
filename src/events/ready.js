@@ -61,7 +61,7 @@ async function registerCommands(client, commandMap) {
         if (guildId === "0") {
             await client.application?.commands.set(commandsData);
         } else {
-            await client.guilds.cache.get(guildId)?.commands.set(commandsData);
+            await client.application?.commands.set(commandsData, guildId);
         }
     }
 }
@@ -78,8 +78,12 @@ async function ready(bot) {
     const commands = prepareCommands(bot);
     await registerCommands(bot.client, commands);
 
-    console.log(`-> The bot "${bot.client.user.username}" is online <-`);
-    bot.client.user.setPresence(bot.data.config.presence);
+    if (bot.client.user) {
+        console.log(`-> The Bot "${bot.client.user.username}" Is Online <-`);
+        bot.client.user.setPresence(bot.data.config.presence);
+    } else {
+        console.log("-> Bot Is Online <-");
+    }
 }
 
 module.exports = {

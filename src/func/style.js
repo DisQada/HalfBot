@@ -64,7 +64,7 @@ function applyStyle(toApplyOn, brand) {
                 }
 
                 if (brand.logoUrl) {
-                    embed.footer.icon_url = brand.logoUrl;
+                    embed.footer.iconUrl = brand.logoUrl;
                 }
             }
         }
