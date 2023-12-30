@@ -24,7 +24,7 @@ class DiscordBot {
                 guild: {}
             },
             brand: {
-                name: "halfbot",
+                name: "HalfBot",
                 colour: 0xffffff,
                 logoUrl: "https://cdn.discordapp.com/embed/avatars/0.png"
             },

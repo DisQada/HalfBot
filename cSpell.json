@@ -2,13 +2,10 @@
     "caseSensitive": true,
     "useGitignore": true,
     "language": "en-GB",
-    "files": [
-        "./src/**/*",
-        "./tests/**/*",
-        "README.md"
-    ],
+    "files": ["./src/**/*", "./tests/**/*", "README.md"],
     "words": [
         "disqada",
+        "dnd",
         "linkedin",
         "nabilalsaiad",
         "Qada",

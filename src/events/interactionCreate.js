@@ -61,6 +61,7 @@ async function interactionCreate(interaction) {
         };
     } else {
         if (reply.embeds) {
+            // @ts-expect-error
             reply.embeds = applyStyle(reply.embeds, brand);
         } else if (reply.content) {
             reply.embeds = [asEmbed(reply.content, brand)];

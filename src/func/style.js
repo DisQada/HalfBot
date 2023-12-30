@@ -13,6 +13,7 @@ const { asNumber } = require("./colour");
 function asEmbed(text, brand) {
     /** @type {import("../options").Embed} */
     const embed = { description: text };
+    // @ts-expect-error
     return applyStyle(embed, brand);
 }
 
@@ -77,7 +78,7 @@ function applyStyle(toApplyOn, brand) {
      * @param {import("../options").Brand} brand - The brand to get the style from.
      * @returns {import("../options").Embed[]} The embeds array after applying the style to it.
      * @example
-     * let embeds = [{title: 'halfbot'}];
+     * let embeds = [{title: 'HalfBot'}];
      * const brand = {colour: 0xffffff};
      * embeds = applyToEmbeds(embeds, brand);
      */
