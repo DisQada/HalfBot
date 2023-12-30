@@ -7,12 +7,12 @@
 
 /**
  * Possible types for a bot module
- * @typedef {"command" | "event"} ModuleType
+ * @typedef {"command" | "event"} Modules
  */
 
 /**
  * Deployment of a bot module
- * @typedef {"global" | "dev" | "support"} DeploymentType
+ * @typedef {"global" | "dev" | "support"} Deployments
  */
 
 // Core
@@ -70,8 +70,8 @@
 /**
  * @typedef {object} SuccessRecord
  * @property {string} name Name of the module
- * @property {ModuleType} type Bot module type
- * @property {DeploymentType} deployment The servers deployed to
+ * @property {Modules} type Bot module type
+ * @property {Deployments} deployment The servers deployed to
  * @private
  */
 
@@ -92,13 +92,15 @@
  */
 
 /**
- * @typedef {BaseCommandData & (import("discord.js").ChatInputApplicationCommandData | import("discord.js").UserApplicationCommandData | import("discord.js").MessageApplicationCommandData)} CommandData
+ * @typedef {BaseCommandData & import("discord.js").ApplicationCommandData} CommandData
  */
 
 /**
  * @typedef {object} BaseCommandData
  * @property {string} category
- * @property {DeploymentType} [deployment]
+ * @property {Deployments} [deployment]
+ * @property {boolean} [defer]
+ * @property {boolean} [ephemeral]
  * @property {"command"} module Bot module type
  */
 
@@ -114,7 +116,7 @@
 /**
  * @callback CommandFunction
  * @param {CommandInteraction} interaction
- * @returns {Promise<import("discord.js").ReplyOptions | string | void> | import("discord.js").ReplyOptions| string | void}
+ * @returns {Promise<import("discord.js").InteractionReplyOptions | string | void> | import("discord.js").InteractionReplyOptions| string | void}
  */
 
 // Event
@@ -137,7 +139,7 @@
 /**
  * @template {keyof import("discord.js").ClientEvents} Key
  * @callback EventFunction
- * @param {import("../class/discordBot").DiscordBot} bot
+ * @param {import("./class/discordBot").DiscordBot} bot
  * @param {...import("discord.js").ClientEvents[Key]} args
  * @returns {any}
  */

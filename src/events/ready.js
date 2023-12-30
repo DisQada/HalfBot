@@ -26,7 +26,7 @@ function getGuildId(data, guildIds) {
 /**
  * Preparing the bot commands for registration.
  * @param {import("../class/discordBot").DiscordBot} bot - The bot to register the commands for.
- * @returns {Map<string, import("../options").BotCommand[]>}
+ * @returns {Map<string, import("../options").CommandData[]>}
  * @category Events
  * @private
  */
@@ -48,7 +48,7 @@ function prepareCommands(bot) {
 /**
  * Register the commands via the API.
  * @param {import("discord.js").Client} client - The client to register the commands for.
- * @param {Map<string, import("../options").BotCommand>} commandMap - The commands to register.
+ * @param {Map<string, import("../options").CommandData[]>} commandMap - The commands to register.
  * @returns {Promise<void>}
  * @category Events
  * @private
