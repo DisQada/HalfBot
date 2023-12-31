@@ -47,28 +47,28 @@ function prepareCommands(bot) {
 
 /**
  * Register the commands via the API.
- * @param {import('discord.js').Client} client - The client to register the commands for.
+ * @param {import('../class/discordBot').DiscordBot} bot - The bot to register the commands for.
  * @param {Map<string, import('../options').CommandData[]>} commandMap - The commands to register.
  * @returns {Promise<void>}
  * @category Events
  * @private
  */
-async function registerCommands(client, commandMap) {
+async function registerCommands(bot, commandMap) {
   for (const iterator of commandMap) {
     const commandsData = iterator[1]
     const guildId = iterator[0]
 
     if (guildId === '0') {
-      await client.application?.commands.set(commandsData)
+      await bot.application?.commands.set(commandsData)
     } else {
-      await client.application?.commands.set(commandsData, guildId)
+      await bot.application?.commands.set(commandsData, guildId)
     }
   }
 }
 
 /**
- * The client is ready and has connected successfully.
- * @param {import('../class/discordBot').DiscordBot} bot - The bot of the client.
+ * The bot is ready and has connected successfully.
+ * @param {import('../class/discordBot').DiscordBot} bot - The bot.
  * @returns {Promise<void>}
  * @category Events
  * @async
@@ -76,11 +76,11 @@ async function registerCommands(client, commandMap) {
  */
 async function ready(bot) {
   const commands = prepareCommands(bot)
-  await registerCommands(bot.client, commands)
+  await registerCommands(bot, commands)
 
-  if (bot.client.user) {
-    console.log(`-> The Bot '${bot.client.user.username}' Is Online <-`)
-    bot.client.user.setPresence(bot.data.config.presence)
+  if (bot.user) {
+    console.log(`-> The Bot '${bot.user.username}' Is Online <-`)
+    bot.user.setPresence(bot.data.config.presence)
   } else {
     console.log('-> Bot Is Online <-')
   }

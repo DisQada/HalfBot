@@ -14,7 +14,7 @@ const { validCommand, validEvent } = require('../func/validate')
  * @class
  * @category Core
  */
-class DiscordBot {
+class DiscordBot extends Client {
   /**
    * @type {import('../options').BotData}
    */
@@ -40,7 +40,9 @@ class DiscordBot {
   commands = new Map()
 
   /**
+   * Will be deleted in the next major release
    * @type {import('discord.js').Client}
+   * @deprecated The bot class now extends `Client`, use it instead
    */
   client
 
@@ -49,7 +51,7 @@ class DiscordBot {
    * @param {import('../options').BotOptions} options - Information about the DiscordBot.
    */
   constructor(options) {
-    this.client = new Client(
+    super(
       options.client || {
         intents: [
           GatewayIntentBits.Guilds,
@@ -58,6 +60,8 @@ class DiscordBot {
         ]
       }
     )
+
+    this.client = this
     this.runBot(options)
   }
 
@@ -95,8 +99,8 @@ class DiscordBot {
    * @private
    */
   listenToEvents() {
-    this.client.once(Events.ClientReady, () => ready(this))
-    this.client.on(Events.InteractionCreate, (interaction) => {
+    this.once(Events.ClientReady, () => ready(this))
+    this.on(Events.InteractionCreate, (interaction) => {
       // @ts-expect-error
       interaction.bot = this
       // @ts-expect-error
@@ -156,13 +160,9 @@ class DiscordBot {
    */
   registerEvent(event) {
     if (event.data.name === Events.ClientReady) {
-      this.client.once(event.data.name, (...args) =>
-        event.execute(this, [...args])
-      )
+      this.once(event.data.name, (...args) => event.execute(this, [...args]))
     } else {
-      this.client.on(event.data.name, (...args) =>
-        event.execute(this, [...args])
-      )
+      this.on(event.data.name, (...args) => event.execute(this, [...args]))
     }
 
     return {
@@ -173,7 +173,7 @@ class DiscordBot {
   }
 
   /**
-   * Register bot modules to the client.
+   * Register bot modules to the bot.
    * @returns {Promise<void>}
    * @async
    * @private
