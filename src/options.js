@@ -133,6 +133,7 @@
  * @template {keyof import('discord.js').ClientEvents} Key
  * @typedef {object} EventData
  * @property {Key} name Event name / caller
+ * @property {boolean} [once] Whether the event should be called once
  * @property {'event'} module Bot module type
  */
 

@@ -159,7 +159,7 @@ class DiscordBot extends Client {
    * @returns {import('../options').SuccessRecord}
    */
   registerEvent(event) {
-    if (event.data.name === Events.ClientReady) {
+    if (event.data.name === Events.ClientReady || event.data.once) {
       this.once(event.data.name, (...args) => event.execute(this, [...args]))
     } else {
       this.on(event.data.name, (...args) => event.execute(this, [...args]))
