@@ -49,24 +49,15 @@ class DiscordBot {
    * @param {import('../options').BotOptions} options - Information about the DiscordBot.
    */
   constructor(options) {
-    /** @type {Partial<import('../options').BotOptions>} */
-    const defaultOptions = {
-      client: {
+    this.client = new Client(
+      options.client || {
         intents: [
           GatewayIntentBits.Guilds,
           GatewayIntentBits.GuildMessages,
           GatewayIntentBits.GuildMembers
         ]
-      },
-      directories: {
-        root: 'bot',
-        data: 'bot/data'
       }
-    }
-    Object.assign(defaultOptions, options)
-
-    // TODO Check token and clientId validity
-    this.client = new Client(options.client)
+    )
     this.runBot(options)
   }
 
@@ -78,16 +69,24 @@ class DiscordBot {
    * @private
    */
   async runBot(options) {
-    // @ts-ignore
-    await storeFolderPaths([options.directories.root], {
-      deepSearch: true
-    })
-    // @ts-ignore
-    await this.storeData(options.directories.data)
+    if (!options.directories) {
+      options.directories = {}
+    }
+
+    await Promise.all([
+      storeFolderPaths([options.directories.root || 'bot'], {
+        deepSearch: true
+      }),
+      this.storeData(options.directories.data || 'bot/data')
+    ])
+
     await this.registerAllModules()
     this.listenToEvents()
 
-    await this.client.login(options.token)
+    if (!options.token) {
+      throw new Error('No token was provided')
+    }
+    await this.login(options.token)
   }
 
   /**
@@ -96,7 +95,7 @@ class DiscordBot {
    * @private
    */
   listenToEvents() {
-    this.client.on(Events.ClientReady, () => ready(this))
+    this.client.once(Events.ClientReady, () => ready(this))
     this.client.on(Events.InteractionCreate, (interaction) => {
       // @ts-expect-error
       interaction.bot = this
@@ -115,6 +114,10 @@ class DiscordBot {
     const files = await readFolderPaths(resolve(directory), {
       deepSearch: false
     })
+    if (files.length === 0) {
+      return
+    }
+
     for (let i = 0; i < files.length; i++) {
       const index1 = files[i].lastIndexOf(sep)
       const index2 = files[i].length - '.json'.length
@@ -152,7 +155,15 @@ class DiscordBot {
    * @returns {import('../options').SuccessRecord}
    */
   registerEvent(event) {
-    this.client.on(event.data.name, (...args) => event.execute(this, [...args]))
+    if (event.data.name === Events.ClientReady) {
+      this.client.once(event.data.name, (...args) =>
+        event.execute(this, [...args])
+      )
+    } else {
+      this.client.on(event.data.name, (...args) =>
+        event.execute(this, [...args])
+      )
+    }
 
     return {
       name: event.data.name,
@@ -168,11 +179,9 @@ class DiscordBot {
    * @private
    */
   async registerAllModules() {
-    const paths = findPaths({})
-      .filter(
-        (fp) => fp.fullPath.includes('command') || fp.fullPath.includes('event')
-      )
+    const paths = findPaths()
       .map((fp) => fp.fullPath)
+      .filter((fp) => fp.includes('command') || fp.includes('event'))
     if (paths.length === 0) {
       return
     }
