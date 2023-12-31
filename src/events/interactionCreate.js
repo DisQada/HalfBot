@@ -76,4 +76,6 @@ async function interactionCreate(interaction) {
   }
 }
 
-module.exports = interactionCreate
+module.exports = {
+  interactionCreate
+}

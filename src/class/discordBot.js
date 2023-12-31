@@ -1,5 +1,5 @@
 const { Client, Events, GatewayIntentBits } = require('discord.js')
-const interactionCreate = require('../events/interactionCreate')
+const { interactionCreate } = require('../events/interactionCreate')
 const { ready } = require('../events/ready')
 const { logSuccessRecords, logFailRecords } = require('../func/log')
 const {
