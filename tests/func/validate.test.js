@@ -19,7 +19,7 @@ describe('Test validCommand function', () => {
 
 describe('Test validEvent function', () => {
   it('should be valid', () => {
-    /** @type {import('../../src/options').BotEvent<any>} */
+    /** @type {import('../../src/options').BotEvent} */
     const event = {
       data: {
         name: 'test',

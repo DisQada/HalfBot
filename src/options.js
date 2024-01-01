@@ -7,12 +7,17 @@
 
 /**
  * Possible types for a bot module
- * @typedef {'command' | 'event'} Modules
+ * @typedef {'command' | 'event' | 'event-repeat'} Modules
  */
 
 /**
  * Deployment of a bot module
  * @typedef {'global' | 'dev' | 'support'} Deployments
+ */
+
+/**
+ * Symbols for time units
+ * @typedef {'ms' | 's' | 'm' | 'h' | 'd' | 'w'} TimeUnits
  */
 
 // Core
@@ -122,16 +127,21 @@
 // Event
 
 /**
+ * All types of bot events
+ * @typedef {ClientEvent<any> | RepeatingEvent} BotEvent
+ */
+
+/**
  * The full object of a event file
  * @template {keyof import('discord.js').ClientEvents} Key
- * @typedef {object} BotEvent
- * @property {EventData<Key>} data
- * @property {EventFunction<Key>} execute
+ * @typedef {object} ClientEvent
+ * @property {ClientEventData<Key>} data
+ * @property {ClientEventFunction<Key>} execute
  */
 
 /**
  * @template {keyof import('discord.js').ClientEvents} Key
- * @typedef {object} EventData
+ * @typedef {object} ClientEventData
  * @property {Key} name Event name / caller
  * @property {boolean} [once] Whether the event should be called once
  * @property {'event'} module Bot module type
@@ -139,10 +149,30 @@
 
 /**
  * @template {keyof import('discord.js').ClientEvents} Key
- * @callback EventFunction
+ * @callback ClientEventFunction
  * @param {import('./class/discordBot').DiscordBot} bot
  * @param {...import('discord.js').ClientEvents[Key]} args
  * @returns {any}
+ */
+
+/**
+ * The full object of a event file
+ * @typedef {object} RepeatingEvent
+ * @property {RepeatingEventData} data
+ * @property {RepeatingEventFunction} execute
+ */
+
+/**
+ * @typedef {object} RepeatingEventData
+ * @property {number | string} wait The time to wait between each execution
+ * @property {number | string} [firstWait] The time to wait before the first execution
+ * @property {'event-repeat'} module Bot module type
+ */
+
+/**
+ * @callback RepeatingEventFunction
+ * @param {import('./class/discordBot').DiscordBot} bot
+ * @returns {Promise<void | number | string>}
  */
 
 // Discord

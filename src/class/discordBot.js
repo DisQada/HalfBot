@@ -9,6 +9,8 @@ const {
 } = require('@disqada/pathfinder')
 const { resolve, sep } = require('path')
 const { validCommand, validEvent } = require('../func/validate')
+const { toNumber } = require('../func/time')
+const { setTimeout } = require('timers/promises')
 
 /**
  * @class
@@ -155,21 +157,81 @@ class DiscordBot extends Client {
 
   /**
    * Register an event inside the bot.
-   * @param {import('../options').BotEvent<any>} event - The bot event module.
+   * @param {import('../options').BotEvent} event - The bot event module.
    * @returns {import('../options').SuccessRecord}
    */
   registerEvent(event) {
-    if (event.data.name === Events.ClientReady || event.data.once) {
-      this.once(event.data.name, (...args) => event.execute(this, [...args]))
-    } else {
-      this.on(event.data.name, (...args) => event.execute(this, [...args]))
-    }
-
-    return {
-      name: event.data.name,
+    /** @type {import('../options').SuccessRecord} */
+    const record = {
+      name: '',
       type: event.data.module,
       deployment: 'global'
     }
+
+    switch (event.data.module) {
+      case 'event': {
+        /** @type {import('../options').ClientEvent<any>} */
+        // @ts-expect-error
+        const e = event
+        const { data, execute } = e
+        /** @type {import('../options').ClientEventFunction<any>} */
+        const func = (...args) => execute(this, [...args])
+
+        if (data.name === Events.ClientReady || data.once) {
+          this.once(data.name, func)
+        } else {
+          this.on(data.name, func)
+        }
+
+        record.name = data.name
+        break
+      }
+
+      case 'event-repeat': {
+        /** @type {import('../options').RepeatingEvent} */
+        // @ts-expect-error
+        const e = event
+        const { data, execute } = e
+        /** @type {import('../options').RepeatingEventFunction} */
+        const func = async () => {
+          let first
+          let nextWait
+
+          if (data.firstWait) {
+            nextWait = toNumber(data.firstWait)
+            first = true
+          } else {
+            nextWait = toNumber(data.wait)
+            first = false
+          }
+
+          // eslint-disable-next-line no-constant-condition
+          while (true) {
+            await setTimeout(nextWait, undefined)
+            const value = await execute(this)
+
+            if (typeof value === 'number' || typeof value === 'string') {
+              nextWait = toNumber(value)
+            } else if (first) {
+              nextWait = toNumber(data.wait)
+              first = false
+            }
+
+            if (nextWait === 0) {
+              break
+            }
+          }
+        }
+
+        // @ts-expect-error
+        this.once(Events.ClientReady, func)
+
+        record.name = 'repeating'
+        break
+      }
+    }
+
+    return record
   }
 
   /**
