@@ -4,7 +4,6 @@ const { applyStyle, asEmbed } = require('../func/style')
  * Handler of interactions called by the bot.
  * @param {import('../options').CommandInteraction} interaction - The interaction to handle.
  * @returns {Promise<void>}
- * @category Events
  * @private
  */
 async function interactionCreate(interaction) {

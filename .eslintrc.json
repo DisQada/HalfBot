@@ -15,12 +15,5 @@
     "plugin:promise/recommended"
   ],
   "plugins": ["jsdoc", "import", "promise"],
-  "rules": {},
-  "settings": {
-    "jsdoc": {
-      "tagNamePreference": {
-        "category": "category"
-      }
-    }
-  }
+  "rules": {}
 }

@@ -8,7 +8,6 @@ const { asNumber } = require('./colour')
  * @example
  * const brand = { colour: 0xffffff }
  * const result = asEmbed('HalfBot', brand)
- * @category Style
  */
 function asEmbed(text, brand) {
   /** @type {import('../options').Embed} */
@@ -30,7 +29,6 @@ function asEmbed(text, brand) {
  * let embeds = [{ title: 'HalfBot' }]
  * const brand = { colour: 0xffffff }
  * embeds = applyStyle(embeds, brand)
- * @category Style
  */
 function applyStyle(toApplyOn, brand) {
   if (Array.isArray(toApplyOn)) {

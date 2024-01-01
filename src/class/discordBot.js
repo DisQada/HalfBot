@@ -14,7 +14,6 @@ const { setTimeout } = require('timers/promises')
 
 /**
  * @class
- * @category Core
  */
 class DiscordBot extends Client {
   /**

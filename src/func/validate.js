@@ -2,7 +2,6 @@
  * Check a command's validity.
  * @param {import('../options').BotCommand} obj - The command to check.
  * @returns {boolean} True if valid, false otherwise.
- * @category Validate
  * @private
  */
 function validCommand(obj) {
@@ -30,7 +29,6 @@ function validCommand(obj) {
  * Check an event's validity.
  * @param {import('../options').BotEvent} obj - The event to check.
  * @returns {boolean} True if valid, false otherwise.
- * @category Validate
  * @private
  */
 function validEvent(obj) {

@@ -4,7 +4,6 @@
  * @param {import('../options').GuildIDs} guildIds - The container of the server IDs.
  * @returns {string} The server ID.
  * @throws {Error} - if data.deployment wasn't of the enum values.
- * @category Events
  * @private
  */
 function getGuildId(data, guildIds) {
@@ -27,7 +26,6 @@ function getGuildId(data, guildIds) {
  * Preparing the bot commands for registration.
  * @param {import('../class/discordBot').DiscordBot} bot - The bot to register the commands for.
  * @returns {Map<string, import('../options').CommandData[]>}
- * @category Events
  * @private
  */
 function prepareCommands(bot) {
@@ -50,7 +48,6 @@ function prepareCommands(bot) {
  * @param {import('../class/discordBot').DiscordBot} bot - The bot to register the commands for.
  * @param {Map<string, import('../options').CommandData[]>} commandMap - The commands to register.
  * @returns {Promise<void>}
- * @category Events
  * @private
  */
 async function registerCommands(bot, commandMap) {
@@ -70,7 +67,6 @@ async function registerCommands(bot, commandMap) {
  * The bot is ready and has connected successfully.
  * @param {import('../class/discordBot').DiscordBot} bot - The bot.
  * @returns {Promise<void>}
- * @category Events
  * @async
  * @private
  */
