@@ -7,18 +7,23 @@
  */
 function validCommand(obj) {
   if (
+    !obj.execute ||
     !obj.data ||
     !obj.data.module ||
-    obj.data.module !== 'command' ||
-    !obj.execute
+    !obj.data.module.startsWith('command')
   ) {
     return false
   }
 
-  const required = ['name', 'description']
-  const hasRequiredData = required.every((property) => property in obj.data)
+  switch (obj.data.module) {
+    case 'command': {
+      const required = ['name', 'description']
+      return required.every((prop) => prop in obj.data)
+    }
 
-  return hasRequiredData
+    default:
+      return false
+  }
 }
 
 /**
@@ -52,18 +57,6 @@ function validEvent(obj) {
     default:
       return false
   }
-    !obj.data ||
-    !obj.data.module ||
-    obj.data.module !== 'event' ||
-    !obj.execute
-  ) {
-    return false
-  }
-
-  const required = ['name']
-  const hasRequiredData = required.every((property) => property in obj.data)
-
-  return hasRequiredData
 }
 
 module.exports = {
