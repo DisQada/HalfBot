@@ -28,7 +28,7 @@
  * @property {object} [directories]
  * @property {string} [directories.root] - The path to the folder containing all the bot files.
  * @property {string} [directories.data] - The Path to the directory the json data files.
- * @property {import('discord.js').ClientOptions} client
+ * @property {import('discord.js').ClientOptions} [client]
  */
 
 /**
