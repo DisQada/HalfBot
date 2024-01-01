@@ -3,12 +3,13 @@ const { table } = require('table')
 /**
  * Get the default configurations for the table.
  * @param {string} header - The name of the table.
+ * @param {number} width - The width of the table rows.
  * @returns {import('table').TableUserConfig} Ready to use configurations.
  * @example
  * const finalConfig = defaultConfig('Table name')
  * @private
  */
-function defaultConfig(header) {
+function defaultConfig(header, width) {
   return {
     header: {
       alignment: 'center',
@@ -19,7 +20,7 @@ function defaultConfig(header) {
       alignment: 'center',
       verticalAlignment: 'middle',
       wrapWord: true,
-      width: 45
+      width: width
     }
   }
 }
@@ -45,7 +46,7 @@ function logSuccessRecords(records) {
   }
 
   const msg = '🟩 Successful registration 🟩'
-  return table(data, defaultConfig(msg))
+  return table(data, defaultConfig(msg, 30))
 }
 
 /**
@@ -69,7 +70,7 @@ function logFailRecords(records) {
   }
 
   const msg = '🟥 Failure registration 🟥'
-  return table(data, defaultConfig(msg))
+  return table(data, defaultConfig(msg, 45))
 }
 
 module.exports = {
