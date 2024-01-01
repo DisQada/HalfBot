@@ -1,3 +1,21 @@
+# [3.1.0](https://github.com/DisQada/HalfBot/compare/v3.0.0...v3.1.0) (2024-01-01)
+
+
+### Bug Fixes
+
+* **BotOptions:** Identify 'client' prop as optional ([f57c47e](https://github.com/DisQada/HalfBot/commit/f57c47e866d8f6e18cc6618763cd20964a657854))
+
+
+### Features
+
+* **BotEvent:** Use 'once' property ([51f235c](https://github.com/DisQada/HalfBot/commit/51f235c5e685de086d084cea7f83f465d4db2dca))
+* **BotEvet:** Introduce repeating events ([f4920a9](https://github.com/DisQada/HalfBot/commit/f4920a9943e9cde9ef82e88d668e593ad673aaca))
+
+
+### Performance Improvements
+
+* Speed up start time ([a544612](https://github.com/DisQada/HalfBot/commit/a5446129db6e669cfc443973a241ee23bb805e25))
+
 # [3.0.0](https://github.com/DisQada/HalfBot/compare/v2.1.1...v3.0.0) (2023-12-30)
 
 
