@@ -1,3 +1,10 @@
+## [3.1.2](https://github.com/DisQada/HalfBot/compare/v3.1.1...v3.1.2) (2024-01-02)
+
+
+### Bug Fixes
+
+* Eliminate types issues ([3ed25fb](https://github.com/DisQada/HalfBot/commit/3ed25fba4174950553c4d21d3a6393c4eeb66f30))
+
 ## [3.1.1](https://github.com/DisQada/HalfBot/compare/v3.1.0...v3.1.1) (2024-01-02)
 
 
