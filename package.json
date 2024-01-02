@@ -57,7 +57,7 @@
     "table": "^6.8.1"
   },
   "devDependencies": {
-    "@disqada/typedoc": "^1.2.1",
+    "@disqada/typedoc": "^1.3.1",
     "@types/jest": "*",
     "eslint": "*",
     "eslint-plugin-import": "*",

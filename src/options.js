@@ -1,3 +1,5 @@
+module.exports = {}
+
 /**
  * @typedef {object} StyleOptions
  * @property {boolean} skipFooter
@@ -273,5 +275,3 @@
  * @property {5} Competing Competing in {name}
  * @see https://discord.com/developers/docs/topics/gateway-events#activity-object-activity-types
  */
-
-module.exports = {}
