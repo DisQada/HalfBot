@@ -174,7 +174,7 @@ class DiscordBot extends Client {
         const e = event
         const { data, execute } = e
         /** @type {import('../options').ClientEventFunction<any>} */
-        const func = (...args) => execute(this, [...args])
+        const func = (args) => execute(this, args)
 
         if (data.name === Events.ClientReady || data.once) {
           this.once(data.name, func)
