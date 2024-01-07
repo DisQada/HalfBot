@@ -1,3 +1,10 @@
+## [3.1.3](https://github.com/DisQada/HalfBot/compare/v3.1.2...v3.1.3) (2024-01-07)
+
+
+### Bug Fixes
+
+* **DiscordBot:** Pass event args without modifications ([69e0832](https://github.com/DisQada/HalfBot/commit/69e08329fe62a8342258799bf26b63657a4f89d6))
+
 ## [3.1.2](https://github.com/DisQada/HalfBot/compare/v3.1.1...v3.1.2) (2024-01-02)
 
 
