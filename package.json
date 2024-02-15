@@ -17,6 +17,7 @@
   "types": "./types/exports.d.ts",
   "exports": {
     ".": {
+      "import": "./src/exports.mjs",
       "require": "./src/exports.js",
       "default": "./src/exports.js",
       "types": "./types/exports.d.ts"
