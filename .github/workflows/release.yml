@@ -1,4 +1,4 @@
-name: Release
+name: إصدار
 
 on:
   workflow_dispatch:
@@ -10,33 +10,27 @@ jobs:
       issues: write
       pull-requests: write
 
-    name: Release
+    name: إصدار
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - name: الفحص
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - name: إعداد Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 'lts/*'
           registry-url: https://registry.npmjs.org
 
-      - name: Install dependencies
-        run: npm ci && npm i --no-save @semantic-release/changelog @semantic-release/git
+      - name: تثبيت التبعيات
+        run: npm ci --ignore-scripts && npm i --no-save @semantic-release/changelog @semantic-release/git
 
-      - name: Config
-        run: npm explore @disqada/typedoc -- npm run config
+      - name: توليد الأنواع
+        run: npm run types --if-present
 
-      - name: Generate types
-        run: npm explore @disqada/typedoc -- npm run types
-
-      - name: Clean types
-        run: npm explore @disqada/typedoc -- npm run clean
-
-      - name: Release
+      - name: الإصدار
         run: npx semantic-release
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

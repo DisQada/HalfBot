@@ -1,8 +1,8 @@
-name: Generate Documentation
+name: توليد الوثائق
 
 on:
   release:
-    types: [released, published]
+    types: [released]
   workflow_dispatch:
 
 permissions:
@@ -21,38 +21,29 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - name: الفحص
+        uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - name: إعداد Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 'lts/*'
           registry-url: https://registry.npmjs.org
 
-      - name: Install dependencies
-        run: npm ci
+      - name: تثبيت التبعيات
+        run: npm ci --ignore-scripts
 
-      - name: Config
-        run: npm explore @disqada/typedoc -- npm run config
+      - name: توليد الوثائق
+        run: npm run docs
 
-      - name: Generate types
-        run: npm explore @disqada/typedoc -- npm run types
+      - name: إعداد الصفحات
+        uses: actions/configure-pages@v4
 
-      - name: Clean types
-        run: npm explore @disqada/typedoc -- npm run clean
-
-      - name: Generate docs
-        run: npm explore @disqada/typedoc -- npm run docs
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+      - name: رفع الملف
+        uses: actions/upload-pages-artifact@v3
         with:
           path: './docs'
 
-      - name: Deploy to GitHub Pages
+      - name: النشر على صفحات جيتهاب
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4

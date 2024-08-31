@@ -1,0 +1,12 @@
+{
+  "$schema": "https://pastebin.com/raw/RsuWYzL3",
+
+  "root": "src",
+  "types": "types",
+  "out": "docs",
+
+  "links": {
+    "DisQada": "https://github.com/DisQada",
+    "Developer": "https://links.thealpha.pro"
+  }
+}
