@@ -7,24 +7,14 @@
  * @private
  */
 export function validCommand(obj) {
-  if (
-    !obj.execute ||
-    !obj.data ||
-    !obj.data.module ||
-    !obj.data.module.startsWith('command')
-  ) {
-    return false
+  if (!obj.execute || !obj.data || !obj.data.module || !obj.data.module.startsWith('command')) return false
+
+  if (obj.data.module === 'command') {
+    const required = ['name', 'description']
+    return required.every((prop) => prop in obj.data)
   }
 
-  switch (obj.data.module) {
-    case 'command': {
-      const required = ['name', 'description']
-      return required.every((prop) => prop in obj.data)
-    }
-
-    default:
-      return false
-  }
+  return false
 }
 
 /**
@@ -34,27 +24,17 @@ export function validCommand(obj) {
  * @private
  */
 export function validEvent(obj) {
-  if (
-    !obj.execute ||
-    !obj.data ||
-    !obj.data.module ||
-    !obj.data.module.startsWith('event')
-  ) {
-    return false
+  if (!obj.execute || !obj.data || !obj.data.module || !obj.data.module.startsWith('event')) return false
+
+  if (obj.data.module === 'event') {
+    const required = ['name']
+    return required.every((prop) => prop in obj.data)
   }
 
-  switch (obj.data.module) {
-    case 'event': {
-      const required = ['name']
-      return required.every((prop) => prop in obj.data)
-    }
-
-    case 'event-repeat': {
-      const required = ['wait']
-      return required.every((prop) => prop in obj.data)
-    }
-
-    default:
-      return false
+  if (obj.data.module === 'event-repeat') {
+    const required = ['wait']
+    return required.every((prop) => prop in obj.data)
   }
+
+  return false
 }

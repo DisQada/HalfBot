@@ -51,11 +51,7 @@ export class DiscordBot extends Client {
   constructor(options) {
     super(
       options.client || {
-        intents: [
-          GatewayIntentBits.Guilds,
-          GatewayIntentBits.GuildMessages,
-          GatewayIntentBits.GuildMembers
-        ]
+        intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildMembers]
       }
     )
 
@@ -113,25 +109,18 @@ export class DiscordBot extends Client {
    * @async
    */
   async storeData(directory) {
-    const files = await readFolderPaths(resolve(directory), {
-      deepSearch: false
-    })
-    if (files.length === 0) {
-      return
-    }
+    const files = await readFolderPaths(resolve(directory), { deepSearch: false })
+    if (files.length === 0) return
 
     for (let i = 0; i < files.length; i++) {
-      const index1 = files[i].lastIndexOf(sep)
-      const index2 = files[i].length - '.json'.length
-      const name = files[i].substring(index1 + sep.length, index2)
+      const i1 = files[i].lastIndexOf(sep)
+      const i2 = files[i].length - '.json'.length
+      const name = files[i].substring(i1 + sep.length, i2)
 
       const data = require(files[i])
       if (data) {
-        if (name === 'config') {
-          Object.assign(this.data.config, data)
-        } else {
-          this.data[name] = data
-        }
+        if (name === 'config') Object.assign(this.data.config, data)
+        else this.data[name] = data
       }
     }
   }
@@ -173,11 +162,8 @@ export class DiscordBot extends Client {
         /** @type {ClientEventFunction<any>} */
         const func = (args) => execute(this, args)
 
-        if (data.name === Events.ClientReady || data.once) {
-          this.once(data.name, func)
-        } else {
-          this.on(data.name, func)
-        }
+        if (data.name === Events.ClientReady || data.once) this.once(data.name, func)
+        else this.on(data.name, func)
 
         record.name = data.name
         break
@@ -206,16 +192,13 @@ export class DiscordBot extends Client {
             await setTimeout(nextWait, undefined)
             const value = await execute(this)
 
-            if (typeof value === 'number' || typeof value === 'string') {
-              nextWait = toNumber(value)
-            } else if (first) {
+            if (typeof value === 'number' || typeof value === 'string') nextWait = toNumber(value)
+            else if (first) {
               nextWait = toNumber(data.wait)
               first = false
             }
 
-            if (nextWait === 0) {
-              break
-            }
+            if (nextWait === 0) break
           }
         }
 
@@ -240,9 +223,7 @@ export class DiscordBot extends Client {
     const paths = findPaths()
       .map((fp) => fp.fullPath)
       .filter((fp) => fp.includes('command') || fp.includes('event'))
-    if (paths.length === 0) {
-      return
-    }
+    if (paths.length === 0) return
 
     /** @type {SuccessRecord[]} */
     const successRecords = []

@@ -32,11 +32,8 @@ export function asEmbed(text, brand) {
  * embeds = applyStyle(embeds, brand)
  */
 export function applyStyle(toApplyOn, brand) {
-  if (Array.isArray(toApplyOn)) {
-    return applyToEmbeds(toApplyOn, brand)
-  } else {
-    return applyToEmbed(toApplyOn, brand)
-  }
+  if (Array.isArray(toApplyOn)) return applyToEmbeds(toApplyOn, brand)
+  else return applyToEmbed(toApplyOn, brand)
 
   /**
    * Apply brand style to an embed.
@@ -50,21 +47,14 @@ export function applyStyle(toApplyOn, brand) {
    * embed = applyToEmbed(embed, brand)
    */
   function applyToEmbed(embed, brand, options = { skipFooter: false }) {
-    if (brand.colour) {
-      embed.color = asNumber(brand.colour)
-    }
+    if (brand.colour) embed.color = asNumber(brand.colour)
 
     if (!options.skipFooter) {
       if (brand.name) {
-        if (embed.footer) {
-          embed.footer.text = brand.name
-        } else {
-          embed.footer = { text: brand.name }
-        }
+        if (embed.footer) embed.footer.text = brand.name
+        else embed.footer = { text: brand.name }
 
-        if (brand.logoUrl) {
-          embed.footer.iconUrl = brand.logoUrl
-        }
+        if (brand.logoUrl) embed.footer.iconUrl = brand.logoUrl
       }
     }
 
@@ -84,9 +74,7 @@ export function applyStyle(toApplyOn, brand) {
   function applyToEmbeds(embeds, brand) {
     const lastEmbed = embeds.length - 1
     for (let i = 0; i < embeds.length; i++) {
-      embeds[i] = applyToEmbed(embeds[i], brand, {
-        skipFooter: i < lastEmbed
-      })
+      embeds[i] = applyToEmbed(embeds[i], brand, { skipFooter: i < lastEmbed })
     }
 
     return embeds

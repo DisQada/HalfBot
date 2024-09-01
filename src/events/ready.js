@@ -34,8 +34,7 @@ export function getGuildId(data, guildIds) {
 export function prepareCommands(bot) {
   const commands = new Map()
 
-  for (const iterator of bot.commands) {
-    const command = iterator[1]
+  for (const [_, command] of bot.commands) {
     const guildId = getGuildId(command.data, bot.data.config.id.guild)
 
     const commandArray = commands.get(guildId) ?? []
@@ -54,15 +53,9 @@ export function prepareCommands(bot) {
  * @private
  */
 async function registerCommands(bot, commandMap) {
-  for (const iterator of commandMap) {
-    const commandsData = iterator[1]
-    const guildId = iterator[0]
-
-    if (guildId === '0') {
-      await bot.application?.commands.set(commandsData)
-    } else {
-      await bot.application?.commands.set(commandsData, guildId)
-    }
+  for (const [guildId, commandsData] of commandMap) {
+    if (guildId === '0') await bot.application?.commands.set(commandsData)
+    else await bot.application?.commands.set(commandsData, guildId)
   }
 }
 
@@ -81,7 +74,5 @@ export async function ready(bot) {
     console.log(`-> The Bot '${bot.user.username}' Is Online <-`)
     // @ts-expect-error
     bot.user.setPresence(bot.data.config.presence)
-  } else {
-    console.log('-> Bot Is Online <-')
-  }
+  } else console.log('-> Bot Is Online <-')
 }

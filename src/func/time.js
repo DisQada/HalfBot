@@ -45,34 +45,17 @@ export function toNumber(str) {
   let time = 0
 
   const secondMatch = str.match(/\d+(s|S)/)
-  if (secondMatch) {
-    time += parseInt(secondMatch[0].slice(0, -1)) * multipliers.ms
-  }
+  if (secondMatch) time += parseInt(secondMatch[0].slice(0, -1)) * multipliers.ms
 
   const minuteMatch = str.match(/\d+(m|M)/)
-  if (minuteMatch) {
-    time +=
-      parseInt(minuteMatch[0].slice(0, -1)) * multipliers.ms * multipliers.m
-  }
+  if (minuteMatch) time += parseInt(minuteMatch[0].slice(0, -1)) * multipliers.ms * multipliers.m
 
   const hourMatch = str.match(/\d+(h|H)/)
-  if (hourMatch) {
-    time +=
-      parseInt(hourMatch[0].slice(0, -1)) *
-      multipliers.ms *
-      multipliers.m *
-      multipliers.h
-  }
+  if (hourMatch) time += parseInt(hourMatch[0].slice(0, -1)) * multipliers.ms * multipliers.m * multipliers.h
 
   const dayMatch = str.match(/\d+(d|D)/)
-  if (dayMatch) {
-    time +=
-      parseInt(dayMatch[0].slice(0, -1)) *
-      multipliers.ms *
-      multipliers.m *
-      multipliers.h *
-      multipliers.d
-  }
+  if (dayMatch)
+    time += parseInt(dayMatch[0].slice(0, -1)) * multipliers.ms * multipliers.m * multipliers.h * multipliers.d
 
   const weekMatch = str.match(/\d+(w|W)/)
   if (weekMatch) {

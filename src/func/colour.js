@@ -12,17 +12,11 @@
 export function asNumber(colour) {
   let num
 
-  if (typeof colour === 'number') {
-    num = colour
-  } else if (typeof colour === 'string') {
-    num = Number.parseInt(colour.substring(1), 16)
-  }
+  if (typeof colour === 'number') num = colour
+  else if (typeof colour === 'string') num = Number.parseInt(colour.substring(1), 16)
 
-  if (num) {
-    return num
-  } else {
-    return 0
-  }
+  if (num) return num
+  else return 0
 }
 
 /**
@@ -39,19 +33,11 @@ export function asNumber(colour) {
 export function asString(colour) {
   let str
 
-  if (typeof colour === 'string') {
-    str = colour.startsWith('#') ? colour.substring(1) : colour
-  } else if (typeof colour === 'number') {
-    str = colour.toString(16)
-  }
+  if (typeof colour === 'string') str = colour.startsWith('#') ? colour.substring(1) : colour
+  else if (typeof colour === 'number') str = colour.toString(16)
 
   if (str) {
-    while (str.length < 6) {
-      str = '0' + str
-    }
-
+    while (str.length < 6) str = '0' + str
     return `#${str}`
-  } else {
-    return `#000000`
-  }
+  } else return `#000000`
 }

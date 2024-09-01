@@ -39,13 +39,7 @@ function defaultConfig(header, width) {
 export function logSuccessRecords(records) {
   const data = [['name', 'type', 'deployment']]
 
-  if (records.length > 0) {
-    data.push(
-      ...records.map((r) => {
-        return [r.name, r.type, r.deployment]
-      })
-    )
-  }
+  if (records.length > 0) data.push(...records.map((r) => [r.name, r.type, r.deployment]))
 
   const msg = '🟩 Successful registration 🟩'
   return table(data, defaultConfig(msg, 30))
@@ -63,13 +57,7 @@ export function logSuccessRecords(records) {
 export function logFailRecords(records) {
   const data = [['path', 'message']]
 
-  if (records.length > 0) {
-    data.push(
-      ...records.map((r) => {
-        return [r.path, r.message]
-      })
-    )
-  }
+  if (records.length > 0) data.push(...records.map((r) => [r.path, r.message]))
 
   const msg = '🟥 Failure registration 🟥'
   return table(data, defaultConfig(msg, 45))

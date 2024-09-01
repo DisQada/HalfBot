@@ -1,62 +1,53 @@
 ## [3.1.3](https://github.com/DisQada/HalfBot/compare/v3.1.2...v3.1.3) (2024-01-07)
 
-
 ### Bug Fixes
 
-* **DiscordBot:** Pass event args without modifications ([69e0832](https://github.com/DisQada/HalfBot/commit/69e08329fe62a8342258799bf26b63657a4f89d6))
+- **DiscordBot:** Pass event args without modifications ([69e0832](https://github.com/DisQada/HalfBot/commit/69e08329fe62a8342258799bf26b63657a4f89d6))
 
 ## [3.1.2](https://github.com/DisQada/HalfBot/compare/v3.1.1...v3.1.2) (2024-01-02)
 
-
 ### Bug Fixes
 
-* Eliminate types issues ([3ed25fb](https://github.com/DisQada/HalfBot/commit/3ed25fba4174950553c4d21d3a6393c4eeb66f30))
+- Eliminate types issues ([3ed25fb](https://github.com/DisQada/HalfBot/commit/3ed25fba4174950553c4d21d3a6393c4eeb66f30))
 
 ## [3.1.1](https://github.com/DisQada/HalfBot/compare/v3.1.0...v3.1.1) (2024-01-02)
 
-
 ### Bug Fixes
 
-* Eliminate types issues ([202084c](https://github.com/DisQada/HalfBot/commit/202084c35a9b7bd825c564934e5c77038f90dce8))
+- Eliminate types issues ([202084c](https://github.com/DisQada/HalfBot/commit/202084c35a9b7bd825c564934e5c77038f90dce8))
 
 # [3.1.0](https://github.com/DisQada/HalfBot/compare/v3.0.0...v3.1.0) (2024-01-01)
 
-
 ### Bug Fixes
 
-* **BotOptions:** Identify 'client' prop as optional ([f57c47e](https://github.com/DisQada/HalfBot/commit/f57c47e866d8f6e18cc6618763cd20964a657854))
-
+- **BotOptions:** Identify 'client' prop as optional ([f57c47e](https://github.com/DisQada/HalfBot/commit/f57c47e866d8f6e18cc6618763cd20964a657854))
 
 ### Features
 
-* **BotEvent:** Use 'once' property ([51f235c](https://github.com/DisQada/HalfBot/commit/51f235c5e685de086d084cea7f83f465d4db2dca))
-* **BotEvet:** Introduce repeating events ([f4920a9](https://github.com/DisQada/HalfBot/commit/f4920a9943e9cde9ef82e88d668e593ad673aaca))
-
+- **BotEvent:** Use 'once' property ([51f235c](https://github.com/DisQada/HalfBot/commit/51f235c5e685de086d084cea7f83f465d4db2dca))
+- **BotEvet:** Introduce repeating events ([f4920a9](https://github.com/DisQada/HalfBot/commit/f4920a9943e9cde9ef82e88d668e593ad673aaca))
 
 ### Performance Improvements
 
-* Speed up start time ([a544612](https://github.com/DisQada/HalfBot/commit/a5446129db6e669cfc443973a241ee23bb805e25))
+- Speed up start time ([a544612](https://github.com/DisQada/HalfBot/commit/a5446129db6e669cfc443973a241ee23bb805e25))
 
 # [3.0.0](https://github.com/DisQada/HalfBot/compare/v2.1.1...v3.0.0) (2023-12-30)
 
-
 ### Bug Fixes
 
-* Use correct type ([d6358ec](https://github.com/DisQada/HalfBot/commit/d6358ecf1ec11a6496e5f4ebbe405936d6cea517))
-
+- Use correct type ([d6358ec](https://github.com/DisQada/HalfBot/commit/d6358ecf1ec11a6496e5f4ebbe405936d6cea517))
 
 ### Code Refactoring
 
-* Delete "emojiChars.json" ([99deb8f](https://github.com/DisQada/HalfBot/commit/99deb8ff69776b36658ef668aa1bdf9b96fad0b1))
-* Delete "url.js" ([ba3de3e](https://github.com/DisQada/HalfBot/commit/ba3de3eeb216999a225b6ce37187f059290b5ab4))
-* Replace bot module classes ([8d7f19c](https://github.com/DisQada/HalfBot/commit/8d7f19c39037a162f3897b44a952f3d7d4bd34f4))
-
+- Delete "emojiChars.json" ([99deb8f](https://github.com/DisQada/HalfBot/commit/99deb8ff69776b36658ef668aa1bdf9b96fad0b1))
+- Delete "url.js" ([ba3de3e](https://github.com/DisQada/HalfBot/commit/ba3de3eeb216999a225b6ce37187f059290b5ab4))
+- Replace bot module classes ([8d7f19c](https://github.com/DisQada/HalfBot/commit/8d7f19c39037a162f3897b44a952f3d7d4bd34f4))
 
 ### BREAKING CHANGES
 
-* the array variable "emojiChars" has been deleted and no longer exists
-* the function "isSafe" has been deleted and no longer exists
-* BotCommand class and BotEvent class has been deleted and no longer exist, normal JS objects shall now be used instead
+- the array variable "emojiChars" has been deleted and no longer exists
+- the function "isSafe" has been deleted and no longer exists
+- BotCommand class and BotEvent class has been deleted and no longer exist, normal JS objects shall now be used instead
 
 ## [2.1.1](https://github.com/DisQada/HalfBot/compare/v2.1.0...v2.1.1) (2023-10-05)
 
