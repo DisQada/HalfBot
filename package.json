@@ -7,7 +7,7 @@
     "types": "workspace ./workspace.json -t",
     "docs": "workspace ./workspace.json -t -d",
     "format": "prettier . --write --ignore-path .gitignore",
-    "test": "npx jest"
+    "test": "mocha ./test/**/*.test.js"
   },
   "type": "commonjs",
   "main": "./src/exports.js",
@@ -51,6 +51,7 @@
   },
   "devDependencies": {
     "@disqada/workspace": "^1.5.2",
+    "mocha": "^10.7.3",
     "prettier": "^3.3.3"
   }
 }
