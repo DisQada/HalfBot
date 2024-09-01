@@ -9,7 +9,7 @@
  * const num = asNumber(0xffffff)
  * // num = 0xffffff
  */
-function asNumber(colour) {
+export function asNumber(colour) {
   let num
 
   if (typeof colour === 'number') {
@@ -36,7 +36,7 @@ function asNumber(colour) {
  * const num = asNumber(0xffffff)
  * // num = '#ffffff'
  */
-function asString(colour) {
+export function asString(colour) {
   let str
 
   if (typeof colour === 'string') {
@@ -54,9 +54,4 @@ function asString(colour) {
   } else {
     return `#000000`
   }
-}
-
-module.exports = {
-  asNumber,
-  asString
 }

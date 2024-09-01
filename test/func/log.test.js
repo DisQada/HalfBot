@@ -1,6 +1,6 @@
 /** @import {SuccessRecord, FailRecord} from '../../src/options.js' */
-const { equal } = require('assert/strict')
-const { logSuccessRecords, logFailRecords } = require('../../src/func/log.js')
+import { equal } from 'assert/strict'
+import { logSuccessRecords, logFailRecords } from '../../src/func/log.js'
 
 describe('Test logSuccessfulRecords function', function () {
   it('should return string', function () {

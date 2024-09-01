@@ -1,5 +1,5 @@
-const { deepEqual } = require('assert/strict')
-const { applyStyle, asEmbed } = require('../../src/func/style.js')
+import { deepEqual } from 'assert/strict'
+import { applyStyle, asEmbed } from '../../src/func/style.js'
 
 const brand = {
   name: 'HalfBot',

@@ -1,11 +1,3 @@
-const { DiscordBot } = require('./class/discordBot')
-const { asNumber, asString } = require('./func/colour')
-const { asEmbed, applyStyle } = require('./func/style')
-
-module.exports = {
-  DiscordBot,
-  asNumber,
-  asString,
-  asEmbed,
-  applyStyle
-}
+export { DiscordBot } from './class/discordBot'
+export { asNumber, asString } from './func/colour'
+export { asEmbed, applyStyle } from './func/style'

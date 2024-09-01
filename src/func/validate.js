@@ -4,7 +4,7 @@
  * @returns {boolean} True if valid, false otherwise.
  * @private
  */
-function validCommand(obj) {
+export function validCommand(obj) {
   if (
     !obj.execute ||
     !obj.data ||
@@ -31,7 +31,7 @@ function validCommand(obj) {
  * @returns {boolean} True if valid, false otherwise.
  * @private
  */
-function validEvent(obj) {
+export function validEvent(obj) {
   if (
     !obj.execute ||
     !obj.data ||
@@ -55,9 +55,4 @@ function validEvent(obj) {
     default:
       return false
   }
-}
-
-module.exports = {
-  validCommand,
-  validEvent
 }

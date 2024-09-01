@@ -1,4 +1,4 @@
-const { table } = require('table')
+import { table } from 'table'
 
 /**
  * Get the default configurations for the table.
@@ -34,7 +34,7 @@ function defaultConfig(header, width) {
  * logSuccessRecords(records)
  * @private
  */
-function logSuccessRecords(records) {
+export function logSuccessRecords(records) {
   const data = [['name', 'type', 'deployment']]
 
   if (records.length > 0) {
@@ -58,7 +58,7 @@ function logSuccessRecords(records) {
  * logFailRecords(records)
  * @private
  */
-function logFailRecords(records) {
+export function logFailRecords(records) {
   const data = [['path', 'message']]
 
   if (records.length > 0) {
@@ -71,9 +71,4 @@ function logFailRecords(records) {
 
   const msg = '🟥 Failure registration 🟥'
   return table(data, defaultConfig(msg, 45))
-}
-
-module.exports = {
-  logSuccessRecords,
-  logFailRecords
 }

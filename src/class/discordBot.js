@@ -1,21 +1,17 @@
-const { Client, Events, GatewayIntentBits } = require('discord.js')
-const { interactionCreate } = require('../events/interactionCreate')
-const { ready } = require('../events/ready')
-const { logSuccessRecords, logFailRecords } = require('../func/log')
-const {
-  findPaths,
-  storeFolderPaths,
-  readFolderPaths
-} = require('@disqada/pathfinder')
-const { resolve, sep } = require('path')
-const { validCommand, validEvent } = require('../func/validate')
-const { toNumber } = require('../func/time')
-const { setTimeout } = require('timers/promises')
+import { findPaths, storeFolderPaths, readFolderPaths } from '@disqada/pathfinder'
+import { Client, Events, GatewayIntentBits } from 'discord.js'
+import { setTimeout } from 'timers/promises'
+import { resolve, sep } from 'path'
+import { interactionCreate } from '../events/interactionCreate.js'
+import { logSuccessRecords, logFailRecords } from '../func/log.js'
+import { validCommand, validEvent } from '../func/validate.js'
+import { toNumber } from '../func/time.js'
+import { ready } from '../events/ready.js'
 
 /**
  * @class
  */
-class DiscordBot extends Client {
+export class DiscordBot extends Client {
   /**
    * @type {import('../options').BotData}
    */
@@ -276,8 +272,4 @@ class DiscordBot extends Client {
     console.log(logSuccessRecords(successRecords))
     console.log(logFailRecords(failRecords))
   }
-}
-
-module.exports = {
-  DiscordBot
 }

@@ -1,4 +1,4 @@
-const { applyStyle, asEmbed } = require('../func/style')
+import { applyStyle, asEmbed } from '../func/style'
 
 /**
  * Handler of interactions called by the bot.
@@ -6,7 +6,7 @@ const { applyStyle, asEmbed } = require('../func/style')
  * @returns {Promise<void>}
  * @private
  */
-async function interactionCreate(interaction) {
+export async function interactionCreate(interaction) {
   /**
    * A shortcut to a full reply.
    * @param {string} reply - The message to reply with.
@@ -73,8 +73,4 @@ async function interactionCreate(interaction) {
   } else {
     await interaction.reply(reply)
   }
-}
-
-module.exports = {
-  interactionCreate
 }

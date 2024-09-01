@@ -1,6 +1,6 @@
 /** @import {BotCommand, BotEvent} from '../../src/options.js' */
-const { ok } = require('assert/strict')
-const { validCommand, validEvent } = require('../../src/func/validate.js')
+import { ok } from 'assert/strict'
+import { validCommand, validEvent } from '../../src/func/validate.js'
 
 describe('func', function () {
   describe('validate', function () {

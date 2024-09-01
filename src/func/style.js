@@ -1,4 +1,4 @@
-const { asNumber } = require('./colour')
+import { asNumber } from './colour.js'
 
 /**
  * Convert a text to an embed.
@@ -9,7 +9,7 @@ const { asNumber } = require('./colour')
  * const brand = { colour: 0xffffff }
  * const result = asEmbed('HalfBot', brand)
  */
-function asEmbed(text, brand) {
+export function asEmbed(text, brand) {
   /** @type {import('../options').Embed} */
   const embed = { description: text }
   // @ts-expect-error
@@ -30,7 +30,7 @@ function asEmbed(text, brand) {
  * const brand = { colour: 0xffffff }
  * embeds = applyStyle(embeds, brand)
  */
-function applyStyle(toApplyOn, brand) {
+export function applyStyle(toApplyOn, brand) {
   if (Array.isArray(toApplyOn)) {
     return applyToEmbeds(toApplyOn, brand)
   } else {
@@ -90,9 +90,4 @@ function applyStyle(toApplyOn, brand) {
 
     return embeds
   }
-}
-
-module.exports = {
-  asEmbed,
-  applyStyle
 }

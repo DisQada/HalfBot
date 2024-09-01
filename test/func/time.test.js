@@ -1,5 +1,5 @@
-const { equal } = require('assert/strict')
-const { asMilliseconds, toNumber } = require('../../src/func/time.js')
+import { equal } from 'assert/strict'
+import { asMilliseconds, toNumber } from '../../src/func/time.js'
 
 describe('func', function () {
   describe('time', function () {

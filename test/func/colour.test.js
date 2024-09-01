@@ -1,5 +1,5 @@
-const { equal } = require('assert/strict')
-const { asNumber, asString } = require('../../src/func/colour.js')
+import { equal } from 'assert/strict'
+import { asNumber, asString } from '../../src/func/colour.js'
 
 describe('func', function () {
   describe('colour', function () {

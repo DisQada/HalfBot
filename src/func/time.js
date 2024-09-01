@@ -18,7 +18,7 @@ const multipliers = {
  * const milliseconds = asMilliseconds(5)
  * // milliseconds = 5000
  */
-function asMilliseconds(seconds) {
+export function asMilliseconds(seconds) {
   return seconds * multipliers.ms
 }
 
@@ -39,7 +39,7 @@ function asMilliseconds(seconds) {
  * const milliseconds = toNumber('25m')
  * // milliseconds = 1500000
  */
-function toNumber(str) {
+export function toNumber(str) {
   if (typeof str === 'number') return asMilliseconds(str)
 
   let time = 0
@@ -94,10 +94,4 @@ function toNumber(str) {
 //  * @param {import('../options').TimeUnits} from
 //  * @param {import('../options').TimeUnits} to
 //  */
-// function convertTime(value, from, to) {}
-
-module.exports = {
-  asMilliseconds,
-  toNumber
-  // convertTime
-}
+// export function convertTime(value, from, to) {}

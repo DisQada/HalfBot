@@ -6,7 +6,7 @@
  * @throws {Error} - if data.deployment wasn't of the enum values.
  * @private
  */
-function getGuildId(data, guildIds) {
+export function getGuildId(data, guildIds) {
   const globalGuildId = '0'
 
   switch (data.deployment) {
@@ -28,7 +28,7 @@ function getGuildId(data, guildIds) {
  * @returns {Map<string, import('../options').CommandData[]>}
  * @private
  */
-function prepareCommands(bot) {
+export function prepareCommands(bot) {
   const commands = new Map()
 
   for (const iterator of bot.commands) {
@@ -70,7 +70,7 @@ async function registerCommands(bot, commandMap) {
  * @async
  * @private
  */
-async function ready(bot) {
+export async function ready(bot) {
   const commands = prepareCommands(bot)
   await registerCommands(bot, commands)
 
@@ -80,10 +80,4 @@ async function ready(bot) {
   } else {
     console.log('-> Bot Is Online <-')
   }
-}
-
-module.exports = {
-  ready,
-  getGuildId,
-  prepareCommands
 }

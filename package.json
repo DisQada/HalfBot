@@ -9,13 +9,12 @@
     "format": "prettier . --write --ignore-path .gitignore",
     "test": "mocha ./test/**/*.test.js"
   },
-  "type": "commonjs",
+  "type": "module",
   "main": "./src/exports.js",
   "types": "./types/exports.d.ts",
   "exports": {
     ".": {
-      "import": "./src/exports.mjs",
-      "require": "./src/exports.js",
+      "import": "./src/exports.js",
       "default": "./src/exports.js",
       "types": "./types/exports.d.ts"
     }
