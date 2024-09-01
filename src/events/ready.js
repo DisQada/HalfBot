@@ -1,7 +1,10 @@
+/** @import {CommandData, GuildIDs} from '../options.js' */
+/** @import {DiscordBot} from '../class/discordBot.js' */
+
 /**
  * Get the correct server ID.
- * @param {import('../options').CommandData} data - The command data deciding where to register the command.
- * @param {import('../options').GuildIDs} guildIds - The container of the server IDs.
+ * @param {CommandData} data - The command data deciding where to register the command.
+ * @param {GuildIDs} guildIds - The container of the server IDs.
  * @returns {string} The server ID.
  * @throws {Error} - if data.deployment wasn't of the enum values.
  * @private
@@ -24,8 +27,8 @@ export function getGuildId(data, guildIds) {
 
 /**
  * Preparing the bot commands for registration.
- * @param {import('../class/discordBot').DiscordBot} bot - The bot to register the commands for.
- * @returns {Map<string, import('../options').CommandData[]>}
+ * @param {DiscordBot} bot - The bot to register the commands for.
+ * @returns {Map<string, CommandData[]>}
  * @private
  */
 export function prepareCommands(bot) {
@@ -45,8 +48,8 @@ export function prepareCommands(bot) {
 
 /**
  * Register the commands via the API.
- * @param {import('../class/discordBot').DiscordBot} bot - The bot to register the commands for.
- * @param {Map<string, import('../options').CommandData[]>} commandMap - The commands to register.
+ * @param {DiscordBot} bot - The bot to register the commands for.
+ * @param {Map<string, CommandData[]>} commandMap - The commands to register.
  * @returns {Promise<void>}
  * @private
  */
@@ -65,7 +68,7 @@ async function registerCommands(bot, commandMap) {
 
 /**
  * The bot is ready and has connected successfully.
- * @param {import('../class/discordBot').DiscordBot} bot - The bot.
+ * @param {DiscordBot} bot - The bot.
  * @returns {Promise<void>}
  * @async
  * @private
@@ -76,6 +79,7 @@ export async function ready(bot) {
 
   if (bot.user) {
     console.log(`-> The Bot '${bot.user.username}' Is Online <-`)
+    // @ts-expect-error
     bot.user.setPresence(bot.data.config.presence)
   } else {
     console.log('-> Bot Is Online <-')

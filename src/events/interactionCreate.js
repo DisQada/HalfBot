@@ -1,8 +1,9 @@
+/** @import {Brand, CommandInteraction} from '../options.js' */
 import { applyStyle, asEmbed } from '../func/style'
 
 /**
  * Handler of interactions called by the bot.
- * @param {import('../options').CommandInteraction} interaction - The interaction to handle.
+ * @param {CommandInteraction} interaction - The interaction to handle.
  * @returns {Promise<void>}
  * @private
  */
@@ -10,7 +11,7 @@ export async function interactionCreate(interaction) {
   /**
    * A shortcut to a full reply.
    * @param {string} reply - The message to reply with.
-   * @param {import('../options').Brand} brand - The brand to style the reply with.
+   * @param {Brand} brand - The brand to style the reply with.
    */
   async function quickReply(reply, brand) {
     const embed = asEmbed(reply, brand)

@@ -1,3 +1,4 @@
+/** @import {BotData, BotCommand, BotOptions, SuccessRecord, BotEvent, ClientEvent, ClientEventFunction, RepeatingEvent, RepeatingEventFunction, FailRecord} from '../options.js' */
 import { findPaths, storeFolderPaths, readFolderPaths } from '@disqada/pathfinder'
 import { Client, Events, GatewayIntentBits } from 'discord.js'
 import { setTimeout } from 'timers/promises'
@@ -13,7 +14,7 @@ import { ready } from '../events/ready.js'
  */
 export class DiscordBot extends Client {
   /**
-   * @type {import('../options').BotData}
+   * @type {BotData}
    */
   data = {
     config: {
@@ -32,20 +33,20 @@ export class DiscordBot extends Client {
   }
 
   /**
-   * @type {Map<string, import('../options').BotCommand>}
+   * @type {Map<string, BotCommand>}
    */
   commands = new Map()
 
   /**
    * Will be deleted in the next major release
-   * @type {import('discord.js').Client}
+   * @type {Client}
    * @deprecated The bot class now extends `Client`, use it instead
    */
   client
 
   /**
    * The initialization of a new DiscordBot.
-   * @param {import('../options').BotOptions} options - Information about the DiscordBot.
+   * @param {BotOptions} options - Information about the DiscordBot.
    */
   constructor(options) {
     super(
@@ -64,7 +65,7 @@ export class DiscordBot extends Client {
 
   /**
    * Start and connect the bot.
-   * @param {import('../options').BotOptions} options - Information about the DiscordBot.
+   * @param {BotOptions} options - Information about the DiscordBot.
    * @returns {Promise<void>}
    * @async
    * @private
@@ -137,8 +138,8 @@ export class DiscordBot extends Client {
 
   /**
    * Register a command inside the bot.
-   * @param {import('../options').BotCommand} command - The bot command module.
-   * @returns {import('../options').SuccessRecord}
+   * @param {BotCommand} command - The bot command module.
+   * @returns {SuccessRecord}
    */
   registerCommand(command) {
     this.commands.set(command.data.name, command)
@@ -152,11 +153,11 @@ export class DiscordBot extends Client {
 
   /**
    * Register an event inside the bot.
-   * @param {import('../options').BotEvent} event - The bot event module.
-   * @returns {import('../options').SuccessRecord}
+   * @param {BotEvent} event - The bot event module.
+   * @returns {SuccessRecord}
    */
   registerEvent(event) {
-    /** @type {import('../options').SuccessRecord} */
+    /** @type {SuccessRecord} */
     const record = {
       name: '',
       type: event.data.module,
@@ -165,11 +166,11 @@ export class DiscordBot extends Client {
 
     switch (event.data.module) {
       case 'event': {
-        /** @type {import('../options').ClientEvent<any>} */
+        /** @type {ClientEvent<any>} */
         // @ts-expect-error
         const e = event
         const { data, execute } = e
-        /** @type {import('../options').ClientEventFunction<any>} */
+        /** @type {ClientEventFunction<any>} */
         const func = (args) => execute(this, args)
 
         if (data.name === Events.ClientReady || data.once) {
@@ -183,11 +184,11 @@ export class DiscordBot extends Client {
       }
 
       case 'event-repeat': {
-        /** @type {import('../options').RepeatingEvent} */
+        /** @type {RepeatingEvent} */
         // @ts-expect-error
         const e = event
         const { data, execute } = e
-        /** @type {import('../options').RepeatingEventFunction} */
+        /** @type {RepeatingEventFunction} */
         const func = async () => {
           let first
           let nextWait
@@ -243,9 +244,9 @@ export class DiscordBot extends Client {
       return
     }
 
-    /** @type {import('../options').SuccessRecord[]} */
+    /** @type {SuccessRecord[]} */
     const successRecords = []
-    /** @type {import('../options').FailRecord[]} */
+    /** @type {FailRecord[]} */
     const failRecords = []
 
     for (let i = 0; i < paths.length; i++) {

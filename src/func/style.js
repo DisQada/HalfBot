@@ -1,16 +1,17 @@
+/** @import {Embed, Brand, StyleOptions} from '../options.js' */
 import { asNumber } from './colour.js'
 
 /**
  * Convert a text to an embed.
  * @param {string} text - The original text.
- * @param {import('../options').Brand} brand - The brand to style the embed with.
- * @returns {import('../options').Embed} The resulting embed.
+ * @param {Brand} brand - The brand to style the embed with.
+ * @returns {Embed} The resulting embed.
  * @example
  * const brand = { colour: 0xffffff }
  * const result = asEmbed('HalfBot', brand)
  */
 export function asEmbed(text, brand) {
-  /** @type {import('../options').Embed} */
+  /** @type {Embed} */
   const embed = { description: text }
   // @ts-expect-error
   return applyStyle(embed, brand)
@@ -18,9 +19,9 @@ export function asEmbed(text, brand) {
 
 /**
  * Apply brand style to an multiple embeds.
- * @param {import('../options').Embed | import('../options').Embed[]} toApplyOn - The embeds to apply the style to.
- * @param {import('../options').Brand} brand - The brand to get the style from.
- * @returns {import('../options').Embed | import('../options').Embed[]} The embeds array after applying the style to it.
+ * @param {Embed | Embed[]} toApplyOn - The embeds to apply the style to.
+ * @param {Brand} brand - The brand to get the style from.
+ * @returns {Embed | Embed[]} The embeds array after applying the style to it.
  * @example
  * let embed = { title: 'HalfBot' }
  * const brand = { colour: 0xffffff }
@@ -39,10 +40,10 @@ export function applyStyle(toApplyOn, brand) {
 
   /**
    * Apply brand style to an embed.
-   * @param {import('../options').Embed} embed - The embed to apply the style to.
-   * @param {import('../options').Brand} brand - The brand to get the style from.
-   * @param {import('../options').StyleOptions} options - Configuration options for the process.
-   * @returns {import('../options').Embed} The embed after applying the style to it.
+   * @param {Embed} embed - The embed to apply the style to.
+   * @param {Brand} brand - The brand to get the style from.
+   * @param {StyleOptions} options - Configuration options for the process.
+   * @returns {Embed} The embed after applying the style to it.
    * @example
    * let embed = { title: 'HalfBot' }
    * const brand = { colour: 0xffffff }
@@ -72,9 +73,9 @@ export function applyStyle(toApplyOn, brand) {
 
   /**
    * Apply brand style to an multiple embeds.
-   * @param {import('../options').Embed[]} embeds - The embeds to apply the style to.
-   * @param {import('../options').Brand} brand - The brand to get the style from.
-   * @returns {import('../options').Embed[]} The embeds array after applying the style to it.
+   * @param {Embed[]} embeds - The embeds to apply the style to.
+   * @param {Brand} brand - The brand to get the style from.
+   * @returns {Embed[]} The embeds array after applying the style to it.
    * @example
    * let embeds = [{ title: 'HalfBot' }]
    * const brand = { colour: 0xffffff }

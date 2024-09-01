@@ -1,10 +1,12 @@
+/** @import {FailRecord, SuccessRecord} from '../options.js' */
+/** @import {TableUserConfig} from 'table' */
 import { table } from 'table'
 
 /**
  * Get the default configurations for the table.
  * @param {string} header - The name of the table.
  * @param {number} width - The width of the table rows.
- * @returns {import('table').TableUserConfig} Ready to use configurations.
+ * @returns {TableUserConfig} Ready to use configurations.
  * @example
  * const finalConfig = defaultConfig('Table name')
  * @private
@@ -27,7 +29,7 @@ function defaultConfig(header, width) {
 
 /**
  * Log the table for successful records.
- * @param {import('../options').SuccessRecord[]} records - The records to log as a table.
+ * @param {SuccessRecord[]} records - The records to log as a table.
  * @returns {string} The table as a string.
  * @example
  * const records = [{ ... }]
@@ -51,7 +53,7 @@ export function logSuccessRecords(records) {
 
 /**
  * Log the table for failed records.
- * @param {import('../options').FailRecord[]} records - The records to log as a table.
+ * @param {FailRecord[]} records - The records to log as a table.
  * @returns {string} The table as a string.
  * @example
  * const records = [{ ... }]

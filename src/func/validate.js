@@ -1,6 +1,8 @@
+/** @import {BotCommand, BotEvent} from '../options.js' */
+
 /**
  * Check a command's validity.
- * @param {import('../options').BotCommand} obj - The command to check.
+ * @param {BotCommand} obj - The command to check.
  * @returns {boolean} True if valid, false otherwise.
  * @private
  */
@@ -27,7 +29,7 @@ export function validCommand(obj) {
 
 /**
  * Check an event's validity.
- * @param {import('../options').BotEvent} obj - The event to check.
+ * @param {BotEvent} obj - The event to check.
  * @returns {boolean} True if valid, false otherwise.
  * @private
  */
