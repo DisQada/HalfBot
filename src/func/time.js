@@ -1,14 +1,16 @@
+/** @import {TimeUnits} from '../options.js' */
+
 /**
  * Object containing multipliers for time unit
  */
-const multipliers = {
+const { ms, s, m, h, d, w } = Object.freeze({
   ms: 1000,
   s: 1,
   m: 60,
   h: 60,
   d: 24,
   w: 7
-}
+})
 
 /**
  * Convert seconds to milliseconds (just multiply by 1000)
@@ -19,7 +21,7 @@ const multipliers = {
  * // milliseconds = 5000
  */
 export function asMilliseconds(seconds) {
-  return seconds * multipliers.ms
+  return seconds * ms
 }
 
 /**
@@ -44,29 +46,20 @@ export function toNumber(str) {
 
   let time = 0
 
-  const secondMatch = str.match(/\d+(s|S)/)
-  if (secondMatch) time += parseInt(secondMatch[0].slice(0, -1)) * multipliers.ms
+  const sMatch = str.match(/\d+(s|S)/)
+  if (sMatch) time += parseInt(sMatch[0].slice(0, -1)) * ms
 
-  const minuteMatch = str.match(/\d+(m|M)/)
-  if (minuteMatch) time += parseInt(minuteMatch[0].slice(0, -1)) * multipliers.ms * multipliers.m
+  const mMatch = str.match(/\d+(m|M)/)
+  if (mMatch) time += parseInt(mMatch[0].slice(0, -1)) * ms * m
 
-  const hourMatch = str.match(/\d+(h|H)/)
-  if (hourMatch) time += parseInt(hourMatch[0].slice(0, -1)) * multipliers.ms * multipliers.m * multipliers.h
+  const hMatch = str.match(/\d+(h|H)/)
+  if (hMatch) time += parseInt(hMatch[0].slice(0, -1)) * ms * m * h
 
-  const dayMatch = str.match(/\d+(d|D)/)
-  if (dayMatch)
-    time += parseInt(dayMatch[0].slice(0, -1)) * multipliers.ms * multipliers.m * multipliers.h * multipliers.d
+  const dMatch = str.match(/\d+(d|D)/)
+  if (dMatch) time += parseInt(dMatch[0].slice(0, -1)) * ms * m * h * d
 
-  const weekMatch = str.match(/\d+(w|W)/)
-  if (weekMatch) {
-    time +=
-      parseInt(weekMatch[0].slice(0, -1)) *
-      multipliers.ms *
-      multipliers.m *
-      multipliers.h *
-      multipliers.d *
-      multipliers.w
-  }
+  const wMatch = str.match(/\d+(w|W)/)
+  if (wMatch) time += parseInt(wMatch[0].slice(0, -1)) * ms * m * h * d * w
 
   return time
 }
@@ -74,7 +67,7 @@ export function toNumber(str) {
 // /**
 //  *
 //  * @param {number} value
-//  * @param {import('../options').TimeUnits} from
-//  * @param {import('../options').TimeUnits} to
+//  * @param {TimeUnits} from
+//  * @param {TimeUnits} to
 //  */
 // export function convertTime(value, from, to) {}

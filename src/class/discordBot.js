@@ -4,7 +4,7 @@ import { Client, Events, GatewayIntentBits } from 'discord.js'
 import { setTimeout } from 'timers/promises'
 import { resolve, sep } from 'path'
 import { interactionCreate } from '../events/interactionCreate.js'
-import { logSuccessRecords, logFailRecords } from '../func/log.js'
+import { logSuccesses, logFails } from '../func/log.js'
 import { validCommand, validEvent } from '../func/validate.js'
 import { toNumber } from '../func/time.js'
 import { ready } from '../events/ready.js'
@@ -226,32 +226,32 @@ export class DiscordBot extends Client {
     if (paths.length === 0) return
 
     /** @type {SuccessRecord[]} */
-    const successRecords = []
+    const sRecords = []
     /** @type {FailRecord[]} */
-    const failRecords = []
+    const fRecords = []
 
     for (let i = 0; i < paths.length; i++) {
       const botModule = (await import(paths[i])).default
 
       if (validCommand(botModule)) {
         const record = this.registerCommand(botModule)
-        successRecords.push(record)
+        sRecords.push(record)
         continue
       } else if (validEvent(botModule)) {
         const record = this.registerEvent(botModule)
-        successRecords.push(record)
+        sRecords.push(record)
         continue
       }
 
       const word = 'modules'
       const index = paths[i].indexOf(word)
-      failRecords.push({
+      fRecords.push({
         path: paths[i].substring(index + word.length + 1),
         message: 'The module is invalid, maybe a required property is missing'
       })
     }
 
-    console.log(logSuccessRecords(successRecords))
-    console.log(logFailRecords(failRecords))
+    if (sRecords.length > 0) console.log(logSuccesses(sRecords))
+    if (fRecords.length > 0) console.log(logFails(fRecords))
   }
 }

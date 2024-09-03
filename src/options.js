@@ -1,3 +1,6 @@
+/** @import {ApplicationCommandData, ChatInputCommandInteraction, ClientOptions, MessageContextMenuCommandInteraction, UserContextMenuCommandInteraction, InteractionReplyOptions, ClientEvents} from 'discord.js' */
+/** @import {DiscordBot} from './class/discordBot.js' */
+
 export {}
 
 /**
@@ -27,10 +30,14 @@ export {}
 /**
  * @typedef {object} BotOptions
  * @property {string} token The bot application's API token.
- * @property {object} [directories]
- * @property {string} [directories.root] - The path to the folder containing all the bot files.
- * @property {string} [directories.data] - The Path to the directory the json data files.
- * @property {import('discord.js').ClientOptions} [client]
+ * @property {BotDirectories} [directories]
+ * @property {ClientOptions} [client]
+ */
+
+/**
+ * @typedef {object} BotDirectories
+ * @property {string} [root='bot'] - The path to the folder containing all the bot files.
+ * @property {string} [data='data'] - The Path to the directory the json data files.
  */
 
 /**
@@ -99,7 +106,7 @@ export {}
  */
 
 /**
- * @typedef {BaseCommandData & import('discord.js').ApplicationCommandData} CommandData
+ * @typedef {BaseCommandData & ApplicationCommandData} CommandData
  */
 
 /**
@@ -112,18 +119,18 @@ export {}
  */
 
 /**
- * @typedef {BaseCommandInteraction & (import('discord.js').ChatInputCommandInteraction | import('discord.js').UserContextMenuCommandInteraction | import('discord.js').MessageContextMenuCommandInteraction)} CommandInteraction
+ * @typedef {BaseCommandInteraction & (ChatInputCommandInteraction | UserContextMenuCommandInteraction | MessageContextMenuCommandInteraction)} CommandInteraction
  */
 
 /**
  * @typedef {object} BaseCommandInteraction
- * @property {import('./class/discordBot').DiscordBot} bot
+ * @property {DiscordBot} bot
  */
 
 /**
  * @callback CommandFunction
  * @param {CommandInteraction} interaction
- * @returns {Promise<import('discord.js').InteractionReplyOptions | string | void> | import('discord.js').InteractionReplyOptions| string | void}
+ * @returns {Promise<InteractionReplyOptions | string | void> | InteractionReplyOptions| string | void}
  */
 
 // Event
@@ -135,14 +142,14 @@ export {}
 
 /**
  * The full object of a event file
- * @template {keyof import('discord.js').ClientEvents} Key
+ * @template {keyof ClientEvents} Key
  * @typedef {object} ClientEvent
  * @property {ClientEventData<Key>} data
  * @property {ClientEventFunction<Key>} execute
  */
 
 /**
- * @template {keyof import('discord.js').ClientEvents} Key
+ * @template {keyof ClientEvents} Key
  * @typedef {object} ClientEventData
  * @property {Key} name Event name / caller
  * @property {boolean} [once] Whether the event should be called once
@@ -150,10 +157,10 @@ export {}
  */
 
 /**
- * @template {keyof import('discord.js').ClientEvents} Key
+ * @template {keyof ClientEvents} Key
  * @callback ClientEventFunction
- * @param {import('./class/discordBot').DiscordBot} bot
- * @param {...import('discord.js').ClientEvents[Key]} args
+ * @param {DiscordBot} bot
+ * @param {...ClientEvents[Key]} args
  * @returns {any}
  */
 
@@ -173,7 +180,7 @@ export {}
 
 /**
  * @callback RepeatingEventFunction
- * @param {import('./class/discordBot').DiscordBot} bot
+ * @param {DiscordBot} bot
  * @returns {Promise<void | number | string>}
  */
 
