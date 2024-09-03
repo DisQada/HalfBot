@@ -26,6 +26,11 @@ describe('func', function () {
     })
 
     describe('asString()', function () {
+      it('should return the string with hash', function () {
+        const result = asString('ffffff')
+        equal(result, '#ffffff')
+      })
+
       it('should return the same string', function () {
         const result = asString('#ffffff')
         equal(result, '#ffffff')
