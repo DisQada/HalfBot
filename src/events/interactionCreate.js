@@ -1,5 +1,5 @@
 /** @import {Brand, CommandInteraction} from '../options.js' */
-import { applyStyle, asEmbed } from '../func/style'
+import { applyStyle, asEmbed } from '../func/style.js'
 
 /**
  * Handler of interactions called by the bot.
