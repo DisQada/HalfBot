@@ -38,13 +38,6 @@ export class Bot extends Client {
   commands = new Map()
 
   /**
-   * Will be deleted in the next major release
-   * @type {Client}
-   * @deprecated The bot class now extends `Client`, use it instead
-   */
-  client
-
-  /**
    * The initialization of a new Bot.
    * @param {BotOptions} options - Information about the Bot.
    */
@@ -55,7 +48,6 @@ export class Bot extends Client {
       }
     )
 
-    this.client = this
     this.runBot(options)
   }
 
