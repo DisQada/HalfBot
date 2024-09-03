@@ -1,3 +1,10 @@
+## [4.0.1](https://github.com/DisQada/HalfBot/compare/v4.0.0...v4.0.1) (2024-09-03)
+
+
+### Bug Fixes
+
+* إضافة أمر ما قبل التعليب ([b169f7a](https://github.com/DisQada/HalfBot/commit/b169f7a166c137f5a2af72c03eb31b6ea710741a))
+
 # [4.0.0](https://github.com/DisQada/HalfBot/compare/v3.1.3...v4.0.0) (2024-09-03)
 
 
