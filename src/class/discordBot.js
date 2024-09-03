@@ -117,7 +117,7 @@ export class DiscordBot extends Client {
       const i2 = files[i].length - '.json'.length
       const name = files[i].substring(i1 + sep.length, i2)
 
-      const data = require(files[i])
+      const data = (await import(files[i])).default
       if (data) {
         if (name === 'config') Object.assign(this.data.config, data)
         else this.data[name] = data
@@ -231,7 +231,7 @@ export class DiscordBot extends Client {
     const failRecords = []
 
     for (let i = 0; i < paths.length; i++) {
-      const botModule = require(paths[i])
+      const botModule = (await import(paths[i])).default
 
       if (validCommand(botModule)) {
         const record = this.registerCommand(botModule)
