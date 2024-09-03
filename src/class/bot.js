@@ -10,11 +10,13 @@ import { toNumber } from '../func/time.js'
 import { ready } from '../events/ready.js'
 
 /**
+ * The Bot class.
  * @class
  * @extends {Client<true>}
  */
 export class Bot extends Client {
   /**
+   * The data collected from the data files in the data folder.
    * @type {BotData}
    */
   data = {
@@ -33,6 +35,7 @@ export class Bot extends Client {
   }
 
   /**
+   * The commands of the bot.
    * @type {Map<string, BotCommand>}
    */
   commands = new Map()
