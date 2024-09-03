@@ -1,3 +1,36 @@
+# [4.0.0](https://github.com/DisQada/HalfBot/compare/v3.1.3...v4.0.0) (2024-09-03)
+
+
+### Bug Fixes
+
+* إضافة الصيغة لأسطر التصدير وتصدير بقية الأنواع ([5dc1987](https://github.com/DisQada/HalfBot/commit/5dc1987bf293ff60fd725b8c8340393b30511b95))
+* إضافة الصيغة للملف المراد استيراده ([6052d15](https://github.com/DisQada/HalfBot/commit/6052d151e89917fa3b67e5b47ffb776e55ad6767))
+* استبدال دالة require بimport ([27566fc](https://github.com/DisQada/HalfBot/commit/27566fcfe67a858c679885c0f2227f2a384db4e5))
+
+
+### Code Refactoring
+
+* إزالة الclient من صنف البوت نهائياً ([e68517f](https://github.com/DisQada/HalfBot/commit/e68517fa4feb777a6d6a456e919e4f5e2199ecb0))
+* إعادة تسمية صنف البوت الرئيسي وكلمة اللون ([c59f0f8](https://github.com/DisQada/HalfBot/commit/c59f0f8513339e3cbfd2620bcb9368adf0021726))
+* تغيير مسار مجلد البيانات الإفتراضي ([c092f3d](https://github.com/DisQada/HalfBot/commit/c092f3d1ef3cc963b98572433d40a6793550b5ed))
+* تغيير نوع جافا سكربت من CJS إلى MJS ([fc8d43a](https://github.com/DisQada/HalfBot/commit/fc8d43af4f0ffaaa4871547f7ffae02fa1c68b93))
+
+
+### Features
+
+* Add support for ES Module ([e50676c](https://github.com/DisQada/HalfBot/commit/e50676c5c506312822dc1e89626db372d60a3992))
+* توسعة كائن البيانات في البوت مع بعض التغييرات عليه ([a4547b3](https://github.com/DisQada/HalfBot/commit/a4547b3df5bcd3f163d30852364446b552ffae10))
+
+
+### BREAKING CHANGES
+
+* تغير مسار مجلد البيانات الإفتراضي، قم بتعيين قيمة المسار في البوت أو غير مكان المجد
+* تم إخراج brand وid من data.config
+جميع الإستدعاءات القديمة لأي منهما يجب إزالة ".config" منها
+* لم يعد تصنيف البوت يحتوي على client
+* تم تغيير امس الصنف DiscordBot إلى Bot فعلى المستحدم تغيير الاسم تبعاً
+* عدم القدرة على إستيراد الطرد من المشاريع المكتوبة بCJS
+
 ## [3.1.3](https://github.com/DisQada/HalfBot/compare/v3.1.2...v3.1.3) (2024-01-07)
 
 ### Bug Fixes
