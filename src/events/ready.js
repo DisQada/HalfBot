@@ -35,7 +35,7 @@ export function prepareCommands(bot) {
   const commands = new Map()
 
   for (const [_, command] of bot.commands) {
-    const guildId = getGuildId(command.data, bot.data.config.id.guild)
+    const guildId = getGuildId(command.data, bot.data.id.guild)
 
     const commandArray = commands.get(guildId) ?? []
     commandArray.push(command.data)

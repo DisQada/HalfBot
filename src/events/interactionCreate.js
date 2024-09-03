@@ -24,7 +24,7 @@ export async function interactionCreate(interaction) {
   if (!interaction.isCommand()) return
 
   const command = interaction.bot.commands.get(interaction.commandName)
-  const brand = interaction.bot.data.config.brand
+  const brand = interaction.bot.data.brand
 
   if (!command) {
     quickReply('Error: Unknown command', brand)

@@ -18,17 +18,20 @@ export class Bot extends Client {
    */
   data = {
     config: {
-      id: {
-        guild: {}
-      },
-      brand: {
-        name: 'HalfBot',
-        color: 0xffffff,
-        logoUrl: 'https://cdn.discordapp.com/embed/avatars/0.png'
-      },
       presence: {
         status: 'online'
       }
+    },
+      id: {
+      role: {},
+      user: {},
+      guild: {},
+      channel: {}
+      },
+      brand: {
+      name: 'HalfBot',
+      color: 0xffffff,
+      logoUrl: 'https://cdn.discordapp.com/embed/avatars/0.png'
     }
   }
 
@@ -111,7 +114,7 @@ export class Bot extends Client {
 
       const data = (await import(files[i])).default
       if (data) {
-        if (name === 'config') Object.assign(this.data.config, data)
+        if (typeof this.data[name] === 'object') Object.assign(this.data[name], data)
         else this.data[name] = data
       }
     }

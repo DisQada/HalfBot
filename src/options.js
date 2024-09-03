@@ -40,17 +40,19 @@ export {}
  * @property {string} [data='data'] - The Path to the directory the json data files.
  */
 
+/** @typedef {BaseData & KeyAnyObj} BotData */
+
 /**
- * @typedef {object} BotData
+ * @typedef {object} BaseData
  * @property {Config} config
+ * @property {Brand} brand - The container of the bot's brand information.
+ * @property {IDs} id - The container of all IDs.
  */
 
 // Config
 
 /**
  * @typedef {object} Config
- * @property {IDs} id - The container of all IDs.
- * @property {Brand} brand - The container of the bot's brand information.
  * @property {PresenceData} presence
  */
 
@@ -65,7 +67,17 @@ export {}
 /**
  * The container of all IDs
  * @typedef {object} IDs
+ * @property {RoleIDs} role The IDs of all roles
+ * @property {KeyAnyObj} user The IDs of all users
  * @property {GuildIDs} guild The IDs of all servers
+ * @property {ChannelIDs} channel The IDs of all channels
+ * @property {KeyAnyObj} [thread] The IDs of all threads
+ * @property {KeyAnyObj} [message] The IDs of all messages
+ * @property {EmojiIDs} [emoji] The IDs of all emojis
+ * @property {KeyAnyObj} [sticker] The IDs of all stickers
+ * @property {KeyAnyObj} [command] The IDs of all commands
+ * @property {KeyAnyObj} [webhook] The IDs of all webhooks
+ * @property {KeyAnyObj} [invite] The IDs of all invites
  */
 
 /**
@@ -74,6 +86,39 @@ export {}
  * @property {string} [dev] The id of the development / testing server
  * @property {string} [support] The id of the support / main
  */
+
+/**
+ * @typedef {object} ChannelIDs
+ * @property {string} [dev] The id of the development / testing server
+ * @property {string} [error] The id of the error log channel
+ * @property {string} [rules] The id of the rules channel
+ * @property {string} [welcome] The id of the welcome channel
+ */
+
+/**
+ * @typedef {object} RoleIDs
+ * @property {string[] | KeyStrObj} [categories] The ids of all role categories
+ * @property {string} [admin] The id of the admin role
+ * @property {string} [mod] The id of the mod role
+ */
+
+/**
+ * @typedef {object} UserIDs
+ * @property {string} [owner] The id of the bot owner
+ * @property {string[] | KeyStrObj} [dev] The id of the developer
+ * @property {string[] | KeyStrObj} [support] The id of the support team
+ */
+
+/**
+ * @typedef {object} EmojiIDs
+ * @property {string} [yes] The id of the checkmark emoji
+ * @property {string} [no] The id of the cross emoji
+ * @property {string} [up] The id of the up arrow emoji
+ * @property {string} [down] The id of the down arrow emoji
+ */
+
+/** @typedef {{[key:string]:string}} KeyStrObj */
+/** @typedef {{[key:string]:any}} KeyAnyObj */
 
 // Record
 
@@ -130,7 +175,7 @@ export {}
 /**
  * @callback CommandFunction
  * @param {CommandInteraction} interaction
- * @returns {Promise<InteractionReplyOptions | string | void> | InteractionReplyOptions| string | void}
+ * @returns {Promise<InteractionReplyOptions | string | void> | InteractionReplyOptions | string | void}
  */
 
 // Event
