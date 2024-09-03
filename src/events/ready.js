@@ -10,19 +10,12 @@
  * @private
  */
 export function getGuildId(data, guildIds) {
-  const globalGuildId = '0'
+  const globalId = '0'
 
-  switch (data.deployment) {
-    case 'dev':
-      return guildIds.dev ?? globalGuildId
+  if (data.deployment === 'dev') return guildIds.dev || globalId
+  if (data.deployment === 'support') return guildIds.support || globalId
 
-    case 'support':
-      return guildIds.support ?? globalGuildId
-
-    case 'global':
-    default:
-      return globalGuildId
-  }
+  return globalId
 }
 
 /**
@@ -31,18 +24,18 @@ export function getGuildId(data, guildIds) {
  * @returns {Map<string, CommandData[]>}
  * @private
  */
-export function prepareCommands(bot) {
-  const commands = new Map()
+export function prepareCommands({ commands, data }) {
+  const prepared = new Map()
 
-  for (const [_, command] of bot.commands) {
-    const guildId = getGuildId(command.data, bot.data.id.guild)
+  for (const [_, command] of commands) {
+    const guildId = getGuildId(command.data, data.id.guild)
 
-    const commandArray = commands.get(guildId) ?? []
-    commandArray.push(command.data)
-    commands.set(guildId, commandArray)
+    const commandArr = prepared.get(guildId) ?? []
+    commandArr.push(command.data)
+    prepared.set(guildId, commandArr)
   }
 
-  return commands
+  return prepared
 }
 
 /**
@@ -52,10 +45,10 @@ export function prepareCommands(bot) {
  * @returns {Promise<void>}
  * @private
  */
-async function registerCommands(bot, commandMap) {
+async function registerCommands({ application }, commandMap) {
   for (const [guildId, commandsData] of commandMap) {
-    if (guildId === '0') await bot.application?.commands.set(commandsData)
-    else await bot.application?.commands.set(commandsData, guildId)
+    if (guildId === '0') await application?.commands.set(commandsData)
+    else await application?.commands.set(commandsData, guildId)
   }
 }
 
@@ -67,12 +60,12 @@ async function registerCommands(bot, commandMap) {
  * @private
  */
 export async function ready(bot) {
-  const commands = prepareCommands(bot)
-  await registerCommands(bot, commands)
+  await registerCommands(bot, prepareCommands(bot))
 
-  if (bot.user) {
-    console.log(`-> The Bot '${bot.user.username}' Is Online <-`)
+  const { user, data } = bot
+  if (user) {
+    console.log(`-> The Bot '${user.username}' Is Online <-`)
     // @ts-expect-error
-    bot.user.setPresence(bot.data.config.presence)
+    user.setPresence(data.config.presence)
   } else console.log('-> Bot Is Online <-')
 }

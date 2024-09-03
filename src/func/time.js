@@ -1,16 +1,12 @@
 /** @import {TimeUnits} from '../options.js' */
 
-/**
- * Object containing multipliers for time unit
- */
-const { ms, s, m, h, d, w } = Object.freeze({
-  ms: 1000,
-  s: 1,
-  m: 60,
-  h: 60,
-  d: 24,
-  w: 7
-})
+// Multipliers for time units
+const ms = 1000 // Milliseconds
+// const s = 1 // Seconds
+const m = 60 // Minutes
+const h = 60 // Hours
+const d = 24 // Days
+const w = 7 // Weeks
 
 /**
  * Convert seconds to milliseconds (just multiply by 1000)
@@ -63,11 +59,3 @@ export function toNumber(str) {
 
   return time
 }
-
-// /**
-//  *
-//  * @param {number} value
-//  * @param {TimeUnits} from
-//  * @param {TimeUnits} to
-//  */
-// export function convertTime(value, from, to) {}

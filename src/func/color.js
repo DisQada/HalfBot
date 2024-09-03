@@ -13,7 +13,7 @@ export function asNumber(color) {
   let num
 
   if (typeof color === 'number') num = color
-  else if (typeof color === 'string') num = Number.parseInt(color.substring(1), 16)
+  else if (typeof color === 'string') num = parseInt(color.substring(1), 16)
 
   if (num) return num
   else return 0
@@ -24,20 +24,26 @@ export function asNumber(color) {
  * @param {string | number} color - The color value.
  * @returns {string} The color as a string.
  * @example
- * const num = asNumber('#ffffff')
+ * const num = asString('ffffff')
  * // num = '#ffffff'
  * @example
- * const num = asNumber(0xffffff)
+ * const num = asString(0xffffff)
  * // num = '#ffffff'
  */
 export function asString(color) {
   let str
 
-  if (typeof color === 'string') str = color.startsWith('#') ? color.substring(1) : color
-  else if (typeof color === 'number') str = color.toString(16)
+  if (typeof color === 'string') {
+    const hasHash = color.startsWith('#')
+
+    if (hasHash && color.length === 7) return color
+    str = hasHash ? color.substring(1) : color
+  } else if (typeof color === 'number') str = color.toString(16)
 
   if (str) {
-    while (str.length < 6) str = '0' + str
-    return `#${str}`
+    const zeros = Array(6 - str.length)
+      .fill('0')
+      .join('')
+    return `#${zeros + str}`
   } else return `#000000`
 }
