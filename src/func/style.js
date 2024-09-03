@@ -13,26 +13,28 @@ import { asNumber } from './color.js'
 export function asEmbed(text, brand) {
   /** @type {Embed} */
   const embed = { description: text }
-  // @ts-expect-error
   return applyStyle(embed, brand)
 }
 
 /**
  * Apply brand style to an multiple embeds.
- * @param {Embed | Embed[]} toApplyOn - The embeds to apply the style to.
+ * @template {Embed | Embed[]} E
+ * @param {E} toApplyOn - The embeds to apply the style to.
  * @param {Brand} brand - The brand to get the style from.
- * @returns {Embed | Embed[]} The embeds array after applying the style to it.
+ * @returns {E} The embeds array after applying the style to it.
  * @example
- * let embed = { title: 'HalfBot' }
  * const brand = { color: 0xffffff }
+ * let embed = { title: 'HalfBot' }
  * embed = applyStyle(embed, brand)
  * @example
- * let embeds = [{ title: 'HalfBot' }]
  * const brand = { color: 0xffffff }
+ * let embeds = [{ title: 'HalfBot' }]
  * embeds = applyStyle(embeds, brand)
  */
 export function applyStyle(toApplyOn, brand) {
+  // @ts-expect-error
   if (Array.isArray(toApplyOn)) return applyToEmbeds(toApplyOn, brand)
+  // @ts-expect-error
   else return applyToEmbed(toApplyOn, brand)
 
   /**
@@ -42,9 +44,8 @@ export function applyStyle(toApplyOn, brand) {
    * @param {StyleOptions} options - Configuration options for the process.
    * @returns {Embed} The embed after applying the style to it.
    * @example
-   * let embed = { title: 'HalfBot' }
    * const brand = { color: 0xffffff }
-   * embed = applyToEmbed(embed, brand)
+   * const embed = applyToEmbed({ title: 'HalfBot' }, brand)
    */
   function applyToEmbed(embed, brand, options = { skipFooter: false }) {
     if (brand.color) embed.color = asNumber(brand.color)
@@ -67,9 +68,8 @@ export function applyStyle(toApplyOn, brand) {
    * @param {Brand} brand - The brand to get the style from.
    * @returns {Embed[]} The embeds array after applying the style to it.
    * @example
-   * let embeds = [{ title: 'HalfBot' }]
    * const brand = { color: 0xffffff }
-   * embeds = applyToEmbeds(embeds, brand)
+   * const embeds = applyToEmbeds([{ title: 'HalfBot' }], brand)
    */
   function applyToEmbeds(embeds, brand) {
     const lastEmbed = embeds.length - 1
