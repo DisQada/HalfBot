@@ -4,6 +4,7 @@
   "version": "4.0.0",
   "description": "A tool to facilitate and accelerate the development of Discord bots",
   "scripts": {
+    "prepack": "npm run types && npm run format",
     "types": "workspace ./workspace.json -c -t",
     "docs": "workspace ./workspace.json -c -t -d",
     "format": "prettier . --write --ignore-path .gitignore",
@@ -26,10 +27,7 @@
     "*.md"
   ],
   "homepage": "https://disqada.github.io/HalfBot",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/DisQada/HalfBot.git"
-  },
+  "repository": "github:DisQada/HalfBot",
   "bugs": {
     "url": "https://github.com/DisQada/HalfBot/issues"
   },
