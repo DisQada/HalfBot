@@ -70,7 +70,7 @@ export class Bot extends Client {
       storeFolderPaths([options.directories.root || 'bot'], {
         deepSearch: true
       }),
-      this.storeData(options.directories.data || 'bot/data')
+      this.storeData(options.directories.data || 'data')
     ])
 
     await this.registerAllModules()
