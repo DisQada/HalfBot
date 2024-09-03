@@ -1,5 +1,5 @@
 /** @import {Embed, Brand, StyleOptions} from '../options.js' */
-import { asNumber } from './colour.js'
+import { asNumber } from './color.js'
 
 /**
  * Convert a text to an embed.
@@ -7,7 +7,7 @@ import { asNumber } from './colour.js'
  * @param {Brand} brand - The brand to style the embed with.
  * @returns {Embed} The resulting embed.
  * @example
- * const brand = { colour: 0xffffff }
+ * const brand = { color: 0xffffff }
  * const result = asEmbed('HalfBot', brand)
  */
 export function asEmbed(text, brand) {
@@ -24,11 +24,11 @@ export function asEmbed(text, brand) {
  * @returns {Embed | Embed[]} The embeds array after applying the style to it.
  * @example
  * let embed = { title: 'HalfBot' }
- * const brand = { colour: 0xffffff }
+ * const brand = { color: 0xffffff }
  * embed = applyStyle(embed, brand)
  * @example
  * let embeds = [{ title: 'HalfBot' }]
- * const brand = { colour: 0xffffff }
+ * const brand = { color: 0xffffff }
  * embeds = applyStyle(embeds, brand)
  */
 export function applyStyle(toApplyOn, brand) {
@@ -43,11 +43,11 @@ export function applyStyle(toApplyOn, brand) {
    * @returns {Embed} The embed after applying the style to it.
    * @example
    * let embed = { title: 'HalfBot' }
-   * const brand = { colour: 0xffffff }
+   * const brand = { color: 0xffffff }
    * embed = applyToEmbed(embed, brand)
    */
   function applyToEmbed(embed, brand, options = { skipFooter: false }) {
-    if (brand.colour) embed.color = asNumber(brand.colour)
+    if (brand.color) embed.color = asNumber(brand.color)
 
     if (!options.skipFooter) {
       if (brand.name) {
@@ -68,7 +68,7 @@ export function applyStyle(toApplyOn, brand) {
    * @returns {Embed[]} The embeds array after applying the style to it.
    * @example
    * let embeds = [{ title: 'HalfBot' }]
-   * const brand = { colour: 0xffffff }
+   * const brand = { color: 0xffffff }
    * embeds = applyToEmbeds(embeds, brand)
    */
   function applyToEmbeds(embeds, brand) {

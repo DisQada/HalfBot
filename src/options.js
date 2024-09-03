@@ -1,5 +1,5 @@
 /** @import {ApplicationCommandData, ChatInputCommandInteraction, ClientOptions, MessageContextMenuCommandInteraction, UserContextMenuCommandInteraction, InteractionReplyOptions, ClientEvents} from 'discord.js' */
-/** @import {DiscordBot} from './class/discordBot.js' */
+/** @import {Bot} from './class/bot.js' */
 
 export {}
 
@@ -58,7 +58,7 @@ export {}
  * The container of all IDs
  * @typedef {object} Brand
  * @property {string} name
- * @property {number} colour hex colour
+ * @property {number} color hex color
  * @property {string} logoUrl
  */
 
@@ -124,7 +124,7 @@ export {}
 
 /**
  * @typedef {object} BaseCommandInteraction
- * @property {DiscordBot} bot
+ * @property {Bot} bot
  */
 
 /**
@@ -159,7 +159,7 @@ export {}
 /**
  * @template {keyof ClientEvents} Key
  * @callback ClientEventFunction
- * @param {DiscordBot} bot
+ * @param {Bot} bot
  * @param {...ClientEvents[Key]} args
  * @returns {any}
  */
@@ -180,7 +180,7 @@ export {}
 
 /**
  * @callback RepeatingEventFunction
- * @param {DiscordBot} bot
+ * @param {Bot} bot
  * @returns {Promise<void | number | string>}
  */
 

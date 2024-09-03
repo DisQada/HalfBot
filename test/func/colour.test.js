@@ -1,15 +1,15 @@
 import { equal } from 'assert/strict'
-import { asNumber, asString } from '../../src/func/colour.js'
+import { asNumber, asString } from '../../src/func/color.js'
 
 describe('func', function () {
-  describe('colour', function () {
+  describe('color', function () {
     describe('asNumber()', function () {
       it('should return the same number', function () {
         const result = asNumber(0xffffff)
         equal(result, 0xffffff)
       })
 
-      it('should return the number version of the colour', function () {
+      it('should return the number version of the color', function () {
         const result = asNumber('#ffffff')
         equal(result, 0xffffff)
       })
@@ -19,7 +19,7 @@ describe('func', function () {
         equal(result, 0x0000ff)
       })
 
-      it('should return the number version of the colour  in full length', function () {
+      it('should return the number version of the color  in full length', function () {
         const result = asNumber('#ff')
         equal(result, 0x0000ff)
       })
@@ -31,7 +31,7 @@ describe('func', function () {
         equal(result, '#ffffff')
       })
 
-      it('should return the string version of the colour', function () {
+      it('should return the string version of the color', function () {
         const result = asString(0xffffff)
         equal(result, '#ffffff')
       })
@@ -41,7 +41,7 @@ describe('func', function () {
         equal(result, '#0000ff')
       })
 
-      it('should return the string version of the colour in full length', function () {
+      it('should return the string version of the color in full length', function () {
         const result = asString(0xff)
         equal(result, '#0000ff')
       })

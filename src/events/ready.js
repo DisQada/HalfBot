@@ -1,5 +1,5 @@
 /** @import {CommandData, GuildIDs} from '../options.js' */
-/** @import {DiscordBot} from '../class/discordBot.js' */
+/** @import {Bot} from '../class/bot.js' */
 
 /**
  * Get the correct server ID.
@@ -27,7 +27,7 @@ export function getGuildId(data, guildIds) {
 
 /**
  * Preparing the bot commands for registration.
- * @param {DiscordBot} bot - The bot to register the commands for.
+ * @param {Bot} bot - The bot to register the commands for.
  * @returns {Map<string, CommandData[]>}
  * @private
  */
@@ -47,7 +47,7 @@ export function prepareCommands(bot) {
 
 /**
  * Register the commands via the API.
- * @param {DiscordBot} bot - The bot to register the commands for.
+ * @param {Bot} bot - The bot to register the commands for.
  * @param {Map<string, CommandData[]>} commandMap - The commands to register.
  * @returns {Promise<void>}
  * @private
@@ -61,7 +61,7 @@ async function registerCommands(bot, commandMap) {
 
 /**
  * The bot is ready and has connected successfully.
- * @param {DiscordBot} bot - The bot.
+ * @param {Bot} bot - The bot.
  * @returns {Promise<void>}
  * @async
  * @private

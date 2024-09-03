@@ -12,7 +12,7 @@ import { ready } from '../events/ready.js'
 /**
  * @class
  */
-export class DiscordBot extends Client {
+export class Bot extends Client {
   /**
    * @type {BotData}
    */
@@ -23,7 +23,7 @@ export class DiscordBot extends Client {
       },
       brand: {
         name: 'HalfBot',
-        colour: 0xffffff,
+        color: 0xffffff,
         logoUrl: 'https://cdn.discordapp.com/embed/avatars/0.png'
       },
       presence: {
@@ -45,8 +45,8 @@ export class DiscordBot extends Client {
   client
 
   /**
-   * The initialization of a new DiscordBot.
-   * @param {BotOptions} options - Information about the DiscordBot.
+   * The initialization of a new Bot.
+   * @param {BotOptions} options - Information about the Bot.
    */
   constructor(options) {
     super(
@@ -61,7 +61,7 @@ export class DiscordBot extends Client {
 
   /**
    * Start and connect the bot.
-   * @param {BotOptions} options - Information about the DiscordBot.
+   * @param {BotOptions} options - Information about the Bot.
    * @returns {Promise<void>}
    * @async
    * @private
