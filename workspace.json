@@ -5,8 +5,10 @@
   "types": "types",
   "out": "docs",
 
+  "lang": "en",
+  "title": "Home",
+
   "links": {
-    "DisQada": "https://github.com/DisQada",
-    "Developer": "https://links.thealpha.pro"
+    "DisQada": "https://links.DisQada.org"
   }
 }

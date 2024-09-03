@@ -11,6 +11,7 @@ import { ready } from '../events/ready.js'
 
 /**
  * @class
+ * @extends {Client<true>}
  */
 export class Bot extends Client {
   /**
@@ -55,7 +56,6 @@ export class Bot extends Client {
    * Start and connect the bot.
    * @param {BotOptions} options - Information about the Bot.
    * @returns {Promise<void>}
-   * @async
    * @private
    */
   async run(options) {
@@ -76,7 +76,6 @@ export class Bot extends Client {
    * Inject data from the workspace files.
    * @param {string} directory - The path to the directory the json data files.
    * @returns {Promise<void>}
-   * @async
    */
   async storeData(directory) {
     const files = await readFolderPaths(resolve(directory), { deepSearch: false })
@@ -113,7 +112,6 @@ export class Bot extends Client {
   /**
    * Register bot modules to the bot.
    * @returns {Promise<void>}
-   * @async
    * @private
    */
   async registerAllModules() {
@@ -220,7 +218,7 @@ export class Bot extends Client {
         }
       }
 
-      // @ts-expect-error
+      // @ts-ignore
       this.once(Events.ClientReady, func)
 
       record.name = 'repeating'

@@ -47,8 +47,8 @@ export function prepareCommands({ commands, data }) {
  */
 async function registerCommands({ application }, commandMap) {
   for (const [guildId, commandsData] of commandMap) {
-    if (guildId === '0') await application?.commands.set(commandsData)
-    else await application?.commands.set(commandsData, guildId)
+    if (guildId === '0') await application.commands.set(commandsData)
+    else await application.commands.set(commandsData, guildId)
   }
 }
 
@@ -56,16 +56,12 @@ async function registerCommands({ application }, commandMap) {
  * The bot is ready and has connected successfully.
  * @param {Bot} bot - The bot.
  * @returns {Promise<void>}
- * @async
  * @private
  */
 export async function ready(bot) {
   await registerCommands(bot, prepareCommands(bot))
 
-  const { user, data } = bot
-  if (user) {
-    console.log(`-> The Bot '${user.username}' Is Online <-`)
-    // @ts-expect-error
-    user.setPresence(data.config.presence)
-  } else console.log('-> Bot Is Online <-')
+  console.log(`-> The Bot '${bot.user.username}' Is Online <-`)
+  // @ts-expect-error
+  bot.user.setPresence(bot.data.config.presence)
 }
