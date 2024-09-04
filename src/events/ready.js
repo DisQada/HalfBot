@@ -62,6 +62,5 @@ export async function ready(bot) {
   await registerCommands(bot, prepareCommands(bot))
 
   console.log(`-> The Bot '${bot.user.username}' Is Online <-`)
-  // @ts-expect-error
   bot.user.setPresence(bot.data.config.presence)
 }

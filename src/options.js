@@ -333,8 +333,8 @@ export {}
  * @typedef {object} PresenceData
  * @property {PresenceStatusData} [status] - The status of the bot, such as online or idle.
  * @property {boolean} [afk=false] - Indicates whether the bot is marked as AFK (away from keyboard).
- * @property {ActivitiesOptions[]} [activities] - An array of activity objects representing the bot's current activities.
- * @property {number | number[]} [shardId] - The shard ID(s) associated with the bot's presence.
+ * @property {readonly ActivitiesOptions[]} [activities] - An array of activity objects representing the bot's current activities.
+ * @property {number | readonly number[]} [shardId] - The shard ID(s) associated with the bot's presence.
  */
 
 /**
@@ -355,9 +355,10 @@ export {}
 /**
  * Represents the options for an activity.
  * @typedef {object} ActivityOptions
- * @property {string} [name] - The name of the activity.
- * @property {string} [url] - The URL associated with the activity.
- * @property {Exclude<ActivityType, 4>} [type] - The type of activity, excluding custom activities.
+ * @property {string} name - 	Activity's name.
+ * @property {string} [state] - User's current party status, or text used for a custom status.
+ * @property {string} [url] - Stream URL, is validated when type is 1.
+ * @property {ActivityType} [type] - Activity type.
  * @property {number | readonly number[]} [shardId] - The shard ID(s) associated with the activity.
  */
 
@@ -365,11 +366,11 @@ export {}
  * Represents the different types of activities a bot can display.
  * https://discord.com/developers/docs/topics/gateway-events#activity-object-activity-types
  *
- * - 0 Playing - Represents a bot that is playing a game.
- * - 1 Streaming - Represents a bot that is streaming content.
- * - 2 Listening - Represents a bot that is listening to something.
- * - 3 Watching - Represents a bot that is watching something.
- * - 4 Custom - Represents a custom activity with an emoji and details.
- * - 5 Competing - Represents a bot that is competing in something.
+ * - 0 Playing - Playing {game}. Example: "Playing Rocket League".
+ * - 1 Streaming - Streaming {details}. Example: "Streaming Rocket League".
+ * - 2 Listening - Listening to {name}. Example: "Listening to Spotify".
+ * - 3 Watching - Watching {details}. Example: "Watching YouTube Together".
+ * - 4 Custom - {emoji} {state}. Example: ":smiley: Feeling good today".
+ * - 5 Competing - Competing in {name}. "Competing in Arena World Champions"
  * @typedef {0 | 1 | 2 | 3 | 4 | 5} ActivityType
  */
