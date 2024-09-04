@@ -24,7 +24,7 @@ export async function interactionCreate(interaction) {
 
   let reply = await command.execute(interaction)
   if (!reply) {
-    quickReply('Done', brand)
+    quickReply(':)👍', brand)
     return
   }
 

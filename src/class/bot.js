@@ -29,7 +29,7 @@ export class Bot extends Client {
       channel: {}
     },
     brand: {
-      name: 'HalfBot',
+      name: 'Bot',
       color: 0xffffff,
       logoUrl: 'https://cdn.discordapp.com/embed/avatars/0.png'
     }
@@ -62,27 +62,23 @@ export class Bot extends Client {
    * @returns {Promise<void>}
    * @private
    */
-  async run(options) {
-    if (!options.directories) options.directories = {}
-
-    await Promise.all([
-      storeFolderPaths([options.directories.root || 'bot'], { deepSearch: true }),
-      this.storeData(options.directories.data || 'data')
-    ])
+  async run({ directories, token }) {
+    const folders = Object.assign({ root: 'bot', data: 'data' }, directories)
+    await Promise.all([storeFolderPaths([folders.root], { deepSearch: true }), this.storeData(folders.data)])
 
     await this.registerAllModules()
     this.listenToEvents()
 
-    await this.login(options.token)
+    await this.login(token)
   }
 
   /**
    * Inject data from the workspace files.
-   * @param {string} directory - The path to the directory the json data files.
+   * @param {string} folder - The path to the directory the json data files.
    * @returns {Promise<void>}
    */
-  async storeData(directory) {
-    const files = await readFolderPaths(resolve(directory), { deepSearch: false })
+  async storeData(folder) {
+    const files = await readFolderPaths(resolve(folder), { deepSearch: false })
     if (files.length === 0) return
 
     for (let i = 0; i < files.length; i++) {
@@ -183,18 +179,15 @@ export class Bot extends Client {
    * @param {BotEvent} event - The bot event module.
    * @returns {SuccessRecord}
    */
-  registerEvent(event) {
+  registerEvent({ data, execute }) {
     /** @type {SuccessRecord} */
     const record = {
       name: '',
-      type: event.data.module,
+      type: data.module,
       deployment: 'global'
     }
 
-    if (event.data.module === 'event') {
-      /** @type {ClientEvent<any>} */ // @ts-expect-error
-      const e = event
-      const { data, execute } = e
+    if (data.module === 'event') {
       /** @type {ClientEventFunction<any>} */
       const func = (args) => execute(this, args)
 
@@ -202,10 +195,7 @@ export class Bot extends Client {
       else this.on(data.name, func)
 
       record.name = data.name
-    } else if (event.data.module === 'event-repeat') {
-      /** @type {RepeatingEvent} */ // @ts-expect-error
-      const e = event
-      const { data, execute } = e
+    } else if (data.module === 'event-repeat') {
       /** @type {RepeatingEventFunction} */
       const func = async () => {
         let first = true
