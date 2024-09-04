@@ -120,8 +120,8 @@ export class Bot extends Client {
    */
   async registerAllModules() {
     const paths = findPaths()
-      .map((fp) => fp.fullPath)
-      .filter((fp) => fp.includes('command') || fp.includes('event'))
+      .filter(({ fullPath }) => fullPath.includes('command') || fullPath.includes('event'))
+      .map(({ fullPath }) => fullPath)
     if (paths.length === 0) return
 
     /** @type {SuccessRecord[]} */
