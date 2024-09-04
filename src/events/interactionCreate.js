@@ -28,10 +28,7 @@ export async function interactionCreate(interaction) {
     return
   }
 
-  if (interaction.replied) return
-
-  if (typeof reply === 'string') reply = { embeds: [asEmbed(reply, brand)] }
-  else {
+  if (typeof reply === 'object') {
     // @ts-expect-error
     if (reply.embeds) reply.embeds = applyStyle(reply.embeds, brand)
     else if (reply.content) {
