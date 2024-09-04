@@ -1,7 +1,7 @@
 {
   "displayName": "HalfBot",
   "name": "@disqada/halfbot",
-  "version": "4.0.1",
+  "version": "4.1.0",
   "description": "A tool to facilitate and accelerate the development of Discord bots",
   "scripts": {
     "prepack": "npm run types && npm run format",

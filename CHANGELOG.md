@@ -1,3 +1,21 @@
+# [4.1.0](https://github.com/DisQada/HalfBot/compare/v4.0.1...v4.1.0) (2024-09-04)
+
+
+### Bug Fixes
+
+* إصلاح قراءة الملفات كMJS في ويندوز ([1617dd9](https://github.com/DisQada/HalfBot/commit/1617dd9c24e34f2252902a2702f4e8a48e3f2220))
+* إصلاح نوع خيارات الفعالية ([e323b10](https://github.com/DisQada/HalfBot/commit/e323b1004f700eb69abdfcaf2e75ff3c69e707d5))
+
+
+### Features
+
+* الرد على الأوامر بنص فقط ([84c4aec](https://github.com/DisQada/HalfBot/commit/84c4aec1eece76f388ab56e9b065032a7ed178ef))
+
+
+### Performance Improvements
+
+* تسريع عملية البحث ملفات المشروع ([01554eb](https://github.com/DisQada/HalfBot/commit/01554eb63a851facbde5f781ab8c920943ff386d))
+
 ## [4.0.1](https://github.com/DisQada/HalfBot/compare/v4.0.0...v4.0.1) (2024-09-03)
 
 
