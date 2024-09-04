@@ -8,6 +8,7 @@ import { validCommand, validEvent } from '../func/validate.js'
 import { logSuccesses, logFails } from '../func/log.js'
 import { toNumber } from '../func/time.js'
 import { ready } from '../events/ready.js'
+import { readFile } from 'fs/promises'
 
 /**
  * The Bot class.
@@ -89,7 +90,7 @@ export class Bot extends Client {
       const i2 = files[i].length - 5 // '.json'.length
       const name = files[i].substring(i1 + sep.length, i2)
 
-      const data = (await import(files[i])).default
+      const data = JSON.parse(await readFile(files[i], 'utf-8'))
       if (data) {
         if (typeof this.data[name] === 'object') Object.assign(this.data[name], data)
         else this.data[name] = data
@@ -129,7 +130,16 @@ export class Bot extends Client {
     const fRecords = []
 
     for (let i = 0; i < paths.length; i++) {
-      const botModule = (await import(paths[i])).default
+      let botModule
+
+      try {
+        botModule = (await import(paths[i])).default
+      } catch (err) {
+        if (err.code === 'ERR_MODULE_NOT_FOUND') continue
+        if (err.code === 'ERR_UNSUPPORTED_ESM_URL_SCHEME') {
+          botModule = (await import('file://' + paths[i])).default
+        } else throw err
+      }
 
       if (validCommand(botModule)) {
         const record = this.registerCommand(botModule)
