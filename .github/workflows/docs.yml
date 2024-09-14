@@ -34,7 +34,7 @@ jobs:
         run: npm ci --ignore-scripts
 
       - name: توليد الوثائق
-        run: npm run docs
+        run: npx @disqada/workspace .\workspace.json -ctd
 
       - name: إعداد الصفحات
         uses: actions/configure-pages@v4

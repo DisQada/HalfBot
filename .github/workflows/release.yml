@@ -28,7 +28,7 @@ jobs:
         run: npm ci --ignore-scripts && npm i --no-save @semantic-release/changelog @semantic-release/git
 
       - name: توليد الأنواع
-        run: npm run types --if-present
+        run: npx @disqada/workspace .\workspace.json -ct
 
       - name: الإصدار
         run: npx semantic-release

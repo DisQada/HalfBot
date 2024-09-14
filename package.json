@@ -4,9 +4,6 @@
   "version": "4.1.0",
   "description": "A tool to facilitate and accelerate the development of Discord bots",
   "scripts": {
-    "prepack": "npm run types && npm run format",
-    "types": "workspace ./workspace.json -c -t",
-    "docs": "workspace ./workspace.json -c -t -d",
     "format": "prettier . --write --ignore-path .gitignore",
     "test": "mocha ./test/**/*.test.js"
   },
@@ -44,10 +41,10 @@
   "dependencies": {
     "@disqada/pathfinder": "^3.0.0",
     "discord.js": "^14.16.1",
-    "table": "^6.8.1"
+    "table": "^6.8.2"
   },
   "devDependencies": {
-    "@disqada/workspace": "^1.6.1",
+    "@disqada/workspace": "^1.6.2",
     "mocha": "^10.7.3",
     "prettier": "^3.3.3"
   }
